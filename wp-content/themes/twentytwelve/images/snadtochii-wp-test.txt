@@ -1,0 +1,1 @@
+/home/snadtochii/public_html/test/wp-config.php

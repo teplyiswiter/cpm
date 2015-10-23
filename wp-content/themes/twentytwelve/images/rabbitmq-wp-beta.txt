@@ -1,0 +1,1 @@
+/home/rabbitmq/public_html/beta/wp-config.php

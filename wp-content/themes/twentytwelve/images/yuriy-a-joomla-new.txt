@@ -1,0 +1,1 @@
+/home/yuriy-a/public_html/new/configuration.php

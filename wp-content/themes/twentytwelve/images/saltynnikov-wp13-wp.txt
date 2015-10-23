@@ -1,0 +1,1 @@
+/home/saltynnikov/public_html/wp/wp-config.php

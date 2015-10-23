@@ -1,0 +1,1 @@
+/home/acidlex/public_html/whm/configuration.php

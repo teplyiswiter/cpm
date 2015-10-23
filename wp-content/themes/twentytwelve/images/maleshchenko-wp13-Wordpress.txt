@@ -1,0 +1,1 @@
+/home/maleshchenko/public_html/Wordpress/wp-config.php

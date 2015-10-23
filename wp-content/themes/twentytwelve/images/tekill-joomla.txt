@@ -1,0 +1,1 @@
+/home/tekill/public_html/configuration.php

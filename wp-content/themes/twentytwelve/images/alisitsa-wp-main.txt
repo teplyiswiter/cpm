@@ -1,0 +1,1 @@
+/home/alisitsa/public_html/main/wp-config.php

@@ -1,0 +1,1 @@
+/home/dsenchenko/public_html/wordpress/wp-config.php

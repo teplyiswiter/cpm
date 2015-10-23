@@ -1,0 +1,1 @@
+/home/vladimir-s/public_html/news/configuration.php

@@ -1,0 +1,1 @@
+/home/srudenko/public_html/new/wp-config.php

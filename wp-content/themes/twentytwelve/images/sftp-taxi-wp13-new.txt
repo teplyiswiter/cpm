@@ -1,0 +1,1 @@
+/home/sftp-taxi/public_html/new/wp-config.php

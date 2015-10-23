@@ -1,0 +1,1 @@
+/home/belchykov/public_html/press/wp-config.php

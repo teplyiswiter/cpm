@@ -1,0 +1,1 @@
+/home/bamboo/public_html/joo/configuration.php

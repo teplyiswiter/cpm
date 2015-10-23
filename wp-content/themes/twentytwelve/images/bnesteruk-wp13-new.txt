@@ -1,0 +1,1 @@
+/home/bnesteruk/public_html/new/wp-config.php

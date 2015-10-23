@@ -1,0 +1,1 @@
+/home/eugene-strogiy/public_html/beta/wp-config.php

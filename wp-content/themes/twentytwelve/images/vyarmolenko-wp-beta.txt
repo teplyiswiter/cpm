@@ -1,0 +1,1 @@
+/home/vyarmolenko/public_html/beta/wp-config.php

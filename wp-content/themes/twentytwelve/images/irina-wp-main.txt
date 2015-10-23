@@ -1,0 +1,1 @@
+/home/irina/public_html/main/wp-config.php

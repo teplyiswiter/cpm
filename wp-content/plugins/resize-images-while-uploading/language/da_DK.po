@@ -1,0 +1,74 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Auto Image Resizer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-05 07:50+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dennis Hoppe <mail@DennisHoppe.de>\n"
+"Language-Team: Thomas Jensen <admin@artikelforlaget.dk>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: t;t:2c,1\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../wp-plugin-auto-image-resizer.php:90
+msgid "Auto Image Resizer Options"
+msgstr "Auto Image Resizer indstillinger"
+
+#: ../wp-plugin-auto-image-resizer.php:91
+#: ../options-page/options-page.php:3
+msgid "Auto Image Resizer"
+msgstr "Auto Image Resizer"
+
+#: ../wp-plugin-auto-image-resizer.php:98
+msgid "Image Size"
+msgstr "Billede Størrelse"
+
+#: ../wp-plugin-auto-image-resizer.php:99
+msgid "Image quality"
+msgstr "Billede kvalitet"
+
+#: ../wp-plugin-auto-image-resizer.php:224
+msgid "Convert my images into grayscale."
+msgstr "Konverter mine billeder til gråtone."
+
+#: ../wp-plugin-auto-image-resizer.php:292
+#, php-format
+msgid "Sorry, this feature is only available in the <a href=\"%s\" target=\"_blank\">Pro Version of Auto Image Resizer</a>."
+msgstr "Beklager, denne feature er kun tilgængelig i <a href=\"%s\" target=\"_blank\">Pro Versionen af Auto Image Resizer</a>."
+
+#: ../wp-plugin-auto-image-resizer.php:293
+msgctxt "Link to the authors website"
+msgid "http://dennishoppe.de/en/wordpress-plugins/auto-image-resizer"
+msgstr "http://dennishoppe.de/en/wordpress-plugins/auto-image-resizer"
+
+#: ../options-page/option-box-image-quality.php:2
+msgid "JPEG Quality:"
+msgstr "JPEG kvalitet:"
+
+#: ../options-page/option-box-image-quality.php:4
+msgid "Ranges from 0 (worst quality, smaller file) to 100 (best quality, biggest file)."
+msgstr "Varierer fra 0 (dårligste kvalitet, mindre filer) til 100 (bedste kvalitet, største filer)."
+
+#: ../options-page/option-box-image-quality.php:8
+msgid "PNG Compression:"
+msgstr "PNG kompression:"
+
+#: ../options-page/option-box-image-quality.php:10
+msgid "Compression level: from 0 (no compression) to 9."
+msgstr "Kompressions niveau: fra 0 (ingen kompression) til 9."
+
+#: ../options-page/option-box-image-size.php:11
+msgid "You can change these options on the media settings page."
+msgstr "Du kan ændre disse indstillinger på medie indstillingssiden."
+
+#: ../options-page/option-box-update.php:1
+msgid "Your Account"
+msgstr "Din konto"
+

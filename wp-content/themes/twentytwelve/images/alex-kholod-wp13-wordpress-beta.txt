@@ -1,0 +1,1 @@
+/home/alex-kholod/public_html/wordpress/beta/wp-config.php

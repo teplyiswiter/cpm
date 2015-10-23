@@ -1,0 +1,1 @@
+/home/latha/public_html/wp-config.php

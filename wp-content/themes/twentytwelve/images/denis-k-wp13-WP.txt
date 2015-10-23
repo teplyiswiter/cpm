@@ -1,0 +1,1 @@
+/home/denis-k/public_html/WP/wp-config.php

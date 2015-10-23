@@ -1,0 +1,1 @@
+/home/nlugovoi/public_html/beta/wp-config.php

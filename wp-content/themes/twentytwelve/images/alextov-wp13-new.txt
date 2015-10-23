@@ -1,0 +1,1 @@
+/home/alextov/public_html/new/wp-config.php

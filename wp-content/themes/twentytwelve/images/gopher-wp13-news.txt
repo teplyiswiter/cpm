@@ -1,0 +1,1 @@
+/home/gopher/public_html/news/wp-config.php

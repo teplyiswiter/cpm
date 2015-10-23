@@ -1,0 +1,1 @@
+/home/eugene-gafarov/public_html/beta/wp-config.php

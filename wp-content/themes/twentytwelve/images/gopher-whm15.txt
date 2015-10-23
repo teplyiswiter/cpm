@@ -1,0 +1,1 @@
+/home/gopher/public_html/whm/configuration.php

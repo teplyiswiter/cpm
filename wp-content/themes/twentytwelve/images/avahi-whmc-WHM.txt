@@ -1,0 +1,1 @@
+/home/avahi/public_html/whmc/WHM/configuration.php

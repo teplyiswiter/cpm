@@ -1,0 +1,1 @@
+/home/acidlex/public_html/new/wp-config.php

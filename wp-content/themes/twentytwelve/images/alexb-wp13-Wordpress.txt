@@ -1,0 +1,1 @@
+/home/alexb/public_html/Wordpress/wp-config.php

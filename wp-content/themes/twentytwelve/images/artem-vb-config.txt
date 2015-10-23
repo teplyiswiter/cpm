@@ -1,0 +1,1 @@
+/home/artem/public_html/vb/includes/config.php

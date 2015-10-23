@@ -1,0 +1,1 @@
+/home/openvpn/public_html/wp/beta/wp-config.php

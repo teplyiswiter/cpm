@@ -1,0 +1,1 @@
+/home/puppet/public_html/central/configuration.php

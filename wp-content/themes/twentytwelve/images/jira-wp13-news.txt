@@ -1,0 +1,1 @@
+/home/jira/public_html/news/wp-config.php

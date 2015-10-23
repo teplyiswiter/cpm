@@ -1,0 +1,1 @@
+/home/snadtochii/public_html/wordpress/beta/wp-config.php

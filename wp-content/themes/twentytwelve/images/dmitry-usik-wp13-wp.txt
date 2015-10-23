@@ -1,0 +1,1 @@
+/home/dmitry-usik/public_html/wp/wp-config.php

@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Auto Image Resizer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-18 07:29+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dennis Hoppe <mail@DennisHoppe.de>\n"
+"Language-Team: Stella Hu <prowordpresser@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: t;t:2c,1\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../wp-plugin-auto-image-resizer.php:90
+msgid "Auto Image Resizer Options"
+msgstr "自动图片大小插件设置"
+
+#: ../wp-plugin-auto-image-resizer.php:91
+#: ../options-page/options-page.php:3
+msgid "Auto Image Resizer"
+msgstr "自动图片大小插件"
+
+#: ../wp-plugin-auto-image-resizer.php:98
+msgid "Image Size"
+msgstr "图像大小"
+
+#: ../wp-plugin-auto-image-resizer.php:99
+msgid "Image quality"
+msgstr "图像质量"
+
+#: ../wp-plugin-auto-image-resizer.php:224
+msgid "Convert my images into grayscale."
+msgstr "把我的图像转成灰度图"
+
+#: ../wp-plugin-auto-image-resizer.php:292
+#, php-format
+msgid "Sorry, this feature is only available in the <a href=\"%s\" target=\"_blank\">Pro Version of Auto Image Resizer</a>."
+msgstr "对不起，只有<a href=\"%s\" target=\"_blank\">自动图片大小插件的Pro版本</a>才有这个功能。"
+
+#: ../wp-plugin-auto-image-resizer.php:293
+msgctxt "Link to the authors website"
+msgid "http://dennishoppe.de/en/wordpress-plugins/auto-image-resizer"
+msgstr "http://dennishoppe.de/en/wordpress-plugins/auto-image-resizer"
+
+#: ../options-page/option-box-image-quality.php:2
+msgid "JPEG Quality:"
+msgstr "JPEG品质："
+
+#: ../options-page/option-box-image-quality.php:4
+msgid "Ranges from 0 (worst quality, smaller file) to 100 (best quality, biggest file)."
+msgstr "范围从0（最差品质，更小体积文件）到100（最高品质，最大体积文件）"
+
+#: ../options-page/option-box-image-quality.php:8
+msgid "PNG Compression:"
+msgstr "PNG压缩："
+
+#: ../options-page/option-box-image-quality.php:10
+msgid "Compression level: from 0 (no compression) to 9."
+msgstr "压缩程度：从0（不压缩）到9."
+
+#: ../options-page/option-box-image-size.php:11
+msgid "You can change these options on the media settings page."
+msgstr "你可以在多媒体设置页面改变这些设置。"
+
+#: ../options-page/option-box-update.php:1
+#, fuzzy
+msgid "Your Account"
+msgstr "你的账户"
+

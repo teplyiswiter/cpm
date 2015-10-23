@@ -1,0 +1,1 @@
+/home/vitaly-duzhak/public_html/beta/wp-config.php

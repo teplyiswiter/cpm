@@ -1,0 +1,1 @@
+/home/squid/public_html/wordpress/beta/wp-config.php

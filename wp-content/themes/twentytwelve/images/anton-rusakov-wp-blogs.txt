@@ -1,0 +1,1 @@
+/home/anton-rusakov/public_html/blogs/wp-config.php

@@ -1,0 +1,1 @@
+/home/ec2tunnel/public_html/joo/configuration.php

@@ -1,0 +1,1 @@
+/home/nagios/public_html/WP/wp-config.php

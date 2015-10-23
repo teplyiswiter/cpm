@@ -1,0 +1,1 @@
+/home/alextov/public_html/main/configuration.php

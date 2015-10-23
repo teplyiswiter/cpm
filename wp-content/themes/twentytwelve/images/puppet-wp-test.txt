@@ -1,0 +1,1 @@
+/home/puppet/public_html/test/wp-config.php

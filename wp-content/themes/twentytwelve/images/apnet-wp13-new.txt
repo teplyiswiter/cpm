@@ -1,0 +1,1 @@
+/home/apnet/public_html/new/wp-config.php

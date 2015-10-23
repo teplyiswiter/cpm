@@ -1,0 +1,1 @@
+/home/vshamray/public_html/site/configuration.php

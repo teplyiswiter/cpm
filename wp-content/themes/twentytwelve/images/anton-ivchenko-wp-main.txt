@@ -1,0 +1,1 @@
+/home/anton-ivchenko/public_html/main/wp-config.php

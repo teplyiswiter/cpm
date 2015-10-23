@@ -1,0 +1,1 @@
+/home/anton-t/public_html/whmcs/configuration.php

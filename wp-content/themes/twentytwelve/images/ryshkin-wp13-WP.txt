@@ -1,0 +1,1 @@
+/home/ryshkin/public_html/WP/wp-config.php

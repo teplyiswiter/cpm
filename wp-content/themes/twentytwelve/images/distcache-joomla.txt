@@ -1,0 +1,1 @@
+/home/distcache/public_html/configuration.php

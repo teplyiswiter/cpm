@@ -1,0 +1,1 @@
+/home/alex-kholod/public_html/new/wp-config.php

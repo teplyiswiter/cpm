@@ -1,0 +1,1 @@
+/home/andrii-berdnyk/public_html/whmc/WHM/configuration.php

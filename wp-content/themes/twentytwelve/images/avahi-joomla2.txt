@@ -1,0 +1,1 @@
+/home/avahi/public_html/joomla/configuration.php

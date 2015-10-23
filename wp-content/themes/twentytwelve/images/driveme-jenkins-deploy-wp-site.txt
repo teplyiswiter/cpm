@@ -1,0 +1,1 @@
+/home/driveme-jenkins-deploy/public_html/site/wp-config.php

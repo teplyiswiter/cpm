@@ -1,0 +1,1 @@
+/home/valentyn-kholod/public_html/beta/wp-config.php

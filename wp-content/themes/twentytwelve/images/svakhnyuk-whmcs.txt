@@ -1,0 +1,1 @@
+/home/svakhnyuk/public_html/whmcs/configuration.php

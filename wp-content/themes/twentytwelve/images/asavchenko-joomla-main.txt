@@ -1,0 +1,1 @@
+/home/asavchenko/public_html/main/configuration.php

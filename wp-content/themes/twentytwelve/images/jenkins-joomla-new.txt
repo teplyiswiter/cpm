@@ -1,0 +1,1 @@
+/home/jenkins/public_html/new/configuration.php

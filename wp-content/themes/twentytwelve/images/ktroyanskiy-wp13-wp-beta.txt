@@ -1,0 +1,1 @@
+/home/ktroyanskiy/public_html/wp/beta/wp-config.php

@@ -1,0 +1,74 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Auto Image Resizer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-21 19:13+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Dennis Hoppe <mail@DennisHoppe.de>\n"
+"Language-Team: Milan Budimkic <milanbudimkic@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: t;t:2c,1\n"
+"X-Poedit-Language: Serbian\n"
+"X-Poedit-Country: Serbia\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../wp-plugin-auto-image-resizer.php:90
+msgid "Auto Image Resizer Options"
+msgstr "Auto Image Resizer Opcije"
+
+#: ../wp-plugin-auto-image-resizer.php:91
+#: ../options-page/options-page.php:3
+msgid "Auto Image Resizer"
+msgstr "Auto Image Resizer"
+
+#: ../wp-plugin-auto-image-resizer.php:99
+msgid "Image Size"
+msgstr "Veličina slike"
+
+#: ../wp-plugin-auto-image-resizer.php:100
+msgid "Image quality"
+msgstr "Kvalitet slike"
+
+#: ../wp-plugin-auto-image-resizer.php:225
+msgid "Convert my images into grayscale."
+msgstr "Konvertuj moju sliku u sive tonove."
+
+#: ../wp-plugin-auto-image-resizer.php:293
+#, php-format
+msgid "Sorry, this feature is only available in the <a href=\"%s\" target=\"_blank\">Pro Version of Auto Image Resizer</a>."
+msgstr "Izvinite, ali ova funkcija je dostupna samo u <a href=\"%s\" target=\"_blank\">Auto Image Resizer Pro verziji</a>."
+
+#: ../wp-plugin-auto-image-resizer.php:294
+msgctxt "Link to the authors website"
+msgid "http://dennishoppe.de/en/wordpress-plugins/auto-image-resizer"
+msgstr "http://dennishoppe.de/en/wordpress-plugins/auto-image-resizer"
+
+#: ../options-page/option-box-image-quality.php:2
+msgid "JPEG Quality:"
+msgstr "JPEG Kvalitet:"
+
+#: ../options-page/option-box-image-quality.php:4
+msgid "Ranges from 0 (worst quality, smaller file) to 100 (best quality, biggest file)."
+msgstr "Skala se kreće od 0 (najlošiji kvalitet, mala veličina fajla) do 100 (najviši kvalitet, najveća veličina fajla)."
+
+#: ../options-page/option-box-image-quality.php:8
+msgid "PNG Compression:"
+msgstr "PNG Kompresija:"
+
+#: ../options-page/option-box-image-quality.php:10
+msgid "Compression level: from 0 (no compression) to 9."
+msgstr "Nivo kompresije: od 0 (bez kompresije) do 9."
+
+#: ../options-page/option-box-image-size.php:11
+msgid "You can change these options on the media settings page."
+msgstr "Možete promeniti ove opcije na Media Settings strani."
+
+#: ../options-page/option-box-update.php:1
+#, fuzzy
+msgid "Your Account"
+msgstr "Vaš nalog"
+

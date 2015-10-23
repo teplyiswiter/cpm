@@ -1,0 +1,1 @@
+/home/anton/public_html/main/configuration.php

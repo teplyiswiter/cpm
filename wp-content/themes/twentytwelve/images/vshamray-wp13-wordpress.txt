@@ -1,0 +1,1 @@
+/home/vshamray/public_html/wordpress/wp-config.php

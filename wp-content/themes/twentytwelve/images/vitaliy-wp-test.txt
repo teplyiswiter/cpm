@@ -1,0 +1,1 @@
+/home/vitaliy/public_html/test/wp-config.php

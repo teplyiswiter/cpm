@@ -1,0 +1,1 @@
+/home/usr1cv81/public_html/wordpress/wp-config.php

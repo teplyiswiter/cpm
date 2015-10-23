@@ -1,0 +1,1 @@
+/home/danil/public_html/whmc/WHM/configuration.php

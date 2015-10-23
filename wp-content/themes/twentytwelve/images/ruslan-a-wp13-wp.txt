@@ -1,0 +1,1 @@
+/home/ruslan-a/public_html/wp/wp-config.php
