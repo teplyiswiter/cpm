@@ -50,14 +50,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 function amt_content_description() {
-    $post = get_queried_object();
+    $options = get_option("add_meta_tags_opts");
+    $post = amt_get_queried_object($options);
     if ( ! is_null( $post ) ) {
         echo amt_get_content_description( $post );
     }
 }
 
 function amt_content_keywords() {
-    $post = get_queried_object();
+    $options = get_option("add_meta_tags_opts");
+    $post = amt_get_queried_object($options);
     if ( ! is_null( $post ) ) {
         echo amt_get_content_keywords( $post );
     }
@@ -65,12 +67,12 @@ function amt_content_keywords() {
 
 function amt_metadata_head() {
     // Prints full metadata for head area.
-    amt_add_metadata_head();
+    amt_print_head_block();
 }
 
 function amt_metadata_footer() {
     // Prints full metadata for footer area.
-    amt_add_metadata_footer();
+    amt_print_footer_block();
 }
 
 function amt_metadata_review() {
@@ -80,5 +82,24 @@ function amt_metadata_review() {
 
 function amt_breadcrumbs( $user_options ) {
     echo amt_get_breadcrumbs( $user_options );
+}
+
+function amt_local_author_profile_url( $author_id=null, $display=true ) {
+    $options = get_option("add_meta_tags_opts");
+    if ( empty($options) ) {
+        return '';
+    }
+    if ( is_null($author_id) ) {
+        $post = amt_get_queried_object($options);
+        if ( is_null($post) || $post->ID == 0 ) {
+            return '';
+        }
+        $author_id = get_the_author_meta( 'ID', $post->post_author );
+    }
+    if ( $display ) {
+        echo esc_url( amt_get_local_author_profile_url( $author_id, $options ) );
+    } else {
+        return esc_url( amt_get_local_author_profile_url( $author_id, $options ) );
+    }
 }
 
