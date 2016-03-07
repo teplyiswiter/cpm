@@ -11,6 +11,11 @@ if ( function_exists('register_sidebar') ) {
 $themename = "Entitle";
 $shortname = str_replace(' ', '_', strtolower($themename));
 
+add_filter( 'the_excerpt', 'themeprefix_excerpt_read_more_link' );
+function themeprefix_excerpt_read_more_link( $output ) {
+	global $post;
+	return $output . ' <a href="' . get_permalink( $post->ID ) . '" class="more-link" title="Read More"><strong>Читать далее</strong></a>';//change read more text
+}
 
 function get_theme_option($option)
 {
