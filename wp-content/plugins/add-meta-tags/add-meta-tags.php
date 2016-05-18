@@ -3,7 +3,7 @@
 Plugin Name: Add Meta Tags
 Plugin URI: http://www.g-loaded.eu/2006/01/05/add-meta-tags-wordpress-plugin/
 Description: Add basic meta tags and also Opengraph, Schema.org Microdata, Twitter Cards and Dublin Core metadata to optimize your web site for better SEO.
-Version: 2.10.9
+Version: 2.11.3
 Author: George Notaras
 Author URI: http://www.g-loaded.eu/
 License: Apache License v2
@@ -31,7 +31,7 @@ Domain Path: /languages/
  *
  *  Licensing Information
  *
- *  Copyright 2006-2013 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
+ *  Copyright 2006-2016 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -85,8 +85,10 @@ require( AMT_PLUGIN_DIR . 'amt-cli.php' );
  *
  * Translation files are searched in: wp-content/plugins
  */
-load_plugin_textdomain('add-meta-tags', false, dirname( plugin_basename( AMT_PLUGIN_FILE ) ) . '/languages/');
+//load_plugin_textdomain('add-meta-tags', false, dirname( plugin_basename( AMT_PLUGIN_FILE ) ) . '/languages/');
 //load_plugin_textdomain('add-meta-tags', false, AMT_PLUGIN_DIR . 'languages/');
+// For language packs check:
+load_plugin_textdomain('add-meta-tags');
 
 
 /**
@@ -102,6 +104,38 @@ function amt_plugin_actions( $links, $file ) {
 }
 add_filter( 'plugin_action_links', 'amt_plugin_actions', 10, 2 );
 
+
+//
+// Adds prefixes to the html element of the page
+// ex xmlns
+//
+function amt_add_html_prefixes_and_namespaces( $content ) {
+    $options = amt_get_options();
+    $prefixes = array();
+    if ( $options['og_add_xml_namespaces'] == '1' ) {
+        $prefixes['og'] = 'http://ogp.me/ns#';
+        $prefixes['fb'] = 'https://www.facebook.com/2008/fbml';
+    }
+    // Dublin Core
+    // See: http://wiki.dublincore.org/index.php/Dublin_Core_Prefixes
+    if ( $options['dc_add_xml_namespaces'] == '1' ) {
+        $prefixes['dcterms'] = 'http://purl.org/dc/terms/';
+    }
+    // Generate the value of the prefix attribute
+    $prefix_value = '';
+    foreach ( $prefixes as $key => $val ) {
+        $prefix_value .= sprintf(' %s: %s', $key, $val);
+    }
+    // return the final attributes
+    $output = '';
+    // Although not necessary in HTML 5, we also add the xmlns="http://www.w3.org/1999/xhtml"
+    // Comment out if duplicate
+    $output .= ' xmlns="http://www.w3.org/1999/xhtml"';
+    // Add our prefixes
+    $output .= ' prefix="' . trim($prefix_value) . '"';
+    return $output . ' ' . $content;
+}
+add_filter('language_attributes', 'amt_add_html_prefixes_and_namespaces');
 
 
 /**
@@ -119,7 +153,7 @@ function amt_custom_title_tag($title) {
     // Get the options
     $options = get_option('add_meta_tags_opts');
     // Get current post object
-    $post = amt_get_queried_object($options);
+    $post = amt_get_queried_object();
 
     $processed_title = amt_get_title_for_title_element($options, $post);
     if ( ! empty($processed_title) ) {
@@ -170,7 +204,7 @@ function amt_set_html_lang_attribute( $lang ) {
     // Set the html lang attribute according to the locale
     $locale = '';
     if ( is_singular() ) {
-        $post = amt_get_queried_object($options);
+        $post = amt_get_queried_object();
         // Store locale
         $locale = str_replace( '_', '-', amt_get_language_content($options, $post) );
     } else {
@@ -301,7 +335,7 @@ function amt_add_metadata_head() {
     // Get the options the DB
     $options = get_option("add_meta_tags_opts");
     // Get current post object
-    $post = amt_get_queried_object($options);
+    $post = amt_get_queried_object();
     // Caching indicator
     $is_cached = 'no';
     // Get the metadata
@@ -426,7 +460,7 @@ function amt_add_metadata_footer() {
     // Get the options the DB
     $options = get_option("add_meta_tags_opts");
     // Get current post object
-    $post = amt_get_queried_object($options);
+    $post = amt_get_queried_object();
     // Caching indicator
     $is_cached = 'no';
     // Get the metadata
@@ -695,7 +729,7 @@ function amt_add_metadata_review($post_body) {
         }
 
         // Get current post object
-        $post = amt_get_queried_object($options);
+        $post = amt_get_queried_object();
         if ( is_null( $post ) ) {
             return $post_body;
         }

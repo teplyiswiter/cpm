@@ -19,7 +19,7 @@
  *
  *  Licensing Information
  *
- *  Copyright 2006-2013 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
+ *  Copyright 2006-2016 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function amt_get_default_options() {
     return array(
-        "settings_version"  => 22,       // IMPORTANT: SETTINGS UPGRADE: Every time settings are added or removed this has to be incremented.
+        "settings_version"  => 23,       // IMPORTANT: SETTINGS UPGRADE: Every time settings are added or removed this has to be incremented.
         "site_description"  => "",      // Front page description
         "site_keywords"     => "",      // Front page keywords
         "global_keywords"   => "",      // These keywords are added to the 'keywords' meta tag on all posts and pages
@@ -65,6 +65,7 @@ function amt_get_default_options() {
         "og_omit_video_metadata" => "0",    // Omit og:video and og:video:* meta tags
         "og_add_xml_namespaces" => "0",
         "auto_dublincore"   => "0",
+        "dc_add_xml_namespaces" => "0",
         "auto_twitter"      => "0",     // Twitter Cards
         "tc_enable_player_card_local" => "0",   // Enable the player card for locally hosted audio and video attachments.
         "tc_enforce_summary_large_image" => "0",   // Set summary_large_image as the default card.
@@ -277,6 +278,10 @@ function amt_plugin_upgrade() {
     // Added "metabox_user_enable_image_url"
     // No migrations required. Addition takes place in (1).
 
+    // Version 2.10.10 (settings_version 22->23)
+    // Added "dc_add_xml_namespaces"
+    // No migrations required. Addition takes place in (1).
+
 
     // 3) Clean stored options.
     foreach ($stored_options as $opt => $value) {
@@ -329,7 +334,7 @@ function amt_save_settings($post_payload) {
             } elseif ( $def_key == 'copyright_url' ) {
                 $add_meta_tags_opts[$def_key] = esc_url_raw( stripslashes( $post_payload[$def_key] ), array( 'http', 'https') );
             } elseif ( $def_key == 'default_image_url' ) {
-                $add_meta_tags_opts[$def_key] = esc_url_raw( stripslashes( $post_payload[$def_key] ), array( 'http', 'https') );
+                $add_meta_tags_opts[$def_key] = amt_esc_id_or_url_notation( stripslashes( $post_payload[$def_key] ), array( 'http', 'https') );
             } elseif ( $def_key == 'social_main_facebook_publisher_profile_url' ) {
                 $add_meta_tags_opts[$def_key] = esc_url_raw( stripslashes( $post_payload[$def_key] ), array( 'http', 'https') );
             } elseif ( $def_key == 'social_main_googleplus_publisher_profile_url' ) {

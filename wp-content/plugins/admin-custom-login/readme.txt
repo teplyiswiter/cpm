@@ -1,10 +1,10 @@
-=== Custom Login Plugin ===
+=== Customize WordPress Login Page ===
 Contributors: weblizar
 Donate link: http://www.weblizar.com/
 Tags: admin, admin login, admin login page, customize, admin custom login, custom login,  branding, custom login, custom login pro, customization, error, login, login error, logo,  customization, themes, wordpress login, login form, admin login form, wordpress login, plugin, jquery form, jquery,  customization, customizer, custom login plugin, background , sideshow, social form, social connect, social share, facebook, twitter, google plug, linkedin, background slideshow, image, logo, custom logo, wordpress admin login, wp login, wp-login, log in, admin, role, subscriber, captcha, security login, customize wordpress login form, wp login form, login form plugin, ogin page, logo, style log in, style login, themes, custom login page, css , html, form style,       
-Requires at least: 3.3
-Tested up to: 4.4.2
-Stable tag: 2.4.1
+Requires at least: 3.5
+Tested up to: 4.5
+Stable tag: 2.4.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,7 @@ Pugin allows to change background color, background image, background slide show
 Guys please send us your login screenshots at `lizarweb[at]gmail[dot]com`.
 
 > **Standard Features**
+>
 > * Add Your Own Custom Logo On Login Form
 > * Background Colour
 > * Background Image
@@ -38,6 +39,7 @@ Guys please send us your login screenshots at `lizarweb[at]gmail[dot]com`.
 > * Social Media Icon Size
 > * Interactive Plugin Dashboard
 > * Customize Login Form Positions
+>
 
 ### Background Slide Show:
 This is our most key feature of this plugin. We have provide you our best to add slide show on your custom login background without any hesitation.
@@ -74,17 +76,20 @@ Plugin is integrated with 500+ google fonts. So add beautiful font styles fro yo
 Theere you able update plugin design with unlimited colours. Colour option is available for both login form panel and background  
 
 > #### **Admin Demo**
-> * [Admin Demo](http://demo.weblizar.com/admin-custom-login-admin-demo/wp-admin)
 >
+>
+> [Admin Demo](http://demo.weblizar.com/admin-custom-login-admin-demo/wp-admin)
 > **Username:** userdemo
 > **Password:** userdemo
 >
+>
 
-### Included Translations:
+### Translations By Our Plugin Users:
 
 * Italian(it_IT) by [Giovanni Caputo](http://giovannicaputo.netsons.org)
 * Hindi(hi_HI) by [Infigo Software](http://infigosoft.com)
 * German(de_DE) or Deutsch by Markus Petautschnig aka X00LA
+* Portuguese(pt_BR) by An User
 
 If you have any question contact us at here: [Plugin Support Forum ](http://wordpress.org/support/plugin/admin-custom-login) 
 
@@ -102,13 +107,36 @@ If you have any question contact us at here: [Plugin Support Forum ](http://word
 3. Demo 3
 4. Demo 4
 4. Demo 5
-5. social link up
-6. Admin settings layout
-7. Admin settings layout 2
+5. Social Link Up
+6. Admin Settings layout
+7. Admin Settings layout 2
  
 == Changelog ==
 
 For more information, see [Weblizar](http://wwww.weblizar.com/)
+
+= Version 2.4.5.1 15/04/2016 =
+* Improvements: Font Awesome Icon Library Updated 4.6.1
+* Fix: Font Awesome Position Centred into Login Form Inputs
+* Fix: Login Form Shadow Setting
+* Fix: Login Form Background Image Setting
+* Fix: Logo Image & Links Fading with Slide Show
+* Fix: Login Form Floating Width Customization
+
+= Version 2.4.5 15/04/2016 =
+* Compatible and Tested upto WordPress 4.5
+* New: Portuguese language translation added 
+* Hard-coded input box place holder value has been removed.
+* Sorry!!! it was accidentally remain into code by developer during testing a language conversion issue.
+
+= Version 2.4.4 14/04/2016 =
+* Opacity & Background issue fixed removed
+
+= Version 2.4.3 02/04/2016 =
+* Font Awesome Library Updated
+
+= Version 2.4. 25/02/2016 =
+* small updates
 
 = Version 2.4. 25/02/2016 =
 * Add Social Media Option

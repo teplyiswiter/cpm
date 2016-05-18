@@ -93,6 +93,16 @@ function acl_er_login_logo() {
       });
     </script>
     <style type="text/css">
+	.fa{
+	line-height:1.5 !important;
+	}
+	p{
+		position:relative !important;
+	}
+	body.login div#login h1 a,
+	#login_error{
+		position:relative !important;
+	}
 	<?php echo $login_page['login_custom_css'] ?>;
 	
 		/* Styles loading for Admin Custome Login */
@@ -148,7 +158,9 @@ function acl_er_login_logo() {
 			background-size: <?php echo $logo_page['logo_width'] ?>px <?php echo $logo_page['logo_height'] ?>px;
 			width: <?php echo $logo_page['logo_width'] ?>px;
 			height: <?php echo $logo_page['logo_height'] ?>px;			
-        }
+        
+	
+}
 	
 
 		<?php 
@@ -169,25 +181,25 @@ function acl_er_login_logo() {
 		
 		<?php if($login_page['login_form_position'] == 'lf_float_style') { ?>
 		#login {
-			float:<?php echo $login_page['login_form_float']; ?>;
-			position: relative;
+			float:<?php echo $login_page['login_form_float']; ?> !important;
+			position: relative !important;
 			<?php if($login_page['login_form_float'] == "left") { ?>
-			padding-left: 25px;
+			padding-left: 25px !important;
 			<?php }?>
 			<?php if($login_page['login_form_float'] == "right") { ?>
-			padding-right: 25px;
+			padding-right: 25px !important;
 			<?php } ?>
 		}
 		<?php } ?>	
 			
 		<?php if($login_page['login_form_position'] == 'lf_customize_style') { ?>
 		#login{
-			position:relative;
+			position:relative !important;
 			<?php if($login_page['login_form_left'] !== "") { ?>
-				margin-left:<?php echo $login_page['login_form_left']; ?>px;
+				margin-left:<?php echo $login_page['login_form_left']; ?>px !important;
 			<?php } ?>
 			<?php if($login_page['login_form_top'] !== "") { ?>
-				padding-top: <?php echo $login_page['login_form_top']; ?>px;
+				padding-top: <?php echo $login_page['login_form_top']; ?>px !important;
 			<?php } ?>
 		} 
 		<?php }?>			
@@ -201,7 +213,7 @@ function acl_er_login_logo() {
 			border:<?php echo $login_page['login_border_thikness'] ?>px <?php echo $login_page['login_border_style'] ?> <?php echo $login_page['login_border_color'] ?>;
 			-moz-box-shadow:    <?php echo $login_shadow_color ?>;
 			-webkit-box-shadow: <?php echo $login_shadow_color ?>;
-			box-shadow:         <?php echo $login_shadow_color ?>;
+			box-shadow:         <?php echo $login_shadow_color ?>!important;
 			<?php 
 				if($Social_page['enable_social_icon'] == "inner" || $Social_page['enable_social_icon'] == "both"){?>
 					padding: 26px 24px 8px;
@@ -214,10 +226,10 @@ function acl_er_login_logo() {
 			  background-color: rgb(<?php echo $loginbg['red'];?>,<?php echo $loginbg['green']?>,<?php echo $loginbg['blue']?>);
 			  background:  url(<?php echo $login_page['login_bg_image'] ?>) <?php echo $login_page['login_bg_repeat'] ?> <?php echo $login_page['login_bg_position'] ?>;		
 			  
-			 background: rgba(<?php echo $loginbg['red'];?>,<?php echo $loginbg['green']?>,<?php echo $loginbg['blue']?>,<?php echo $login_form_opacity ?>);
+			 background: rgba(<?php echo $loginbg['red'];?>,<?php echo $loginbg['green']?>,<?php echo $loginbg['blue']?>,<?php echo $login_form_opacity ?>)!important;;
 			 
 			 <?php if($login_page['login_bg_type'] == "static-background-image" ){?>	
-				background: url('<?php echo WEBLIZAR_NALF_PLUGIN_URL.'css/img/'.$login_page['login_bg_effect'].'.png'; ?>') repeat scroll left top, url(<?php echo $login_page['login_bg_image'] ?>) <?php echo $login_page['login_bg_repeat'] ?> <?php echo $login_page['login_bg_position'] ?>;
+				background: url('<?php echo WEBLIZAR_NALF_PLUGIN_URL.'css/img/'.$login_page['login_bg_effect'].'.png'; ?>') repeat scroll left top, url(<?php echo $login_page['login_bg_image'] ?>) <?php echo $login_page['login_bg_repeat'] ?> <?php echo $login_page['login_bg_position'] ?> !important;
 			<?php } ?>
 		}		
 		
@@ -275,8 +287,9 @@ function acl_er_login_logo() {
 		
 		body.login #nav a, body.login #backtoblog a {
 			color: <?php echo $text_and_color_page['link_color'] ?> !important;
-			font-family:<?php echo $text_and_color_page['link_font_style'] ?>;
+			font-family:<?php echo $text_and_color_page['link_font_style'] ?>!important;
 		}
+		
 		body.login #nav, body.login #backtoblog {
 			text-shadow: <?php echo $link_shadow_color ?>;
 		}

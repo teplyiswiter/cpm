@@ -19,7 +19,7 @@
  *
  *  Licensing Information
  *
- *  Copyright 2006-2013 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
+ *  Copyright 2006-2016 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -397,7 +397,7 @@ function amt_add_schemaorg_metadata_content_filter( $post_body ) {
     // Get the options the DB
     $options = get_option("add_meta_tags_opts");
     // Get current post object
-    $post = amt_get_queried_object($options);
+    $post = amt_get_queried_object();
     // Caching indicator
     $is_cached = 'no';
 
@@ -549,7 +549,7 @@ function amt_add_schemaorg_metadata_content_filter( $post_body ) {
 
         // First check if a global image override URL has been entered.
         // If yes, use this image URL and override all other images.
-        $image_data = amt_get_image_attributes_array( amt_get_post_meta_image_url($post->ID) );
+        $image_data = amt_get_image_data( amt_get_post_meta_image_url($post->ID) );
         if ( ! empty($image_data) ) {
             $image_size = apply_filters( 'amt_image_size_product', 'full' );
             $image_meta_tags = amt_get_schemaorg_image_metatags( $options, $image_data, $size=$image_size );
@@ -915,7 +915,7 @@ function amt_add_schemaorg_metadata_content_filter( $post_body ) {
 
         // First check if a global image override URL has been entered.
         // If yes, use this image URL and override all other images.
-        $image_data = amt_get_image_attributes_array( amt_get_post_meta_image_url($post->ID) );
+        $image_data = amt_get_image_data( amt_get_post_meta_image_url($post->ID) );
         if ( ! empty($image_data) ) {
             $image_size = apply_filters( 'amt_image_size_content', 'full' );
             $image_meta_tags = amt_get_schemaorg_image_metatags( $options, $image_data, $size=$image_size );
@@ -1538,7 +1538,7 @@ function amt_get_schemaorg_author_metatags( $author_id, $options ) {
 
     // Profile Image
     // First use the global image override URL
-    $image_data = amt_get_image_attributes_array( amt_get_user_meta_image_url( $author_id ) );
+    $image_data = amt_get_image_data( amt_get_user_meta_image_url( $author_id ) );
     if ( ! empty($image_data) ) {
         $image_size = apply_filters( 'amt_image_size_index', 'full' );
         $image_meta_tags = amt_get_schemaorg_image_metatags( $options, $image_data, $size=$image_size );
@@ -1566,7 +1566,7 @@ function amt_get_schemaorg_author_metatags( $author_id, $options ) {
         if ( ! empty($avatar_url) ) {
             //$avatar_url = html_entity_decode($avatar_url, ENT_NOQUOTES, 'UTF-8');
             //$metadata_arr[] = '<meta itemprop="image" content="' . esc_url_raw( $avatar_url ) . '" />';
-            $image_data = amt_get_image_attributes_array( sprintf('%s,%dx%d', $avatar_url, $avatar_size, $avatar_size) );
+            $image_data = amt_get_image_data( sprintf('%s,%dx%d', $avatar_url, $avatar_size, $avatar_size) );
             if ( ! empty($image_data) ) {
                 $image_size = apply_filters( 'amt_image_size_index', 'full' );
                 $image_meta_tags = amt_get_schemaorg_image_metatags( $options, $image_data, $size=$image_size );
@@ -1609,7 +1609,7 @@ function amt_get_schemaorg_author_metatags( $author_id, $options ) {
     }
 
     // Allow filtering of the Author meta tags
-    $metadata_arr = apply_filters( 'amt_schemaorg_author_extra', $metadata_arr );
+    $metadata_arr = apply_filters( 'amt_schemaorg_author_extra', $metadata_arr, $author_id );
 
     return $metadata_arr;
 }
@@ -2023,7 +2023,7 @@ function amt_add_jsonld_schemaorg_metadata_head( $post, $attachments, $embedded_
 
         // First check if a global image override URL has been entered.
         // If yes, use this image URL and override all other images.
-        $image_data = amt_get_image_attributes_array( amt_get_post_meta_image_url($post->ID) );
+        $image_data = amt_get_image_data( amt_get_post_meta_image_url($post->ID) );
         if ( ! empty($image_data) ) {
             $image_size = apply_filters( 'amt_image_size_product', 'full' );
             $image_meta_array = amt_get_jsonld_schemaorg_image_array( $options, $image_data, $size=$image_size );
@@ -2418,9 +2418,9 @@ function amt_add_jsonld_schemaorg_metadata_head( $post, $attachments, $embedded_
             // Rating
             $metadata_arr['reviewRating'] = array();
             $metadata_arr['reviewRating']['@type'] = 'Rating';
-            $metadata_arr['reviewRating']['ratingValue'] = $review_data['ratingValue'];
+            $metadata_arr['reviewRating']['ratingValue'] = esc_attr($review_data['ratingValue']);
             $bestrating = apply_filters( 'amt_schemaorg_review_bestrating', '5' );
-            $metadata_arr['reviewRating']['bestRating'] = $bestrating;
+            $metadata_arr['reviewRating']['bestRating'] = esc_attr($bestrating);
         }
 
         // Keywords - We use the keywords defined by Add-Meta-Tags
@@ -2446,7 +2446,7 @@ function amt_add_jsonld_schemaorg_metadata_head( $post, $attachments, $embedded_
 
         // First check if a global image override URL has been entered.
         // If yes, use this image URL and override all other images.
-        $image_data = amt_get_image_attributes_array( amt_get_post_meta_image_url($post->ID) );
+        $image_data = amt_get_image_data( amt_get_post_meta_image_url($post->ID) );
         if ( ! empty($image_data) ) {
             $image_size = apply_filters( 'amt_image_size_content', 'full' );
             $image_meta_array = amt_get_jsonld_schemaorg_image_array( $options, $image_data, $size=$image_size );
@@ -3111,7 +3111,7 @@ function amt_get_jsonld_schemaorg_author_array( $author_id, $options ) {
 
     // Profile Image
     // First use the global image override URL
-    $image_data = amt_get_image_attributes_array( amt_get_user_meta_image_url( $author_id ) );
+    $image_data = amt_get_image_data( amt_get_user_meta_image_url( $author_id ) );
     if ( ! empty($image_data) ) {
         $image_size = apply_filters( 'amt_image_size_index', 'full' );
         $image_meta_array = amt_get_jsonld_schemaorg_image_array( $options, $image_data, $size=$image_size );
@@ -3137,7 +3137,7 @@ function amt_get_jsonld_schemaorg_author_array( $author_id, $options ) {
         if ( ! empty($avatar_url) ) {
             //$avatar_url = html_entity_decode($avatar_url, ENT_NOQUOTES, 'UTF-8');
             //$metadata_arr['image'] = esc_url_raw( $avatar_url );
-            $image_data = amt_get_image_attributes_array( sprintf('%s,%dx%d', $avatar_url, $avatar_size, $avatar_size) );
+            $image_data = amt_get_image_data( sprintf('%s,%dx%d', $avatar_url, $avatar_size, $avatar_size) );
             if ( ! empty($image_data) ) {
                 $image_meta_array = amt_get_jsonld_schemaorg_image_array( $options, $image_data );
                 if ( ! empty($image_meta_array) ) {
@@ -3182,7 +3182,7 @@ function amt_get_jsonld_schemaorg_author_array( $author_id, $options ) {
     }
 
     // Allow filtering of the Author meta tags
-    $metadata_arr = apply_filters( 'amt_jsonld_schemaorg_author_extra', $metadata_arr );
+    $metadata_arr = apply_filters( 'amt_jsonld_schemaorg_author_extra', $metadata_arr, $author_id );
 
     return $metadata_arr;
 }

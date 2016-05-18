@@ -19,7 +19,7 @@
  *
  *  Licensing Information
  *
- *  Copyright 2006-2013 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
+ *  Copyright 2006-2016 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -76,11 +76,6 @@ function amt_admin_init() {
 
     // Register scripts and styles
 
-    /* Register our script for the color picker. */
-    // wp_register_script( 'myPluginScript', plugins_url( 'script.js', AMT_PLUGIN_FILE ) );
-    /* Register our stylesheet. */
-    wp_register_style( 'amt_settings', plugins_url( 'css/amt-settings.css', AMT_PLUGIN_FILE ) );
-
 }
 add_action( 'admin_init', 'amt_admin_init' );
 
@@ -95,17 +90,35 @@ function amt_admin_menu() {
 add_action( 'admin_menu', 'amt_admin_menu');
 
 
-/** Enqueue scripts and styles
- *  From: http://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts#Example:_Target_a_Specific_Admin_Page
- */
+//
+// Enqueue scripts and styles
+// From: http://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts#Example:_Target_a_Specific_Admin_Page
+//
 function amt_enqueue_admin_scripts_and_styles( $hook ) {
     //var_dump($hook);
     if ( 'settings_page_add-meta-tags-options' != $hook ) {
         return;
     }
-    // Enqueue script and style for the color picker.
-    //wp_enqueue_script( 'myPluginScript' );
+
+    // Using included Jquery
+    wp_enqueue_script('jquery');
+
+    // Necessary for the media selector.
+    // https://codex.wordpress.org/Javascript_Reference/wp.media
+    wp_enqueue_media();
+
+    // Register our stylesheet.
+    wp_register_style( 'amt_settings', plugins_url( 'css/amt-settings.css', AMT_PLUGIN_FILE ) );
+
+    // Enqueue style.
     wp_enqueue_style( 'amt_settings' );
+
+    // Register Add-Meta-Tags admin scripts
+    wp_register_script( 'amt_image_selector_script', plugins_url( 'js/amt-image-selector.js', AMT_PLUGIN_FILE ), array('jquery') );
+
+    // Enqueue the Add-Meta-Tags Admin Scripts
+    wp_enqueue_script( 'amt_image_selector_script' );
+
 }
 add_action( 'admin_enqueue_scripts', 'amt_enqueue_admin_scripts_and_styles' );
 // Note: `admin_print_styles` should not be used to enqueue styles or scripts on the admin pages. Use `admin_enqueue_scripts` instead. 
@@ -327,7 +340,12 @@ function amt_admin_help_tabs() {
     $help_text = '
         <h3>'.__('Automatically generate Dublin Core metadata.', 'add-meta-tags').'</h3>
 
-        <p>'.__('If this option is enabled, Dublin Core metadata is automatically generated for your content and attachments. For more information, please refer to <a href="http://dublincore.org">Dublin Core Metadata Initiative</a>.', 'add-meta-tags').'</p>';
+        <p>'.__('If this option is enabled, Dublin Core metadata is automatically generated for your content and attachments. For more information, please refer to <a href="http://dublincore.org">Dublin Core Metadata Initiative</a>.', 'add-meta-tags').'</p>
+
+        <h3>'.__('Add the Dublin Core XML namespace.', 'add-meta-tags').'</h3>
+
+        <p>'.__('When enabled, the Dublin Core XML namespace for the <code>dcterms</code> prefix is added to the <code>html</code> element of the page. If your theme already contains this namespace, then this option should not be enabled.', 'add-meta-tags').'</p>';
+
     $screen->add_help_tab( array(
         'id'	=> 'amt_help_metadata_dublin_core',
         'title'	=> __('Dublin Core', 'add-meta-tags'),
@@ -603,7 +621,12 @@ function amt_options_page() {
     /*
     Configuration Page
     */
-    
+
+    print('
+    <!-- #add-meta-tags-settings is required by the media selector -->
+    <span id="add-meta-tags-settings">    
+    ');
+
     print('
     <div class="wrap">
         <div id="icon-options-general" class="icon32"><br /></div>
@@ -628,23 +651,6 @@ function amt_options_page() {
 
     </div>
     -->
-
-    <div class="wrap amt-settings-donations-msg" style="' . (($options["i_have_donated"]=="1") ? 'display: none;' : '') . '">
-
-        <h3>'.__('Message from the author', 'add-meta-tags').'</h3>
-
-        <p><em>Add-Meta-Tags</em> is released under the terms of the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License version 2</a> and, therefore, is <strong>Free software</strong>. It is actively maintained and supported free of charge since 2006.</p>
-
-        <p>However, a significant amount of <strong>time</strong> and <strong>energy</strong> has been put into the development of this plugin, so, its production has not been free from cost. If you find this plugin useful and if it has helped your blog get indexed better and rank higher, I would appreciate an <a href="http://bit.ly/HvUakt">extra cup of coffee</a>.</p>
-        <!--
-        <p">Donations in BitCoin (BTC) are also accepted and welcome. Send the donated coin to the following address:</p>
-        <ul>
-            <li style="margin-left: 1em;">BitCoin (BTC): <code>1KkgpmaBKqQVk643VRhFRkL19Bbci4Mwn9</code></li>
-        </ul>
-        -->
-        <p>Thank you in advance,<br />George Notaras</p>
-        <div style="text-align: right;"><small>'.__('This message can be deactivated in the settings below.', 'add-meta-tags').'</small></div>
-    </div>
 
     <div class="wrap">
         <h2>'.__('Configuration', 'add-meta-tags').'</h2>
@@ -957,6 +963,10 @@ function amt_options_page() {
                 <label for="auto_dublincore">'.__('Automatically generate Dublin Core metadata.', 'add-meta-tags').'</label>
                 <br />
 
+                <input id="dc_add_xml_namespaces" type="checkbox" value="1" name="dc_add_xml_namespaces" '. (($options["dc_add_xml_namespaces"]=="1") ? 'checked="checked"' : '') .'" />
+                <label for="dc_add_xml_namespaces">'.__('Add the Dublin Core XML namespace.', 'add-meta-tags').'</label>
+                <br />
+
             </fieldset>
             </td>
             </tr>
@@ -1173,7 +1183,7 @@ function amt_options_page() {
             <fieldset>
                 <legend class="screen-reader-text"><span>'.__('Copyright URL', 'add-meta-tags').'</span></legend>
 
-                <input name="copyright_url" type="text" id="copyright_url" class="code" value="' . esc_url_raw( stripslashes( amt_get_site_copyright_url($options) ) ) . '" size="100" maxlength="1024" />
+                <input name="copyright_url" type="text" id="copyright_url" class="code" value="' . esc_url( stripslashes( amt_get_site_copyright_url($options) ) ) . '" size="100" maxlength="1024" />
                 <br />
                 <label for="copyright_url">
                 '.__('Enter an absolute URL to a document containing copyright and licensing information about your work.', 'add-meta-tags').'
@@ -1189,15 +1199,40 @@ function amt_options_page() {
             <fieldset>
                 <legend class="screen-reader-text"><span>'.__('Default Image', 'add-meta-tags').'</span></legend>
 
-                <input name="default_image_url" type="text" id="default_image_url" class="code" value="' . esc_url_raw( stripslashes( $options["default_image_url"] ) ) . '" size="100" maxlength="1024" />
+                <input name="default_image_url" type="text" id="default_image_url" class="code" value="' . amt_esc_id_or_url_notation( stripslashes( $options["default_image_url"] ) ) . '" size="100" maxlength="1024" />
                 <br />
+
+                <span id="amt-default-image-selector-button" class="amt-default-image-selector-button wp-media-buttons-icon loadmediawindow button updatemeta button-small">Select image</span>
+                <br />
+
                 <label for="default_image_url">
                 '.__('Enter an absolute URL to an image that represents your website, for instance the logo. To specify the image dimensions you can use the special notation <code>URL,WIDTHxHEIGHT</code>.', 'add-meta-tags').'
                 </label>
                 <br />
+        ');
+
+            // Default image preview
+            $image_data = amt_get_default_image_data();
+            $img_html = '';
+            if ( is_numeric($image_data['id']) ) {
+                $main_size_meta = wp_get_attachment_image_src( $image_data['id'], 'medium' );
+                $img_html = '<img src="' . esc_url($main_size_meta[0]) . '" width="' . esc_attr($main_size_meta[1]) . '" height="' . esc_attr($main_size_meta[2]) . '" />';
+            } elseif ( ! is_null($image_data['url']) ) {
+                $img_html = '<img src="' . esc_url($image_data['url']) . '" width="' . esc_attr($image_data['width']) . '" height="' . esc_attr($image_data['height']) . '" />';
+            }
+            if ( ! empty($img_html) ) {
+                print('
+                <p>'.__('Image preview', 'add-meta-tags').':</p>
+                <br />
+                <div id="amt-image-preview" class="amt-image-preview">' . $img_html . '</div>
+                ');
+            }
+
+        print('
             </fieldset>
             </td>
             </tr>
+
 
             <tr valign="top">
             <th scope="row">'.__('Shortcodes', 'add-meta-tags').'</th>
@@ -1367,24 +1402,16 @@ function amt_options_page() {
                 <legend class="screen-reader-text"><span>'.__('Vendor HTML comments', 'add-meta-tags').'</span></legend>
 
                 <p>
-                    '.__('Add-Meta-Tags has always been enclosing its output in <a target="_blank" href="http://www.codetrax.org/projects/wp-add-meta-tags/wiki/Screenshots#Vendor-HTML-comments">HTML comments</a>, which contain the plugin\'s name. This is common practice among WordPress plugin developers as it makes it easier for users to identify the output of a specific plugin and also lets those who check the HTML source code of the page know which plugin has generated this specific output. For a free product with limited resources like Add-Meta-Tags this practice is also its only means of exposure in a safe and non intrusive way.', 'add-meta-tags').'
-                </p>
-                <br />
-
-                <p>
-                    '.__('Although we don\'t like it, we have added the following option which deactivates the generation of those HTML comments*. We do not recommend checking the following box, but, if for whatever reason you have to turn these comments off, please go ahead and do it. To make it a little harder for you, an artificial requirement of a one time donation for any number of web sites you own has been added. Please keep in mind that there are no special donation links for this purpose. We do not force or keep track of your donations. You are free to go ahead and check this box without donating. What you do is totally your own decision and has nothing to do with us.', 'add-meta-tags').'
+                    '.__('Add-Meta-Tags has always been enclosing its output in <a target="_blank" href="http://www.codetrax.org/projects/wp-add-meta-tags/wiki/Screenshots#Vendor-HTML-comments">HTML comments</a>, which contain the plugin\'s name. This is common practice among WordPress plugin developers as it makes it easier for users to identify the output of a specific plugin and also lets those who check the HTML source code of the page know which plugin has generated this specific output. By checking the following option you can remove those comments.', 'add-meta-tags').'
                 </p>
                 <br />
 
                 <input id="omit_vendor_html_comments" type="checkbox" value="1" name="omit_vendor_html_comments" '. (($options["omit_vendor_html_comments"]=="1") ? 'checked="checked"' : '') .'" />
-                <label for="omit_vendor_html_comments">'.sprintf( __('I have made a one time <a target="_blank" href="%s">donation</a> of 5 USD or more for all the web sites I own.', 'add-meta-tags'), 'http://bit.ly/HvUakt').'</label> **
+                <label for="omit_vendor_html_comments">'.sprintf( __('Omit the vendor HTML comments.', 'add-meta-tags'), 'http://bit.ly/HvUakt').'</label> *
                 <br />
 
                 <p>
                     '.__('<em>* HTML comments that are generated as part of the Schema.org microdata are always retained.</em>', 'add-meta-tags').'
-                </p>
-                <p>
-                    '.__('<em>** All Add-Meta-Tags contributors should feel free to check the option above without donating.</em>', 'add-meta-tags').'
                 </p>
                 <br />
 
@@ -1394,18 +1421,6 @@ function amt_options_page() {
     ');
 
     print('
-            <tr valign="top">
-            <th scope="row">'.__('Donations', 'add-meta-tags').'</th>
-            <td>
-            <fieldset>
-                <legend class="screen-reader-text"><span>'.__('Donations', 'add-meta-tags').'</span></legend>
-
-                <input id="i_have_donated" type="checkbox" value="1" name="i_have_donated" '. (($options["i_have_donated"]=="1") ? 'checked="checked"' : '') .'" />
-                <label for="i_have_donated">'.sprintf( __('If checked, the <em>message from the author</em> above goes away. Thanks for <a target="_blank" href="%s">donating</a>!', 'add-meta-tags'), 'http://bit.ly/HvUakt').'</label>
-                <br />
-            </fieldset>
-            </td>
-            </tr>
 
         </tbody>
         </table>
@@ -1442,13 +1457,56 @@ function amt_options_page() {
 
     ');
 
+    print('
+    </span> <!-- #add-meta-tags-settings -->
+    ');
+
 }
 
 
 
-/**
- * Meta box in post/page editing panel.
- */
+//
+//
+// Metadata metabox in post/page editing panel.
+//
+//
+
+function amt_post_edit_metabox_enqueue_scripts($hook) {
+    // Enqueue only on profile page.
+    if ( ! in_array($hook, array('post.php', 'post-new.php')) ) {
+        return;
+    }
+    
+    // $supported_types = amt_get_post_types_for_metabox();
+    // See: #900 for details
+
+    // Using included Jquery
+    wp_enqueue_script('jquery');
+
+// For tabs
+//    wp_enqueue_script('jquery-ui-core');
+//    wp_enqueue_script('jquery-ui-widget');
+//    wp_enqueue_script('jquery-ui-tabs');
+
+    // Necessary for the media selector.
+    // https://codex.wordpress.org/Javascript_Reference/wp.media
+    wp_enqueue_media();
+
+// For tabs
+    //wp_register_style( 'amt-jquery-ui-core', plugins_url('css/jquery.ui.core.css', AMT_PLUGIN_FILE) );
+    //wp_enqueue_style( 'amt-jquery-ui-core' );
+    //wp_register_style( 'amt-jquery-ui-tabs', plugins_url('css/jquery.ui.tabs.css', AMT_PLUGIN_FILE) );
+    //wp_enqueue_style( 'amt-jquery-ui-tabs' );
+//    wp_register_style( 'amt-metabox-tabs', plugins_url('css/amt-metabox-tabs.css', AMT_PLUGIN_FILE) );
+//    wp_enqueue_style( 'amt-metabox-tabs' );
+
+    // Register Add-Meta-Tags admin scripts
+    wp_register_script( 'amt_image_selector_script', plugins_url( 'js/amt-image-selector.js', AMT_PLUGIN_FILE ), array('jquery') );
+    // Enqueue the Add-Meta-Tags Admin Scripts
+    wp_enqueue_script( 'amt_image_selector_script' );
+}
+add_action( 'admin_enqueue_scripts', 'amt_post_edit_metabox_enqueue_scripts' );
+
 
 /* Define the custom box */
 add_action( 'add_meta_boxes', 'amt_add_metadata_box' );
@@ -1479,7 +1537,7 @@ function amt_add_metadata_box() {
     foreach ($supported_types as $supported_type) {
         add_meta_box( 
             'amt-metadata-box',
-            __( 'Metadata', 'add-meta-tags' ),
+            __( 'Metadata', 'add-meta-tags' ) . ' ' . __('(by <em>Add-Meta-Tags</em>)', 'add-meta-tags'),
             'amt_inner_metadata_box',
             $supported_type,
             'advanced',
@@ -1490,35 +1548,8 @@ function amt_add_metadata_box() {
 }
 
 
-/**
- * Load CSS and JS for metadata box.
- * The editing pages are post.php and post-new.php
- */
-// add_action('admin_print_styles-post.php', 'amt_metadata_box_css_js');
-// add_action('admin_print_styles-post-new.php', 'amt_metadata_box_css_js');
-
-function amt_metadata_box_css_js () {
-    // $supported_types = amt_get_post_types_for_metabox();
-    // See: #900 for details
-
-    // Using included Jquery UI
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('jquery-ui-core');
-    wp_enqueue_script('jquery-ui-widget');
-    wp_enqueue_script('jquery-ui-tabs');
-
-    //wp_register_style( 'amt-jquery-ui-core', plugins_url('css/jquery.ui.core.css', AMT_PLUGIN_FILE) );
-    //wp_enqueue_style( 'amt-jquery-ui-core' );
-    //wp_register_style( 'amt-jquery-ui-tabs', plugins_url('css/jquery.ui.tabs.css', AMT_PLUGIN_FILE) );
-    //wp_enqueue_style( 'amt-jquery-ui-tabs' );
-    wp_register_style( 'amt-metabox-tabs', plugins_url('css/amt-metabox-tabs.css', AMT_PLUGIN_FILE) );
-    wp_enqueue_style( 'amt-metabox-tabs' );
-
-}
-
-
-/* For future reference - Add data to the HEAD area of post editing panel */
-
+// For future reference - Add data to the HEAD area of post editing panel
+//
 // add_action('admin_head-post.php', 'amt_metabox_script_caller');
 // add_action('admin_head-post-new.php', 'amt_metabox_script_caller');
 // OR
@@ -1580,6 +1611,11 @@ function amt_inner_metadata_box( $post ) {
     // Display the meta box HTML code.
 
     $metabox_has_features = false;
+
+    print('
+    <!-- #add-meta-tags-settings is required by the media selector -->
+    <span id="add-meta-tags-settings">
+    ');
 
     // Custom description
     
@@ -1770,11 +1806,34 @@ function amt_inner_metadata_box( $post ) {
         print('
             <p>
                 <label for="amt_custom_image_url"><strong>'.__('Image URL', 'add-meta-tags').'</strong>:</label>
-                <input type="text" class="code" style="width: 99%" id="amt_custom_image_url" name="amt_custom_image_url" value="' . esc_url_raw( stripslashes( $custom_image_url_value ) ) . '" />
-                <br>
-                '.__('Enter an image URL to override all media related meta tags.', 'add-meta-tags').'
+                <input type="text" class="code" style="width: 99%" id="amt_custom_image_url" name="amt_custom_image_url" value="' . amt_esc_id_or_url_notation( stripslashes( $custom_image_url_value ) ) . '" />
+
+                <span id="amt-image-selector-button" class="amt-image-selector-button wp-media-buttons-icon loadmediawindow button updatemeta button-small">'.__('Select image', 'add-meta-tags').'</span>
+                <br />
+
+                '.__('Enter an absolute image URL in order to enforce the use of this image in the metadata. To specify the image dimensions you can use the special notation <code>URL,WIDTHxHEIGHT</code>.', 'add-meta-tags').'
+                '.__('Alternatively, you can select an image by pressing the <em>Select image</em> button.', 'add-meta-tags').'
+                '.__('If this image is set, the plugin will not generate metadata for other media.', 'add-meta-tags').'
             </p>
+
         ');
+
+            // Image preview
+            $image_data = amt_get_image_data( amt_esc_id_or_url_notation( stripslashes( $custom_image_url_value ) ) );
+            $img_html = '';
+            if ( is_numeric($image_data['id']) ) {
+                $main_size_meta = wp_get_attachment_image_src( $image_data['id'], 'medium' );
+                $img_html = '<img src="' . esc_url($main_size_meta[0]) . '" width="' . esc_attr($main_size_meta[1]) . '" height="' . esc_attr($main_size_meta[2]) . '" />';
+            } elseif ( ! is_null($image_data['url']) ) {
+                $img_html = '<img src="' . esc_url($image_data['url']) . '" width="' . esc_attr($image_data['width']) . '" height="' . esc_attr($image_data['height']) . '" />';
+            }
+            if ( ! empty($img_html) ) {
+                print('
+                <p>'.__('Image preview', 'add-meta-tags').':</p>
+                <br />
+                <div id="amt-image-preview" class="amt-image-preview">' . $img_html . '</div>
+                ');
+            }
 
     }
 
@@ -1883,6 +1942,10 @@ sameAs = http://en.wikipedia.org/wiki/On_the_Origin_of_Species\n\
         ');
     }
 
+    print('
+    </span> <!-- #add-meta-tags-settings -->
+    ');
+
 }
 
 
@@ -1952,7 +2015,7 @@ function amt_save_postdata( $post_id, $post ) {
     }
     // Image URL
     if ( isset( $_POST['amt_custom_image_url'] ) ) {
-        $image_url_value = esc_url_raw( stripslashes( $_POST['amt_custom_image_url'] ) );
+        $image_url_value = amt_esc_id_or_url_notation( stripslashes( $_POST['amt_custom_image_url'] ) );
     }
     // Content locale
     if ( isset( $_POST['amt_custom_content_locale'] ) ) {
@@ -2087,6 +2150,28 @@ function amt_save_postdata( $post_id, $post ) {
 //
 //
 
+
+function amt_terms_enqueue_scripts($hook) {
+    // Enqueue only on profile page.
+    if ( 'term.php' != $hook ) {
+        return;
+    }
+    
+    // Using included Jquery UI
+    wp_enqueue_script('jquery');
+
+    // Necessary for the media selector.
+    // https://codex.wordpress.org/Javascript_Reference/wp.media
+    wp_enqueue_media();
+
+    // Register Add-Meta-Tags admin scripts
+    wp_register_script( 'amt_image_selector_script', plugins_url( 'js/amt-image-selector.js', AMT_PLUGIN_FILE ), array('jquery') );
+    // Enqueue the Add-Meta-Tags Admin Scripts
+    wp_enqueue_script( 'amt_image_selector_script' );
+}
+add_action( 'admin_enqueue_scripts', 'amt_terms_enqueue_scripts' );
+
+
 function amt_add_extra_section_fields_terms() {
 
     // The term meta API was implemented in 4.4
@@ -2147,8 +2232,8 @@ function amt_taxonomy_extra_fields_show( $term, $taxonomy_slug ) {
         $custom_full_metatags_value = amt_get_term_meta_full_metatags( $term_id );
 
         print('
-
-            <tr class="form-field term-amt_custom_full_metatags-wrap">
+            <!-- .add-meta-tags-setting is required by the media selector -->
+            <tr class="add-meta-tags-setting form-field term-amt_custom_full_metatags-wrap">
             <th scope="row"><label for="amt_custom_full_metatags">'.__('Full meta tags', 'add-meta-tags').'</label></th>
             <td>
                 <textarea class="large-text code" style="width: 99%" id="amt_custom_full_metatags" name="amt_custom_full_metatags" cols="50" rows="6" >'. stripslashes( $custom_full_metatags_value ) .'</textarea>
@@ -2180,14 +2265,42 @@ function amt_taxonomy_extra_fields_show( $term, $taxonomy_slug ) {
         $custom_image_url_value = amt_get_term_meta_image_url( $term_id );
 
         print('
-            <tr class="form-field term-amt_custom_image_url-wrap">
+            <!-- .add-meta-tags-setting is required by the media selector -->
+            <tr class="add-meta-tags-setting form-field term-amt_custom_image_url-wrap">
             <th scope="row"><label for="amt_custom_image_url">'.__('Image URL', 'add-meta-tags').'</label></th>
             <td>
-            <input type="text" class="code" style="width: 99%" size="40" id="amt_custom_image_url" name="amt_custom_image_url" value="' . esc_url_raw( stripslashes( $custom_image_url_value ) ) . '" />
+            <input type="text" class="code" style="width: 99%" size="40" id="amt_custom_image_url" name="amt_custom_image_url" value="' . amt_esc_id_or_url_notation( stripslashes( $custom_image_url_value ) ) . '" />
+
+            <span id="amt-image-selector-button" class="amt-image-selector-button wp-media-buttons-icon loadmediawindow button updatemeta button-small">'.__('Select image', 'add-meta-tags').'</span>
+            <br />
+
             <p class="description">
                 '.__('Enter an absolute image URL in order to enforce the use of this image in the metadata. To specify the image dimensions you can use the special notation <code>URL,WIDTHxHEIGHT</code>.', 'add-meta-tags').'
+                '.__('Alternatively, you can select an image by pressing the <em>Select image</em> button.', 'add-meta-tags').'
                 <br />
             </p>
+
+        ');
+
+            // Image preview
+            $image_data = amt_get_image_data( amt_esc_id_or_url_notation( stripslashes( $custom_image_url_value ) ) );
+            $img_html = '';
+            if ( is_numeric($image_data['id']) ) {
+                $main_size_meta = wp_get_attachment_image_src( $image_data['id'], 'medium' );
+                $img_html = '<img src="' . esc_url($main_size_meta[0]) . '" width="' . esc_attr($main_size_meta[1]) . '" height="' . esc_attr($main_size_meta[2]) . '" />';
+            } elseif ( ! is_null($image_data['url']) ) {
+                $img_html = '<img src="' . esc_url($image_data['url']) . '" width="' . esc_attr($image_data['width']) . '" height="' . esc_attr($image_data['height']) . '" />';
+            }
+            if ( ! empty($img_html) ) {
+                print('
+                <p>'.__('Image preview', 'add-meta-tags').':</p>
+                <br />
+                <div id="amt-image-preview" class="amt-image-preview">' . $img_html . '</div>
+                ');
+            }
+
+        print('
+
             </td>
             </tr>
 
@@ -2248,7 +2361,7 @@ function amt_taxonomy_extra_fields_save( $term_id, $taxonomy_id ) {
     }
     // Image URL
     if ( isset( $_POST['amt_custom_image_url'] ) ) {
-        $image_url_value = esc_url_raw( stripslashes( $_POST['amt_custom_image_url'] ) );
+        $image_url_value = amt_esc_id_or_url_notation( stripslashes( $_POST['amt_custom_image_url'] ) );
     }
 
     // If a value has not been entered we try to delete existing data from the database
@@ -2288,19 +2401,35 @@ function amt_taxonomy_extra_fields_save( $term_id, $taxonomy_id ) {
 //
 //
 
-function amt_add_extra_section_fields_users() {
-    $taxonomies = get_taxonomies();
-    if ( ! empty($taxonomies) ) {
-        foreach ( $taxonomies as $key => $taxonomy_slug ) {
-            // Show/edit
-            add_action( 'show_user_profile', 'amt_user_extra_fields_show' );
-            add_action( 'edit_user_profile', 'amt_user_extra_fields_show' );
-
-            // Store data when created
-            add_action( 'personal_options_update', 'amt_user_extra_fields_save' );
-            add_action( 'edit_user_profile_update', 'amt_user_extra_fields_save' );
-        }
+function amt_user_profile_enqueue_scripts($hook) {
+    // Enqueue only on profile page.
+    if ( 'profile.php' != $hook ) {
+        return;
     }
+    
+    // Using included Jquery UI
+    wp_enqueue_script('jquery');
+
+    // Necessary for the media selector.
+    // https://codex.wordpress.org/Javascript_Reference/wp.media
+    wp_enqueue_media();
+
+    // Register Add-Meta-Tags admin scripts
+    wp_register_script( 'amt_image_selector_script', plugins_url( 'js/amt-image-selector.js', AMT_PLUGIN_FILE ), array('jquery') );
+    // Enqueue the Add-Meta-Tags Admin Scripts
+    wp_enqueue_script( 'amt_image_selector_script' );
+}
+add_action( 'admin_enqueue_scripts', 'amt_user_profile_enqueue_scripts' );
+
+
+function amt_add_extra_section_fields_users() {
+    // Show/edit
+    add_action( 'show_user_profile', 'amt_user_extra_fields_show' );
+    add_action( 'edit_user_profile', 'amt_user_extra_fields_show' );
+
+    // Store data when created
+    add_action( 'personal_options_update', 'amt_user_extra_fields_save' );
+    add_action( 'edit_user_profile_update', 'amt_user_extra_fields_save' );
 }
 add_action('admin_init', 'amt_add_extra_section_fields_users');
 
@@ -2321,6 +2450,9 @@ function amt_user_extra_fields_show( $user ) {
     $metabox_has_features = false;
 
     print('
+    <!-- #add-meta-tags-settings is required by the media selector -->
+    <span id="add-meta-tags-settings">
+
         <h3>'.__('Add-Meta-Tags', 'add-meta-tags').'</h3>
 
         <table class="form-table">
@@ -2372,11 +2504,38 @@ function amt_user_extra_fields_show( $user ) {
             <tr class="form-field user-amt_custom_image_url-wrap">
             <th scope="row"><label for="amt_custom_image_url">'.__('Image URL', 'add-meta-tags').'</label></th>
             <td>
-            <input type="text" class="code" style="width: 99%" size="40" id="amt_custom_image_url" name="amt_custom_image_url" value="' . esc_url_raw( stripslashes( $custom_image_url_value ) ) . '" />
+            <input type="text" class="code" style="width: 99%" size="40" id="amt_custom_image_url" name="amt_custom_image_url" value="' . amt_esc_id_or_url_notation( stripslashes( $custom_image_url_value ) ) . '" />
+
+            <span id="amt-image-selector-button" class="amt-image-selector-button wp-media-buttons-icon loadmediawindow button updatemeta button-small">'.__('Select image', 'add-meta-tags').'</span>
+            <br />
+
             <p class="description">
                 '.__('Enter an absolute image URL in order to enforce the use of this image in the metadata. To specify the image dimensions you can use the special notation <code>URL,WIDTHxHEIGHT</code>.', 'add-meta-tags').'
+                '.__('Alternatively, you can select an image by pressing the <em>Select image</em> button.', 'add-meta-tags').'
                 <br />
             </p>
+
+        ');
+
+            // Image preview
+            $image_data = amt_get_image_data( amt_esc_id_or_url_notation( stripslashes( $custom_image_url_value ) ) );
+            $img_html = '';
+            if ( is_numeric($image_data['id']) ) {
+                $main_size_meta = wp_get_attachment_image_src( $image_data['id'], 'medium' );
+                $img_html = '<img src="' . esc_url($main_size_meta[0]) . '" width="' . esc_attr($main_size_meta[1]) . '" height="' . esc_attr($main_size_meta[2]) . '" />';
+            } elseif ( ! is_null($image_data['url']) ) {
+                $img_html = '<img src="' . esc_url($image_data['url']) . '" width="' . esc_attr($image_data['width']) . '" height="' . esc_attr($image_data['height']) . '" />';
+            }
+            if ( ! empty($img_html) ) {
+                print('
+                <p>'.__('Image preview', 'add-meta-tags').':</p>
+                <br />
+                <div id="amt-image-preview" class="amt-image-preview">' . $img_html . '</div>
+                ');
+            }
+
+        print('
+
             </td>
             </tr>
 
@@ -2395,6 +2554,10 @@ function amt_user_extra_fields_show( $user ) {
             <p>'.__(sprintf( 'No features have been enabled for this metabox in the Add-Meta-Tags <a href="%s">settings</a> or you do not have enough permissions to access the available features.', admin_url( 'options-general.php?page=add-meta-tags-options' ) ), 'add-meta-tags').'</p>
         ');
     }
+
+    print('
+    </span> <!-- #add-meta-tags-settings -->
+    ');
 
 }
 
@@ -2436,7 +2599,7 @@ function amt_user_extra_fields_save( $user_id ) {
     }
     // Image URL
     if ( isset( $_POST['amt_custom_image_url'] ) ) {
-        $image_url_value = esc_url_raw( stripslashes( $_POST['amt_custom_image_url'] ) );
+        $image_url_value = amt_esc_id_or_url_notation( stripslashes( $_POST['amt_custom_image_url'] ) );
     }
 
     // If a value has not been entered we try to delete existing data from the database

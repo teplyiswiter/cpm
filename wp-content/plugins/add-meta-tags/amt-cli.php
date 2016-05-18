@@ -19,7 +19,7 @@
  *
  *  Licensing Information
  *
- *  Copyright 2006-2015 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
+ *  Copyright 2006-2016 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -102,7 +102,7 @@ class AMT_Command extends WP_CLI_Command {
         // Print a success message
         WP_CLI::success( "Operation complete." );
 */
-        WP_CLI::error('Not implemented');
+        WP_CLI::error('Not implemented.');
     }
 
 
@@ -126,9 +126,14 @@ class AMT_Command extends WP_CLI_Command {
         // Multisite
         if ( $assoc_args['network-wide'] ) {
             if ( is_multisite() ) {
-                $blog_list = get_blog_list( 0, 'all' );
+                // Check for large network
+                if ( wp_is_large_network( $using='sites' ) ) {
+                    WP_CLI::error('Too large network. Aborting...');
+                }
+                $blog_list = wp_get_sites();
+                //var_dump($blog_list);
                 if ( empty($blog_list) ) {
-                    WP_CLI::error('No blogs could be found.');
+                    WP_CLI::error('No blogs could be found.');  // Check for large network is done above
                 }
                 foreach ( $blog_list as $blog ) {
                     switch_to_blog( $blog['blog_id'] );
@@ -139,13 +144,15 @@ class AMT_Command extends WP_CLI_Command {
                 }
                 WP_CLI::success('Add-Meta-Tags settings have been upgraded network wide.');
             } else {
-                WP_CLI::warning('No network detected. Reverting to signle site settings upgrade.');
+                WP_CLI::warning('No network detected. Reverting to single site mode.');
             }
         }
 
-        // Single site installation
-        amt_plugin_upgrade();
-        WP_CLI::success('Add-Meta-Tags settings have been upgraded.');
+        if ( ! is_multisite() ) {
+            // Single site installation
+            amt_plugin_upgrade();
+            WP_CLI::success('Add-Meta-Tags settings have been upgraded.');
+        }
 
 /*
         if ( is_multisite() ) {
@@ -179,7 +186,7 @@ class AMT_Command extends WP_CLI_Command {
 
 
     /**
-     * Export settings and data.
+     * Export settings and data to standard output.
      * 
      * ## OPTIONS
      * 
@@ -188,10 +195,10 @@ class AMT_Command extends WP_CLI_Command {
      * 
      * ## EXAMPLES
      * 
-     *     wp amt export settings
-     *     wp amt export postdata
-     *     wp amt export userdata
-     *     wp amt export termdata
+     *     wp amt export settings > amt-settings.json
+     *     wp amt export postdata > amt-postdata.json
+     *     wp amt export userdata > amt-userdata.json
+     *     wp amt export termdata > amt-termdata.json
      *
      * @synopsis <settings|postdata|userdata|termdata>
      */
@@ -207,6 +214,13 @@ class AMT_Command extends WP_CLI_Command {
         // Export AMT settings
         if ( $what == 'settings' ) {
             $opts = amt_get_options();
+            // Every time Add-Meta-Tags is run it checks and upgrades its settings.
+            // Here we perform a check whether the returned settings are the defaults.
+            //$default_options = amt_get_default_options();
+            //var_dump(array_diff($opts, $default_options));
+            //if ( empty( array_diff($opts, $default_options) ) ) {
+            //    WP_CLI::error( 'No custom settings detected.' );
+            //}
             if ( empty($opts) ) {
                 WP_CLI::error( 'Could not retrieve Add-Meta-Tags options.' );
             }
@@ -301,7 +315,7 @@ class AMT_Command extends WP_CLI_Command {
 
 
     /**
-     * Import settings and data.
+     * Import settings and data from standard input.
      * 
      * ## OPTIONS
      * 
@@ -310,10 +324,10 @@ class AMT_Command extends WP_CLI_Command {
      * 
      * ## EXAMPLES
      * 
-     *     wp amt import settings
-     *     wp amt import postdata
-     *     wp amt import userdata
-     *     wp amt import termdata
+     *     wp amt import settings < amt-settings.json
+     *     wp amt import postdata < amt-postdata.json
+     *     wp amt import userdata < amt-userdata.json
+     *     wp amt import termdata < amt-termdata.json
      *
      * @synopsis <settings|postdata|userdata|termdata>
      */

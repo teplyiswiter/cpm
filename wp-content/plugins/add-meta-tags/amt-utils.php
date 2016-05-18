@@ -19,7 +19,7 @@
  *
  *  Licensing Information
  *
- *  Copyright 2006-2013 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
+ *  Copyright 2006-2016 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -50,11 +50,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Returns the post object filtered.
-function amt_get_queried_object($options) {
-    // Get current post object
-    $post = get_queried_object();
+// In addition see this: https://github.com/Automattic/amp-wp/commit/21180205487d71e595088e2cd1d1acba3f240ea5
+function amt_get_queried_object() {
+    // Sometimes, it is possible that a post object (static WP Page), which behaves
+    // like a custom post type archive (eg the WooCommerce main shop page -- slug=shop)
+    // has been set as the static front page.
+    // In such cases the get_queried_object() function may not return a regular
+    // WP_Post object, which is required by this plugin. So, in such cases we
+    // retrieve the WP_Post object manually.
+    if ( amt_is_static_front_page() && is_post_type_archive() ) {
+        $post = get_post( amt_get_front_page_id() );
+    } else {
+        // Use the normal way to get the $post object.
+        // Get current post object
+        $post = get_queried_object();
+    }
     // Allow filtering of the $post object.
-    $post = apply_filters('amt_get_queried_object', $post, $options);
+    $post = apply_filters('amt_get_queried_object', $post);
     return $post;
 }
 
@@ -287,6 +299,31 @@ function amt_process_paged( $data ) {
 }
 
 
+// Escapes the contents of a field that can accept an attachment ID (integer) and a URL
+// Mainly used for 'Global Image Override' fields and 'Default_image_URL' field.
+function amt_esc_id_or_url_notation( $data ) {
+    if ( empty($data) || is_numeric($data) ) {
+        return $data;
+    }
+    // Treat as URL. Split into pieaces (URL,WIDTHxHEIGHT), escape each and
+    // then reconstruct the data.
+    $parts = explode(',', $data);
+    if ( count($parts) == 1 ) {
+        // We have just the URL
+        return esc_url($data);
+    } else {
+        $url = $parts[0];
+        $dimensions = explode('x', $parts[1]);
+        if ( count($dimensions) != 2 ) {
+            return esc_url($url);
+        } elseif ( ! is_numeric($dimensions[0]) || ! is_numeric($dimensions[1]) ) {
+            return esc_url($url);
+        }
+    }
+    return sprintf('%s,%dx%d', esc_url($url), absint($dimensions[0]), absint($dimensions[1]));
+}
+
+
 // Function that cleans the content of the post
 // Removes HTML markup, expands or removes short codes etc.
 function amt_get_clean_post_content( $options, $post ) {
@@ -300,16 +337,22 @@ function amt_get_clean_post_content( $options, $post ) {
 
     // Early filter that lets dev define the post. This makes it possible to
     // exclude specific parts of the post for the rest of the algorithm.
+    // NOTE: qtranslate-X needs to pass through __() at this point.
     $initial_content = apply_filters( 'amt_get_the_excerpt_initial_content', $post->post_content, $post );
 
     // First expand the shortcodes if the relevant setting is enabled.
     if ( $options['expand_shortcodes'] == '1' ) {
         $initial_content = do_shortcode( $initial_content );
+        // Filter the initial content again after expanding the shortcodes.
+        $initial_content = apply_filters( 'amt_get_the_excerpt_initial_content_expanded_shortcodes', $initial_content, $post );
     }
 
     // Second strip all HTML tags
-    $plain_text = wp_kses( $initial_content, array() );
-
+    //$plain_text = wp_kses( $initial_content, array() );
+    // Use wp_strip_all_tags() instead of wp_kses(). The latter leave the contents
+    // of script/style HTML tags.
+    $plain_text = wp_strip_all_tags( $initial_content, true );
+    
     // Strip properly registered shortcodes
     $plain_text = strip_shortcodes( $plain_text );
     // Also strip any shortcodes (For example, required for the removal of Visual Composer shortcodes)
@@ -438,7 +481,7 @@ function amt_get_the_excerpt( $post, $excerpt_max_len=300, $desc_avg_length=250,
      *      $amt_excerpt = ...
      *      return $amt_excerpt;
      *  }
-     *  add_filter( 'amt_get_the_excerpt', 'customize_amt_excerpt', 10, 1 );
+     *  add_filter( 'amt_get_the_excerpt', 'customize_amt_excerpt', 10, 2 );
      */
     $amt_excerpt = apply_filters( 'amt_get_the_excerpt', $amt_excerpt, $post );
 
@@ -761,6 +804,10 @@ function amt_get_content_description( $post, $auto=true ) {
     // Non persistent object cache
     // Cache even empty
     wp_cache_add( $amtcache_key, $content_description, $group='add-meta-tags' );
+
+    // Allow filtering of the final description
+    // NOTE: qtranslate-X needs to pass through __() at this point.
+    $content_description = apply_filters( 'amt_get_content_description', $content_description, $post );
 
     return $content_description;
 }
@@ -2536,6 +2583,7 @@ function amt_get_image_attributes_array( $notation ) {
 
 
 // Function that returns an array with data about the default image.
+// Returns false if no image could be found.
 function amt_get_default_image_data() {
 
     // Non persistent object cache
@@ -2580,6 +2628,67 @@ function amt_get_default_image_data() {
 
     // Allow filtering
     $data = apply_filters('amt_default_image_data', $data);
+
+    // Check if we have an image
+    if ( is_null($data['id']) && is_null($data['url']) ) {
+        $data = false;
+    }
+
+    // Non persistent object cache
+    // Cache even empty
+    wp_cache_add( $amtcache_key, $data, $group='add-meta-tags' );
+
+    return $data;
+}
+
+
+// Function that returns an array with data about the image.
+// Returns false if no image could be found.
+function amt_get_image_data( $value ) {
+
+    // Non persistent object cache
+    $amtcache_key = amt_get_amtcache_key('amt_cache_get_image_data_' . md5($value) );
+    $data = wp_cache_get( $amtcache_key, $group='add-meta-tags' );
+    if ( $data !== false ) {
+        return $data;
+    }
+
+    // The special notation option accepts:
+    // 1. An attachment ID
+    // 2. Special notation about the default image:
+    //      URL[,WIDTHxHEIGHT]
+
+    $data = array(
+        'id'    => null,   // post ID of attachment
+        // The ID should be enough information to retrieve all attachment information
+        // Alternatively, if the ID is not set, at least the 'url' should be set.
+        'url'   => null,
+        'width' => null,
+        'height' => null,
+        'type'  => null,
+    );
+
+    if ( ! empty($value) ) {
+
+        // First check if we have an ID
+        if ( is_numeric($value) ) {
+            $data['id'] = absint($value);
+
+        // Alternatively, check for special notation
+        } else {
+            $data = amt_get_image_attributes_array( $value );
+
+        }
+
+    }
+
+    // Allow filtering
+    //$data = apply_filters('amt_get_image_data', $data);
+
+    // Check if we have an image
+    if ( is_null($data['id']) && is_null($data['url']) ) {
+        $data = false;
+    }
 
     // Non persistent object cache
     // Cache even empty
@@ -2821,6 +2930,9 @@ function amt_get_review_data( $post ) {
     $mandatory_arr = array( 'ratingValue', 'object', 'name', 'sameAs' );
     // Add extra properties
     foreach ( $review_data_raw as $key => $value ) {
+        // Reverse the ampersand replacement. (see note above)
+        $key = str_replace('&', '&amp;', $key);
+        $value = str_replace('&', '&amp;', $value);
         if ( in_array( $key, $mandatory_arr ) ) {
             $review_data[$key] = $value;
         } else {
@@ -2952,7 +3064,7 @@ function amt_get_sample_review_sets() {
     $html .= PHP_EOL . '<option value="0">'.__('Select a sample review', 'add-meta-tags').'</option>' . PHP_EOL;
     foreach ( array_keys($review_sets) as $key ) {
         $key_slug = str_replace(' ', '_', strtolower($key));
-        $html .= '<option value="'.$key_slug.'">'.$key.'</option>' . PHP_EOL;
+        $html .= '<option value="' . esc_attr($key_slug) . '">' . esc_attr($key) . '</option>' . PHP_EOL;
     }
     $html .= PHP_EOL . '</select>' . PHP_EOL;
 
@@ -2968,7 +3080,7 @@ jQuery(document).ready(function(){
     foreach ( $review_sets as $key => $value ) {
         $key_slug = str_replace(' ', '_', strtolower($key));
         $html .= '
-        } else if (selection == "'.$key_slug.'") {
+        } else if (selection == "' . esc_attr($key_slug) . '") {
             var output = \''.implode('\'+"\n"+\'', $value).'\';
         ';
     }
@@ -2995,7 +3107,7 @@ function amt_get_breadcrumbs( $user_options ) {
     // Get plugin options
     $plugin_options = get_option("add_meta_tags_opts");
     // Get post object
-    $post = amt_get_queried_object($plugin_options);
+    $post = amt_get_queried_object();
 
     // Default Options
     $default_options = array(
@@ -4010,7 +4122,7 @@ function amt_metadata_analysis($default_text, $metadata_block_head, $metadata_bl
     //
 
     $options = amt_get_options();
-    $post = amt_get_queried_object($options);
+    $post = amt_get_queried_object();
 
     if ( ! isset($post->ID) || $post->ID <= 0 ) {
         return $default_text;

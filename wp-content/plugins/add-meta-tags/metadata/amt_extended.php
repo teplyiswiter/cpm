@@ -19,7 +19,7 @@
  *
  *  Licensing Information
  *
- *  Copyright 2006-2015 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
+ *  Copyright 2006-2016 George Notaras <gnot@g-loaded.eu>, CodeTRAX.org
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -1115,6 +1115,19 @@ function amt_product_group_image_url_woocommerce( $default_image_url, $tax_term_
         return wp_get_attachment_url( $thumbnail_id );
     }
 }
+
+
+// Retrieve WooCommerce page IDs
+//
+//get_option( 'woocommerce_shop_page_id' ); 
+//get_option( 'woocommerce_cart_page_id' ); 
+//get_option( 'woocommerce_checkout_page_id' );
+//get_option( 'woocommerce_pay_page_id' ); 
+//get_option( 'woocommerce_thanks_page_id' ); 
+//get_option( 'woocommerce_myaccount_page_id' ); 
+//get_option( 'woocommerce_edit_address_page_id' ); 
+//get_option( 'woocommerce_view_order_page_id' ); 
+//get_option( 'woocommerce_terms_page_id' ); 
 
 
 
