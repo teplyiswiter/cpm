@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /kontakty/
+Disallow: /login/
+Disallow: /logout/
+Disallow: /register/
+Disallow: /lostpassword/
+Disallow: /resetpass/
+Host: lepta.sm.ua
+Sitemap: http://lepta.sm.ua/xmlsitemap.xml

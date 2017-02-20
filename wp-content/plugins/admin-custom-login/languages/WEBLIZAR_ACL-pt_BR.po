@@ -1,46 +1,38 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Custom Admin V1.5\n"
-"POT-Creation-Date: 2016-04-07 17:08-0300\n"
-"PO-Revision-Date: 2016-04-07 17:28-0300\n"
+"POT-Creation-Date: 2016-11-17 12:14-0200\n"
+"PO-Revision-Date: 2016-11-17 12:15-0200\n"
 "Last-Translator: \n"
 "Language-Team: Rodrigues (Blupixel) <rodrigues@blupixel.com.br>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _e;__;_\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../admin-custom-login.php:106
-msgid "Nome de Usuário"
+#: ../admin-custom-login.php:106 ../admin-custom-login.php:112
+msgid "User Name"
 msgstr "Nome de Usuário"
 
-#: ../admin-custom-login.php:106 ../admin-custom-login.php:112
-msgid "nome de usuário"
-msgstr "nome de usuário"
-
-#: ../admin-custom-login.php:107
-msgid "Senha"
+#: ../admin-custom-login.php:107 ../admin-custom-login.php:113
+msgid "Password"
 msgstr "Senha"
 
-#: ../admin-custom-login.php:107 ../admin-custom-login.php:113
-msgid "senha"
-msgstr "senha"
-
 #: ../admin-custom-login.php:123
-msgid "Contate-nos:"
+msgid "Contact Us:"
 msgstr "Contate-nos:"
 
-#: ../admin-custom-login.php:375
+#: ../admin-custom-login.php:374
 msgid "Please upload a valid .json file"
 msgstr "Por favor, envie um arquivo .json válido"
 
-#: ../admin-custom-login.php:381
+#: ../admin-custom-login.php:380
 msgid "Please upload a file to import"
 msgstr "Por favor, envie um arquivo para importar"
 
@@ -132,7 +124,7 @@ msgstr "Nenhuma mídia selecionada!"
 #: ../includes/design/background.php:156
 #: ../includes/settings/page-settings.php:64
 msgid "Upload"
-msgstr "Upload"
+msgstr "Enviar"
 
 #: ../includes/Login-form-setting/Login-form-background.php:369
 #: ../includes/settings/page-settings.php:66
@@ -388,6 +380,10 @@ msgstr "Criado Por"
 msgid "Weblizar"
 msgstr "Weblizar"
 
+#: ../includes/content.php:117
+msgid "Show Us Some Love (Rate Us)"
+msgstr "Mostre-nos Algum Amor (Avalie-nos)"
+
 #: ../includes/content.php:133
 msgid "Dashboard"
 msgstr "Painel de Controle"
@@ -487,6 +483,11 @@ msgstr "Habilitado"
 #: ../includes/dashboard/dashboard.php:43
 msgid "View Login Page"
 msgstr "Visualizar Página de Login"
+
+#: ../includes/dashboard/dashboard.php:48
+msgid "Copy below link and open in another browser where you are not logged in"
+msgstr ""
+"Copiar link abaixo e abrir em outro navegador onde você não está conectado"
 
 #: ../includes/dashboard/dashboard.php:66
 #: ../includes/dashboard/dashboard.php:80
@@ -667,17 +668,54 @@ msgstr "Veja os Documentos de Apoio ou Abra um Ticket"
 msgid "Rate Us"
 msgstr "Classifique-nos"
 
+#: ../includes/help/help.php:56
+msgid ""
+"If you are enjoying using our Admin Custom Login plugin and find it useful, "
+"then please consider writing a positive feedback. Your feedback will help us "
+"to encourage and support the plugins continued development and better user "
+"support."
+msgstr ""
+"Se você está desfrutando do nosso plugin de Login Personalizado do Admin e "
+"encontrá-lo útil, então considere escrever um feedback positivo. Seu "
+"feedback nos ajudará a incentivar e apoiar o desenvolvimento contínuo dos "
+"plugins e melhor suporte ao usuário."
+
 #: ../includes/help/help.php:74
 msgid "Share Us Your Suggestion"
 msgstr "Partilhe a Sua Sugestão"
+
+#: ../includes/help/help.php:80
+msgid ""
+"If you have any suggestion or features in your mind then please share us. We "
+"will try our best to add them in this plugin."
+msgstr ""
+"Se você tiver qualquer sugestão ou características em sua mente, então por "
+"favor compartilhe conosco. Vamos tentar o nosso melhor para adiciona-las à "
+"este plugin."
 
 #: ../includes/help/help.php:92
 msgid "Language Contribution "
 msgstr "Contribuição de Idioma"
 
+#: ../includes/help/help.php:97
+msgid " Translate this plugin into your language"
+msgstr "Traduzir este plugin para o seu idioma"
+
+#: ../includes/help/help.php:98
+msgid "Question : How to convert Plguin into My Language ?"
+msgstr "Pergunta: Como converter o Plugin para Meu Idioma?"
+
 #: ../includes/help/help.php:99
 msgid "here is solution"
 msgstr "aqui está a solução"
+
+#: ../includes/help/rate.php:25
+msgid ""
+"We need your feedback for improve our plugin functionality on WordPress. So, "
+"if you like our plugin then please rate us"
+msgstr ""
+"Precisamos de seus comentários para melhorar nossa funcionalidade do plugin "
+"no WordPress. Então, se você gosta do nosso plugin, por favor, avalie-nos."
 
 #: ../includes/import-export-setting/import_export.php:9
 msgid "Export Custom Login Data "
@@ -917,6 +955,21 @@ msgstr "Instagram"
 #: ../includes/social/social.php:187 ../includes/social/social.php:201
 msgid "Social "
 msgstr "Social "
+
+#~ msgid "Nome de Usuário"
+#~ msgstr "Nome de Usuário"
+
+#~ msgid "nome de usuário"
+#~ msgstr "nome de usuário"
+
+#~ msgid "Senha"
+#~ msgstr "Senha"
+
+#~ msgid "senha"
+#~ msgstr "senha"
+
+#~ msgid "Contate-nos:"
+#~ msgstr "Contate-nos:"
 
 #~ msgid "Login from Floating"
 #~ msgstr "Login Flutuante"

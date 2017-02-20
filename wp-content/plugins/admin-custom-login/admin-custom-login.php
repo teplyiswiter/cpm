@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Admin Custom Login
- * Version: 2.4.5.1
+ * Version: 2.4.7.1
  * Description: Customize Your WordPress Login Screen Amazingly
  * Author: Weblizar
  * Author URI: http://weblizar.com/plugins/
@@ -10,7 +10,6 @@
 
 define("WEBLIZAR_NALF_PLUGIN_URL", plugin_dir_url(__FILE__));
 define("WEBLIZAR_ACL", "WEBLIZAR_ACL" );
-
 
 add_action('plugins_loaded', 'ACL_GetReadyTranslation');
 function ACL_GetReadyTranslation() {
@@ -153,7 +152,6 @@ function acl_export_settings() {
 
 	if( ! current_user_can( 'manage_options' ) )
 		return;
-
 	
 	// Get value of Dashboard page
 	$dashboard_page = unserialize(get_option('Admin_custome_login_dashboard'));

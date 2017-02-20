@@ -2,13 +2,13 @@
 Contributors: weblizar
 Donate link: http://www.weblizar.com/
 Tags: admin, admin login, admin login page, customize, admin custom login, custom login,  branding, custom login, custom login pro, customization, error, login, login error, logo,  customization, themes, wordpress login, login form, admin login form, wordpress login, plugin, jquery form, jquery,  customization, customizer, custom login plugin, background , sideshow, social form, social connect, social share, facebook, twitter, google plug, linkedin, background slideshow, image, logo, custom logo, wordpress admin login, wp login, wp-login, log in, admin, role, subscriber, captcha, security login, customize wordpress login form, wp login form, login form plugin, ogin page, logo, style log in, style login, themes, custom login page, css , html, form style,       
-Requires at least: 3.5
-Tested up to: 4.5
-Stable tag: 2.4.5.1
+Requires at least: 3.8
+Tested up to: 4.7
+Stable tag: 2.4.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Customize Your WordPress Login Screen Amazingly - Add Own Logo, Background Sideshow, Social Link Connectivity, Customize Login Form Positions, Background Image Slide Show
+Customize Your WordPress Login Screen Amazingly - Add Own Logo, Add Social Profiles, Login Form Positions, Background Image Slide Show
 
 == Description ==
 
@@ -79,7 +79,9 @@ Theere you able update plugin design with unlimited colours. Colour option is av
 >
 >
 > [Admin Demo](http://demo.weblizar.com/admin-custom-login-admin-demo/wp-admin)
+>
 > **Username:** userdemo
+>
 > **Password:** userdemo
 >
 >
@@ -90,6 +92,8 @@ Theere you able update plugin design with unlimited colours. Colour option is av
 * Hindi(hi_HI) by [Infigo Software](http://infigosoft.com)
 * German(de_DE) or Deutsch by Markus Petautschnig aka X00LA
 * Portuguese(pt_BR) by An User
+* French Translation by [Gilles Santacreu](http://www.boursikoter.com/)
+* Dutch Translation by [Markus P.](https://plus.google.com/+MarkusPetautschnig78)
 
 If you have any question contact us at here: [Plugin Support Forum ](http://wordpress.org/support/plugin/admin-custom-login) 
 
@@ -114,6 +118,19 @@ If you have any question contact us at here: [Plugin Support Forum ](http://word
 == Changelog ==
 
 For more information, see [Weblizar](http://wwww.weblizar.com/)
+
+= 2.4.7.1 - Language file updated (some text string was missing in lang file and updated in 2.4.7.1)
+= 2.4.7 = 
+* update
+= 2.4.6 = 
+* Dutch Translation Added
+= Version 2.4.5.4 10/10/2016 =
+* Small Update
+= Version 2.4.5.3 16/09/2016 =
+* Small Update
+
+= Version 2.4.5.2 16/05/2016 =
+* Small Update
 
 = Version 2.4.5.1 15/04/2016 =
 * Improvements: Font Awesome Icon Library Updated 4.6.1
@@ -156,28 +173,21 @@ For more information, see [Weblizar](http://wwww.weblizar.com/)
 * Compatible With WordPress 4.4 version
 
 = Version 2.0 18/11/2015 =
-
 * Update css file.
 
 = Version 1.9 12/10/2015 =
-
 * Add German(Deutsch) language translation
 
 = Version 1.8 31/08/2015 =
-
 * Resolved Font Issue
 
 = Version 1.7 14/08/2015 =
-
 * Resolved Spelling Mistake
 
-
 = Version 1.6 13/08/2015 =
-
 * Add Italian language translation
 
 = Version 1.5 08/07/2015 =
-
 * Add Export Import Setting.
 * Increase Logo Width and Height Upto 500px.
 * Bug Fix of 'Background SlideShow' not working in Lost your password page.
@@ -185,13 +195,11 @@ For more information, see [Weblizar](http://wwww.weblizar.com/)
 * Bug Fix of Background Image Strech.
 
 = Version 1.4 22/04/2015 =
-
 * Remove Problem of Social Connectivity.
 * Bug Fix of not converting Username and Password on language.
 * Move "Admin Custom Login" under "settings" menu.
 
 = Version 1.3 22/04/2015 =
-
 * Input box Icon colour changed on changing input box text colour.
 * Remove the bug of log-in form background opacity.
 * Set proper alignment of logo image on login form floating left or right
@@ -200,21 +208,16 @@ For more information, see [Weblizar](http://wwww.weblizar.com/)
 * Compatible with WordPress 4.2 version
 
 = Version 1.2 08/04/2015 =
-
 * Remove preview option.
 * Add help section.
 
-
 = Version 1.1 07/04/2015 =
-
 * Resolve issue loading the fonts with SSL.
 * Resolved Logo preview issue.
-* Setting panel icon now visible on first installation. 
+* Setting panel icon now visible on first installation.
 
 = Version 1.0 =
-
 * This is first and basic version of slider plugin.
-
 
 = Docs & Support =
 

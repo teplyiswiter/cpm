@@ -21,7 +21,7 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	 * @since 6.3.2
 	 * @const string
 	 */
-	const VERSION = '6.4.4';
+	const VERSION = '6.4.6';
 
 	/**
 	 * Holds options key
@@ -66,7 +66,7 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	 * @access public
 	 * @var int
 	 */
-	public $request_instance;
+	public $request_instance = 0;
 
 	/**
 	 * Holds loaded instances
@@ -143,7 +143,6 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 		add_action( 'wp_head',                 array( $this, 'wp_head'                 ) );
 		add_action( 'wp_footer',               array( $this, 'wp_footer'               ) );
 		add_action( 'wp_print_footer_scripts', array( $this, 'wp_print_footer_scripts' ) );
-		add_action( 'wp_authenticate',         array( $this, 'wp_authenticate'         ) );
 
 		add_filter( 'site_url',               array( $this, 'site_url'               ), 10, 3 );
 		add_filter( 'logout_url',             array( $this, 'logout_url'             ), 10, 2 );
@@ -152,8 +151,15 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 		add_filter( 'wp_setup_nav_menu_item', array( $this, 'wp_setup_nav_menu_item' )        );
 		add_filter( 'wp_list_pages_excludes', array( $this, 'wp_list_pages_excludes' )        );
 		add_filter( 'page_link',              array( $this, 'page_link'              ), 10, 2 );
+		add_filter( 'authenticate',           array( $this, 'authenticate'           ), 20, 3 );
 
 		add_shortcode( 'theme-my-login', array( $this, 'shortcode' ) );
+
+		if ( 'username' == $this->get_option( 'login_type' ) ) {
+			remove_filter( 'authenticate', 'wp_authenticate_email_password', 20 );
+		} elseif ( 'email' == $this->get_option( 'login_type' ) ) {
+			remove_filter( 'authenticate', 'wp_authenticate_username_password', 20 );
+		}
 	}
 
 
@@ -245,7 +251,7 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 	 * @since 6.1.13
 	 * @access public
 	 */
-	public function pre_get_posts( &$query ) {
+	public function pre_get_posts( $query ) {
 
 		// Bail if not a search
 		if ( ! $query->is_search )
@@ -477,6 +483,9 @@ class Theme_My_Login extends Theme_My_Login_Abstract {
 									$redirect_to = get_dashboard_url( $user->ID );
 								elseif ( ! $user->has_cap( 'edit_posts' ) )
 									$redirect_to = $user->has_cap( 'read' ) ? admin_url( 'profile.php' ) : home_url();
+
+								wp_redirect( $redirect_to );
+								exit;
 							}
 							wp_safe_redirect( $redirect_to );
 							exit;
@@ -601,14 +610,21 @@ setTimeout( function() {
 try {
 <?php if ( $user_login ) { ?>
 d = document.getElementById('user_pass');
+d.value = '';
 <?php } else { ?>
 d = document.getElementById('user_login');
-<?php } ?>
+<?php if ( 'invalid_username' == $this->errors->get_error_code() ) { ?>
+if ( d.value != '' )
 d.value = '';
+<?php
+}
+} ?>
 d.focus();
+d.select();
 } catch(e){}
 }, 200 );
 }
+
 wp_attempt_focus();
 if(typeof wpOnload=='function')wpOnload()
 </script>
@@ -616,32 +632,6 @@ if(typeof wpOnload=='function')wpOnload()
 				break;
 		}
 	}
-
-	/**
-	 * Handles login type enforcement
-	 *
-	 * @since 6.0
-	 * @access public
-	 *
-	 * @param string $username Username or email
-	 * @param string $password User's password
-	 */
-	public function wp_authenticate( &$user_login ) {
-		global $wpdb;
-
-		$login_type = $this->get_option( 'login_type' );
-
-		if ( 'default' == $login_type )
-			return;
-
-		if ( ! is_email( $user_login ) && 'email' == $login_type ) {
-			$user_login = -1;
-		} elseif ( is_email( $user_login ) ) {
-			if ( $found = $wpdb->get_var( $wpdb->prepare( "SELECT user_login FROM $wpdb->users WHERE user_email = %s", $user_login ) ) )
-				$user_login = $found;
-		}
-	}
-
 
 	/************************************************************************************************************************
 	 * Filters
@@ -832,6 +822,24 @@ if(typeof wpOnload=='function')wpOnload()
 		return $link;
 	}
 
+	/**
+	 * Add proper message in case of e-mail login error
+	 *
+	 * @since 6.4.5
+	 *
+	 * @param null|WP_Error|WP_User $user
+	 * @param string                $username
+	 * @param string                $password
+	 * @return null|WP_User|WP_Error
+	 */
+	public function authenticate( $user, $username, $password ) {
+		if ( 'email' == $this->get_option( 'login_type' ) && null == $user ) {
+			return new WP_Error( 'invalid_email', __( '<strong>ERROR</strong>: Invalid email address.', 'theme-my-login' ) );
+		}
+
+		return $user;
+	}
+
 
 	/************************************************************************************************************************
 	 * Utilities
@@ -980,7 +988,7 @@ if(typeof wpOnload=='function')wpOnload()
 				return null;
 			wp_cache_add( $action, $page_id, 'tml_page_ids' );
 		}
-		return $page_id;
+		return apply_filters( 'tml_page_id', $page_id, $action );
 	}
 
 	/**
@@ -1069,11 +1077,11 @@ if(typeof wpOnload=='function')wpOnload()
 	 * @return object Instance object
 	 */
 	public function load_instance( $args = '' ) {
-		$args['instance'] = count( $this->loaded_instances );
 
 		$instance = new Theme_My_Login_Template( $args );
+		$instance->set_option( 'instance', count( $this->loaded_instances ) );
 
-		if ( $args['instance'] == $this->request_instance ) {
+		if ( $instance->get_option( 'instance' ) === $this->request_instance ) {
 			$instance->set_active();
 			$instance->set_option( 'default_action', $this->request_action );
 		}
@@ -1128,7 +1136,7 @@ if(typeof wpOnload=='function')wpOnload()
 		if ( empty( $_POST['user_login'] ) ) {
 			$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Enter a username or e-mail address.', 'theme-my-login' ) );
 		} else if ( strpos( $_POST['user_login'], '@' ) ) {
-			$user_data = get_user_by( 'email', trim( $_POST['user_login'] ) );
+			$user_data = get_user_by( 'email', trim( wp_unslash( $_POST['user_login'] ) ) );
 			if ( empty( $user_data ) )
 				$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: There is no user registered with that email address.', 'theme-my-login' ) );
 		} else {

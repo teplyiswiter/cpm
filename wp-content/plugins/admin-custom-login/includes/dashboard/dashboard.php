@@ -45,7 +45,7 @@
 				</tr>
 				<tr class="radio-span" style="border-bottom:none;">
 					<td>
-						<h4>Copy below link and open in another browser where you are not logged in</h4>
+						<h4><?php _e('Copy below link and open in another browser where you are not logged in','WEBLIZAR_ACL')?></h4>
 						<br>
 						<span style="color:#ef4238">  <?php echo wp_login_url(); ?> </span>
 					</td>

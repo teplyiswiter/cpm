@@ -53,7 +53,7 @@
 							display:inline-block;
 						}
 						</style>
-						<h4  >If you are enjoying using our Admin Custom Login plugin and find it useful, then please consider writing a positive feedback. Your feedback will help us to encourage and support the plugin's continued development and better user support.</h4>
+						<h4><?php _e('If you are enjoying using our Admin Custom Login plugin and find it useful, then please consider writing a positive feedback. Your feedback will help us to encourage and support the plugins continued development and better user support.','WEBLIZAR_ACL')?></h4>
 						<a class="acl-rate-us" style="text-align:center; text-decoration: none;font:normal 30px/l;" href="https://wordpress.org/plugins/admin-custom-login/" target="_blank">
 							<span class="dashicons dashicons-star-filled"></span>
 							<span class="dashicons dashicons-star-filled"></span>
@@ -77,7 +77,7 @@
 				<tr class="radio-span" style="border-bottom:none;">
 					<td>
 						
-						<h4  > If you have any suggestion or features in your mind then please share us. We will try our best to add them in this plugin. </h4>
+						<h4> <?php _e('If you have any suggestion or features in your mind then please share us. We will try our best to add them in this plugin.','WEBLIZAR_ACL')?>  </h4>
 
 					</td>
 				</tr>
@@ -94,8 +94,8 @@
 				</tr>
 				<tr class="radio-span" style="border-bottom:none;">
 					<td>
-						<h4> Translate this plugin into your language </h4>
-						<h4>Question : How to convert Plguin into My Language ? </h4>
+						<h4><?php _e(' Translate this plugin into your language','WEBLIZAR_ACL')?> </h4>
+						<h4><?php _e('Question : How to convert Plguin into My Language ?','WEBLIZAR_ACL')?> </h4>
 						<a href="http://weblizar.com/customize-your-wordpress-login-page" target="_new" type="button" class="btn btn-info btn-lg" style="color:#fff"><?php _e('here is solution','')?></a>
 					</td>
 				</tr>

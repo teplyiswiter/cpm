@@ -22,7 +22,7 @@
 				
 				<tr class="radio-span" style="border-bottom:none;">
 					<td>
-					<h3>We need your feedback for improve our plugin functionality on WordPress. So, if you like our plugin then please rate us</h3>	
+					<h3><?php _e('We need your feedback for improve our plugin functionality on WordPress. So, if you like our plugin then please rate us','WEBLIZAR_ACL')?></h3>	
 					</td>
 				</tr>
 			</table>
