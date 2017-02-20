@@ -16,7 +16,7 @@
 
 // ** Параметры MySQL: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
-define('DB_NAME', 'cpm');
+define('DB_NAME', 'cpm_dev');
 
 /** Имя пользователя MySQL */
 //define('DB_USER', 'username_here');
@@ -28,8 +28,8 @@ define('DB_PASSWORD', 'hfphf,jnxbr');
 /** Имя сервера MySQL */
 define('DB_HOST', 'localhost');
 
-#define('WP_HOME','http://cpm-dev.volik.cpcs/');
-#define('WP_SITEURL','http://cpm-dev.volik.cpcs/');
+define('WP_HOME','http://cpm-dev.volik.cpcs/');
+define('WP_SITEURL','http://cpm-dev.volik.cpcs/');
 
 /** Кодировка базы данных для создания таблиц. */
 define('DB_CHARSET', 'utf8');
