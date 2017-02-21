@@ -1,1 +1,0 @@
-/home/anton-t/public_html/submitticket.php

@@ -1,1 +1,0 @@
-/home/daemon/public_html/wp-config.php

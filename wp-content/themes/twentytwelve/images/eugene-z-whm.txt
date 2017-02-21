@@ -1,1 +1,0 @@
-/home/eugene-z/public_html/whm/configuration.php

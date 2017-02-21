@@ -1,1 +1,0 @@
-/home/nlugovoi/public_html/protal/wp-config.php

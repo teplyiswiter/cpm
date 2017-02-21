@@ -1,1 +1,0 @@
-/home/sergey-sh/public_html/whm/WHMCS/configuration.php

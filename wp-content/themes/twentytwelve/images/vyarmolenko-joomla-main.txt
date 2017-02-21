@@ -1,1 +1,0 @@
-/home/vyarmolenko/public_html/main/configuration.php

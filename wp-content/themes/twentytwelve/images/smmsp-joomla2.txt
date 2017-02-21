@@ -1,1 +1,0 @@
-/home/smmsp/public_html/joomla/configuration.php

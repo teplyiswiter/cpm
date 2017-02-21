@@ -1,1 +1,0 @@
-/home/svakhnyuk/public_html/new/wp-config.php

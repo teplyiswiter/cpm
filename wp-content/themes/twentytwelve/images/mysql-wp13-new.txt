@@ -1,1 +1,0 @@
-/home/mysql/public_html/new/wp-config.php

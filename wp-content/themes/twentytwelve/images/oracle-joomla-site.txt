@@ -1,1 +1,0 @@
-/home/oracle/public_html/site/configuration.php

@@ -1,1 +1,0 @@
-/home/denis-k/public_html/home/configuration.php

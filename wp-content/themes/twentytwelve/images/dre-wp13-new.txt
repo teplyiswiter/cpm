@@ -1,1 +1,0 @@
-/home/dre/public_html/new/wp-config.php

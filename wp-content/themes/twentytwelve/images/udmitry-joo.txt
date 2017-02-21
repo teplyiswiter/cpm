@@ -1,1 +1,0 @@
-/home/udmitry/public_html/joo/configuration.php

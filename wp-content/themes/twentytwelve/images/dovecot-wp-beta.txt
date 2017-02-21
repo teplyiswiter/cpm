@@ -1,1 +1,0 @@
-/home/dovecot/public_html/beta/wp-config.php

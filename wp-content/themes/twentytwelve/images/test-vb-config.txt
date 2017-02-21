@@ -1,1 +1,0 @@
-/home/test/public_html/vb/includes/config.php

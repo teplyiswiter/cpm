@@ -1,1 +1,0 @@
-/home/remote-backups/public_html/wordpress/beta/wp-config.php

@@ -1,1 +1,0 @@
-/home/ddclient/public_html/submitticket.php

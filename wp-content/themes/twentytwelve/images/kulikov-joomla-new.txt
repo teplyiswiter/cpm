@@ -1,1 +1,0 @@
-/home/kulikov/public_html/new/configuration.php

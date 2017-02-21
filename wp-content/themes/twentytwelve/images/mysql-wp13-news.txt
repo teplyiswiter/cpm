@@ -1,1 +1,0 @@
-/home/mysql/public_html/news/wp-config.php

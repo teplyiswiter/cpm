@@ -1,1 +1,0 @@
-/home/blysenko/public_html/Wordpress/wp-config.php

@@ -1,1 +1,0 @@
-/home/redmine-svn/public_html/beta/wp-config.php

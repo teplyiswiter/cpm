@@ -1,1 +1,0 @@
-/home/ira-lys/public_html/news/configuration.php

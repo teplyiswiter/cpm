@@ -1,1 +1,0 @@
-/home/denis/public_html/new/wp-config.php

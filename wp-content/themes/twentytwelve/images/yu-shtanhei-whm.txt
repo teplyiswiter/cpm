@@ -1,1 +1,0 @@
-/home/yu-shtanhei/public_html/whm/configuration.php

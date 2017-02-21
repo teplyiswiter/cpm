@@ -1,1 +1,0 @@
-/home/srudenko/public_html/new/configuration.php

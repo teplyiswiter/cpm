@@ -1,1 +1,0 @@
-/home/jeff/public_html/main/configuration.php

@@ -1,1 +1,0 @@
-/home/anton-ivchenko/public_html/beta/wp-config.php

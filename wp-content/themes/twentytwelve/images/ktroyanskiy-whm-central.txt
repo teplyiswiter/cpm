@@ -1,1 +1,0 @@
-/home/ktroyanskiy/public_html/central/configuration.php

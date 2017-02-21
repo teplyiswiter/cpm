@@ -1,1 +1,0 @@
-/home/memcached/public_html/home/configuration.php

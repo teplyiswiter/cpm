@@ -1,1 +1,0 @@
-/home/halt/public_html/wp/wp-config.php

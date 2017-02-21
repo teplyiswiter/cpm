@@ -1,1 +1,0 @@
-/home/andrp/public_html/new/wp-config.php

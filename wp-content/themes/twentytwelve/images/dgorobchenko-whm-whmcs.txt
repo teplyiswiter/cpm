@@ -1,1 +1,0 @@
-/home/dgorobchenko/public_html/whm/whmcs/configuration.php

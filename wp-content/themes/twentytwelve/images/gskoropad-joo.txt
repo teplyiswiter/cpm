@@ -1,1 +1,0 @@
-/home/gskoropad/public_html/joo/configuration.php

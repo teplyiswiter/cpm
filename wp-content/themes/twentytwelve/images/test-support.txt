@@ -1,1 +1,0 @@
-/home/test/public_html/support/configuration.php

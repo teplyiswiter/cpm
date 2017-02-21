@@ -1,1 +1,0 @@
-/home/smmsp/public_html/wordpress/wp-config.php

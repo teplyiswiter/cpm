@@ -1,1 +1,0 @@
-/home/eugene-z/public_html/main/wp-config.php

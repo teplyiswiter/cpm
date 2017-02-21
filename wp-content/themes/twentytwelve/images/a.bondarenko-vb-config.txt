@@ -1,1 +1,0 @@
-/home/a.bondarenko/public_html/vb/includes/config.php

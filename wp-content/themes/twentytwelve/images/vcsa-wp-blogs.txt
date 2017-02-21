@@ -1,1 +1,0 @@
-/home/vcsa/public_html/blogs/wp-config.php

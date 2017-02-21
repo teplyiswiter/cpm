@@ -1,1 +1,0 @@
-/home/saltynnikov/public_html/wordpress/beta/wp-config.php

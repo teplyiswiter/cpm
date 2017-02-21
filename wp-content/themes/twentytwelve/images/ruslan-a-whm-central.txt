@@ -1,1 +1,0 @@
-/home/ruslan-a/public_html/central/configuration.php

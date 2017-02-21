@@ -1,1 +1,0 @@
-/home/clam/public_html/whm/whmcs/configuration.php

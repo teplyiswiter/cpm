@@ -1,1 +1,0 @@
-/home/vladimir-s/public_html/wp/beta/wp-config.php

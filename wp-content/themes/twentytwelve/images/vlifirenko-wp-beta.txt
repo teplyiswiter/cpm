@@ -1,1 +1,0 @@
-/home/vlifirenko/public_html/beta/wp-config.php

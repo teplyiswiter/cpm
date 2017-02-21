@@ -1,1 +1,0 @@
-/home/petr/public_html/new/wp-config.php

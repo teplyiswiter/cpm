@@ -1,1 +1,0 @@
-/home/memcached/public_html/wp-config.php

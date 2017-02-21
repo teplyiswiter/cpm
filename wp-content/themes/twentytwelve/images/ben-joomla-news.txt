@@ -1,1 +1,0 @@
-/home/ben/public_html/news/configuration.php

@@ -1,1 +1,0 @@
-/home/ruslan/public_html/whmc/WHM/configuration.php

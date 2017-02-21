@@ -1,1 +1,0 @@
-/home/eugene-strogiy/public_html/blog/wp-config.php

@@ -1,1 +1,0 @@
-/home/icinga/public_html/protal/configuration.php

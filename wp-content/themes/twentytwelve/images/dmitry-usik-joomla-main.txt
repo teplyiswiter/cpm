@@ -1,1 +1,0 @@
-/home/dmitry-usik/public_html/main/configuration.php

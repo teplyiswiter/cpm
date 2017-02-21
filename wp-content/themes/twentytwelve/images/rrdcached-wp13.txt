@@ -1,1 +1,0 @@
-/home/rrdcached/public_html/wp-config.php

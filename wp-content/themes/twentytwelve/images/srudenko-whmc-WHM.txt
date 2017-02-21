@@ -1,1 +1,0 @@
-/home/srudenko/public_html/whmc/WHM/configuration.php

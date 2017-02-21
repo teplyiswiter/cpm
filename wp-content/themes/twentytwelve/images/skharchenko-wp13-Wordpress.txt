@@ -1,1 +1,0 @@
-/home/skharchenko/public_html/Wordpress/wp-config.php

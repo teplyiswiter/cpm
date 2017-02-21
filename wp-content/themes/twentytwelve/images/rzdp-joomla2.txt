@@ -1,1 +1,0 @@
-/home/rzdp/public_html/joomla/configuration.php

@@ -1,1 +1,0 @@
-/home/pavel/public_html/whm/WHMCS/configuration.php

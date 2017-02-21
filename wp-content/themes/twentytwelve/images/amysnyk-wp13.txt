@@ -1,1 +1,0 @@
-/home/amysnyk/public_html/wp-config.php

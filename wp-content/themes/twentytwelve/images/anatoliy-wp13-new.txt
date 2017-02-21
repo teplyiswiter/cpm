@@ -1,1 +1,0 @@
-/home/anatoliy/public_html/new/wp-config.php

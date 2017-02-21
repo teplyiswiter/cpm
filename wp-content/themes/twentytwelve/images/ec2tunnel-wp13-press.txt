@@ -1,1 +1,0 @@
-/home/ec2tunnel/public_html/press/wp-config.php

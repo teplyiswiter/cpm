@@ -1,1 +1,0 @@
-/home/ben/public_html/press/wp-config.php

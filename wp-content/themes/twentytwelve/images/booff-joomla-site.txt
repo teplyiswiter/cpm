@@ -1,1 +1,0 @@
-/home/booff/public_html/site/configuration.php

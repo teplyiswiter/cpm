@@ -1,1 +1,0 @@
-/home/jenkins/public_html/joomla/configuration.php

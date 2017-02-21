@@ -1,1 +1,0 @@
-/home/bnesteruk/public_html/support/configuration.php

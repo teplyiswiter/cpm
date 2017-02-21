@@ -1,1 +1,0 @@
-/home/distcache/public_html/wordpress/beta/wp-config.php

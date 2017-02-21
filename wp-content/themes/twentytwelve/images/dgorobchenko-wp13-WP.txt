@@ -1,1 +1,0 @@
-/home/dgorobchenko/public_html/WP/wp-config.php

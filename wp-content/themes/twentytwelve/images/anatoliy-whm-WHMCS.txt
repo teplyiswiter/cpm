@@ -1,1 +1,0 @@
-/home/anatoliy/public_html/whm/WHMCS/configuration.php

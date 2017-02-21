@@ -1,1 +1,0 @@
-/home/kguggenberger/public_html/new/wp-config.php

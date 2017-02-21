@@ -1,1 +1,0 @@
-/home/igor-papkov/public_html/blog/wp-config.php

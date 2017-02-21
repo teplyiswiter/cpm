@@ -1,1 +1,0 @@
-/home/mep/public_html/joomla/configuration.php

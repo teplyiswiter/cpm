@@ -1,1 +1,0 @@
-/home/icinga/public_html/blogs/wp-config.php

@@ -1,1 +1,0 @@
-/home/usr1cv82/public_html/support/configuration.php

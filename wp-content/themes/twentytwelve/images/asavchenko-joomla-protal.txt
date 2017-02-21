@@ -1,1 +1,0 @@
-/home/asavchenko/public_html/protal/configuration.php

@@ -1,1 +1,0 @@
-/home/ddclient/public_html/protal/wp-config.php

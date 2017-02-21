@@ -1,1 +1,0 @@
-/home/adsiuba/public_html/beta/wp-config.php

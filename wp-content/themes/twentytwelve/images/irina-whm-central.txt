@@ -1,1 +1,0 @@
-/home/irina/public_html/central/configuration.php

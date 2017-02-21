@@ -1,1 +1,0 @@
-/home/artyom-d/public_html/wp/beta/wp-config.php

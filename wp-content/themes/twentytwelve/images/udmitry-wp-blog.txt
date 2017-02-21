@@ -1,1 +1,0 @@
-/home/udmitry/public_html/blog/wp-config.php

@@ -1,1 +1,0 @@
-/home/ddclient/public_html/main/wp-config.php

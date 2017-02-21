@@ -1,1 +1,0 @@
-/home/nobody/public_html/new/wp-config.php

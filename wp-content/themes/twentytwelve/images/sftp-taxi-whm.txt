@@ -1,1 +1,0 @@
-/home/sftp-taxi/public_html/whm/configuration.php

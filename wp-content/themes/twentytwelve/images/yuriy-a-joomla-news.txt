@@ -1,1 +1,0 @@
-/home/yuriy-a/public_html/news/configuration.php

@@ -1,1 +1,0 @@
-/home/zabbix/public_html/main/configuration.php

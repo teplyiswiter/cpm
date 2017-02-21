@@ -1,1 +1,0 @@
-/home/radiusd/public_html/WP/wp-config.php

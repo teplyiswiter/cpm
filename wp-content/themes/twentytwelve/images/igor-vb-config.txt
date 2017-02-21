@@ -1,1 +1,0 @@
-/home/igor/public_html/vb/includes/config.php

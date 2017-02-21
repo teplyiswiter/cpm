@@ -1,1 +1,0 @@
-/home/mongodb/public_html/central/configuration.php

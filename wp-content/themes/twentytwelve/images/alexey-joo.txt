@@ -1,1 +1,0 @@
-/home/alexey/public_html/joo/configuration.php

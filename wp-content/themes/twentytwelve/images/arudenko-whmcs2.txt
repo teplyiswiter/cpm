@@ -1,1 +1,0 @@
-/home/arudenko/public_html/submitticket.php

@@ -1,1 +1,0 @@
-/home/andrux/public_html/new/wp-config.php

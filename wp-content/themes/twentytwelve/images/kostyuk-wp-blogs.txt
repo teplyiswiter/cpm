@@ -1,1 +1,0 @@
-/home/kostyuk/public_html/blogs/wp-config.php
