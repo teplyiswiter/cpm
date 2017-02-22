@@ -16,7 +16,7 @@
 
 // ** Параметры MySQL: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
-define('DB_NAME', 'cpm_dev');
+define('DB_NAME', 'volik_cpm_dev');
 
 /** Имя пользователя MySQL */
 //define('DB_USER', 'username_here');
