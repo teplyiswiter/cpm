@@ -36,8 +36,7 @@ function xmag_posted_on() {
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	//echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
-        echo '<span class="posted-on">' . $posted_on . '</span>';
+	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
 
 }
 endif;
@@ -53,7 +52,7 @@ function xmag_entry_footer() {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( __( ', ', 'xmag' ) );
 		if ( $categories_list && xmag_categorized_blog() ) {
-			printf( '<span class="cat-links"><span class="icon-folder"></span> ' . __( 'Category: %s' ) . '</span>', $categories_list );
+			printf( '<span class="cat-links"><span class="icon-folder"></span> ' . __( 'Category: %s', 'xmag' ) . '</span>', $categories_list );
 		}
 
 		/* translators: used between list items, there is a space after the comma */
@@ -65,7 +64,7 @@ function xmag_entry_footer() {
 
 	if ( is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 		echo '<span class="comments-link">';
-		comments_popup_link( __( 'Leave a Comment'), __( '1 Comment', 'xmag' ), __( '% Comments', 'xmag' ) );
+		comments_popup_link( __( 'Leave a comment', 'xmag' ), __( '1 Comment', 'xmag' ), __( '% Comments', 'xmag' ) );
 		echo '</span>';
 	}
 

@@ -66,7 +66,7 @@
 
 <?php
 	the_post_navigation( array(
-    	'prev_text'	=> __( 'Previous Post' ) . '<span>%title</span>',
-		'next_text'	=> __( 'Next Post' ) . '<span>%title</span>',
+    	'prev_text'	=> __( 'Previous Post', 'xmag' ) . '<span>%title</span>',
+		'next_text'	=> __( 'Next Post', 'xmag' ) . '<span>%title</span>',
 	) );
 ?>
