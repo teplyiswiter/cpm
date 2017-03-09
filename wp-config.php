@@ -18,8 +18,8 @@
 // ** Параметры MySQL: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
 define('WP_CACHE', true); //Added by WP-Cache Manager
-define( 'WPCACHEHOME', '/home/volik/www/cpm-dev/cpm/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
-define('DB_NAME', 'volik_cpm_dev');
+define( 'WPCACHEHOME', '/home/volik/www/cpm/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+define('DB_NAME', 'volik_cpm');
 
 /** Имя пользователя MySQL */
 //define('DB_USER', 'username_here');
@@ -31,8 +31,8 @@ define('DB_PASSWORD', 'hfphf,jnxbr');
 /** Имя сервера MySQL */
 define('DB_HOST', 'localhost');
 
-define('WP_HOME','http://cpm-dev.volik.cpcs/');
-define('WP_SITEURL','http://cpm-dev.volik.cpcs/');
+#define('WP_HOME','http://cpm-dev.volik.cpcs/');
+#define('WP_SITEURL','http://cpm-dev.volik.cpcs/');
 
 /** Кодировка базы данных для создания таблиц. */
 define('DB_CHARSET', 'utf8');
