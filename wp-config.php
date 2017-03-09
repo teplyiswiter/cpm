@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Основные параметры WordPress.
  *
@@ -16,6 +17,8 @@
 
 // ** Параметры MySQL: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
+define('WP_CACHE', true); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/home/volik/www/cpm-dev/cpm/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('DB_NAME', 'volik_cpm_dev');
 
 /** Имя пользователя MySQL */

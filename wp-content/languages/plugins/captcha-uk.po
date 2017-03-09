@@ -2,83 +2,347 @@
 # This file is distributed under the same license as the Plugins - Captcha by BestWebSoft - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-01-29 06:50:49+0000\n"
+"PO-Revision-Date: 2017-03-09 08:47:47+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: GlotPress/2.3.0-alpha\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: uk_UA\n"
 "Project-Id-Version: Plugins - Captcha by BestWebSoft - Stable (latest release)\n"
 
-#. Plugin URI of the plugin/theme
-msgid "http://bestwebsoft.com/products/wordpress/plugins/captcha/"
-msgstr "http://bestwebsoft.com/products/wordpress/plugins/captcha/"
+#: includes/settings_page.php:423
+msgid "Images count"
+msgstr "Kількість зображень"
 
-#: includes/whitelist.php:440
+#: includes/settings_page.php:368
+msgid "Character recognition"
+msgstr "Розпізнавання символів"
+
+#: includes/settings_page.php:365
+msgid "Captcha type"
+msgstr "Тип капчи"
+
+#: includes/settings_page.php:253
+msgid "In order to use \"Character recognition\" type, please select at least one of the items in the option \"Use image packages\"."
+msgstr "Для того, щоб використовувати тип \"Розпізнавання символів\", будь ласка, оберіть хоча б один пакет в блоці налаштувань  \"Використовувати пакети зображень\"."
+
+#: bws_menu/deprecated.php:667
+msgid "Congratulations! Pro version of the plugin is  installed and activated successfully."
+msgstr "Вітаємо! Pro версію плагіну успішно завантажено та активовано."
+
+#: bws_menu/deprecated.php:278
+msgid "Congratulations! The Pro license of the plugin is activated successfully."
+msgstr "Вітаємо! Pro версію плагіну успішно активовано."
+
+#: bws_menu/class-bws-settings.php:1049
+msgid "Start Your Free Trial"
+msgstr "Використовувати безкоштовну Trial версію"
+
+#: bws_menu/class-bws-settings.php:1038
+msgid "Watch the Video"
+msgstr "Дивитися відео"
+
+#: bws_menu/class-bws-settings.php:1034
+msgid "Read the Instruction"
+msgstr "Читати інструкцію"
+
+#: bws_menu/class-bws-settings.php:749
+msgid "Manage active licenses, download BWS products, and view your payment history using BestWebSoft Client Area."
+msgstr "Керуй активними ліцензіями, завантажуй BWS продукти, а також переглядай історію платежів за допомогою BestWebSoft Client Area."
+
+#: bws_menu/class-bws-settings.php:747
+msgid "Login to Client Area"
+msgstr "Зайти в Client Area"
+
+#: bws_menu/class-bws-settings.php:745
+msgid "Manage License Settings"
+msgstr "Управління налаштуваннями ліцензій"
+
+#: bws_menu/class-bws-settings.php:740
+msgid "If necessary, you can check if the license key is correct or reenter it in the field below."
+msgstr "При необхідності ви можете перевірити правильність вашого ліцензійного ключа або знову ввести його у полі, що знаходиться нижче."
+
+#: bws_menu/class-bws-settings.php:719
+msgid "Enter your license key to activate %s and get premium plugin features."
+msgstr "Введіть ліцензійний ключ для активації %s і отримання додаткових можливостей плагіна."
+
+#: bws_menu/class-bws-settings.php:704
+msgid "Settings page"
+msgstr "сторінку налаштувань"
+
+#: bws_menu/class-bws-settings.php:704
+msgid "You will be automatically redirected to the %s in 7 seconds."
+msgstr "Вас буде автоматично перенаправлено на %s через 7 секунд."
+
+#: bws_menu/class-bws-settings.php:703
+msgid "Congratulations! Pro license is activated successfully."
+msgstr "Вітаємо! Pro ліцензія успішно активована."
+
+#: bws_menu/class-bws-settings.php:690 bws_menu/class-bws-settings.php:713
+#: bws_menu/class-bws-settings.php:735
+msgid "License Key"
+msgstr "Ключ ліцензії"
+
+#: bws_menu/class-bws-settings.php:574
+msgid "Import / Export"
+msgstr "Імпорт / Експорт"
+
+#: bws_menu/class-bws-settings.php:562
+msgid "This will restore plugin settings to defaults."
+msgstr "Відновити всі налаштування плагіна до налаштувань за замовчуванням."
+
+#: bws_menu/class-bws-settings.php:561
+msgid "Restore Settings"
+msgstr "Відновлення налаштувань"
+
+#: bws_menu/class-bws-settings.php:559
+msgid "Default Settings"
+msgstr "Налаштування за замовчуванням"
+
+#: bws_menu/class-bws-settings.php:555
+msgid "Enable to allow tracking plugin usage anonymously in order to make it better."
+msgstr "Включити, щоб дозволити анонімно відстежувати використання і зробити плагін краще."
+
+#: bws_menu/class-bws-settings.php:552
+msgid "Track Usage"
+msgstr "Збирати статистику"
+
+#: bws_menu/class-bws-settings.php:547
+msgid "Enable to display plugin Pro options."
+msgstr "Увімкніть для відображення Pro опцій плагіна."
+
+#: bws_menu/class-bws-settings.php:544
+msgid "Pro Options"
+msgstr "Pro опції"
+
+#: bws_menu/class-bws-settings.php:535 bws_menu/class-bws-settings.php:586
+msgid "It is prohibited to view %s settings on this site in the %s network settings."
+msgstr "Мережевими налаштуваннями %s забороняється дивитися налаштування %s на цьому сайті."
+
+#: bws_menu/class-bws-settings.php:532 bws_menu/class-bws-settings.php:583
+msgid "It is prohibited to change %s settings on this site in the %s network settings."
+msgstr "Мережевими налаштуваннями %s забороняється змінювати налаштування %s на цьому сайті."
+
+#: bws_menu/class-bws-settings.php:523
+msgid "Miscellaneous Settings"
+msgstr "Інші налаштування"
+
+#: bws_menu/class-bws-settings.php:456
+msgid "Activate custom %s code."
+msgstr "Активувать користувацький %s код."
+
+#: bws_menu/class-bws-settings.php:434
+msgid "These code will be added to the header on all pages of your site."
+msgstr "Цей код буде додано в заголовок на всіх сторінках вашого сайту."
+
+#: bws_menu/class-bws-settings.php:419
+msgid "Custom Code"
+msgstr "Користувацький код"
+
+#: bws_menu/class-bws-settings.php:173
+msgid "Version"
+msgstr "Версія"
+
+#: bws_menu/class-bws-settings.php:169
+msgid "Status"
+msgstr "Статус"
+
+#: bws_menu/class-bws-settings.php:166
+msgid "License"
+msgstr "Ліцензія"
+
+#: bws_menu/class-bws-settings.php:161
+msgid "Active"
+msgstr "Активна"
+
+#: bws_menu/class-bws-settings.php:159
+msgid "Renew Now"
+msgstr "Відновити зараз"
+
+#: bws_menu/class-bws-settings.php:159
+msgid "Expired on %s"
+msgstr "Витікає %s"
+
+#: bws_menu/class-bws-settings.php:153
+msgid "%s day(-s) left"
+msgstr "%s днів залишилося"
+
+#: bws_menu/class-bws-settings.php:150
+msgid "Expired"
+msgstr "Закінчилась"
+
+#: bws_menu/class-bws-settings.php:142
+msgid "Inactive"
+msgstr "Неактивна"
+
+#: bws_menu/class-bws-settings.php:134
+msgid "Information"
+msgstr "Інформація"
+
+#: bws_menu/bws_menu.php:425
+msgid "The plugin %s is successfully installed."
+msgstr "Плагін %s успішно встановлено."
+
+#: bws_menu/bws_menu.php:226
+msgid "WP DB version"
+msgstr "Версія бази даних WordPress"
+
+#: bws_menu/bws_menu.php:224
+msgid "Database"
+msgstr "База даних"
+
+#: bws_menu/bws_menu.php:205
+msgid "Server Environment"
+msgstr "Системне оточення сервера"
+
+#: bws_menu/bws_menu.php:201 bws_menu/bws_menu.php:246
+#: bws_menu/bws_menu.php:249
+msgid "by %s"
+msgstr "%s"
+
+#: bws_menu/bws_menu.php:200
+msgid "WP Memory Limit"
+msgstr "Ліміт пам’яті WordPress"
+
+#: bws_menu/bws_menu.php:199
+msgid "WP Multisite"
+msgstr "Мультисайт"
+
+#: bws_menu/bws_menu.php:198
+msgid "WP Version"
+msgstr "Версія WordPress"
+
+#: bws_menu/bws_menu.php:197
+msgid "Website URL"
+msgstr "Адреса сайту"
+
+#: bws_menu/bws_menu.php:194
+msgid "WordPress Environment"
+msgstr "Системне оточення WordPress"
+
+#: bws_menu/bws_menu.php:144
+msgid "Congratulations! Pro Membership license is  activated successfully."
+msgstr "Вітаємо! Pro Membership ліцензія успішно активована."
+
+#: bws_menu/bws_functions.php:792
+msgid "Are you sure you want to restore default settings?"
+msgstr "Ви впевнені, що хочете скинути налаштування плагіну до стандартних?"
+
+#: bws_menu/bws_functions.php:510
+msgid "You can always look at premium options by checking the \"Pro Options\" in the \"Misc\" tab."
+msgstr "Ви завжди можете подивитися на преміум опції, натиснувши на кнопку \"Pro опції\" на вкладці \"Різне\"."
+
+#: bws_menu/bws_functions.php:382
+msgid "Your license key for %s expires on %s and you won't be granted TOP-PRIORITY SUPPORT or UPDATES."
+msgstr "Ваш ліцензійний ключ для %s витікає %s та ви більше не будете отримувати першочергову технічну підтримку та оновлення."
+
+#: bws_menu/bws_functions.php:276
+msgid "This function(-s) will be removed over time. Please update the product(-s)."
+msgstr "Ці функції буде видалено через деякий час. Будь ласка, поновіть продукт."
+
+#: bws_menu/bws_functions.php:262
+msgid "Deprecated function(-s) is used on the site here:"
+msgstr "Застарілі функціі використовується на сайті тут:"
+
+#: bws_menu/bws_functions.php:106
+msgid "Want to support the plugin?"
+msgstr "Хочете підтримати плагін?"
+
+#: bws_menu/bws_functions.php:93
+msgid "Rate it"
+msgstr "Оцінити"
+
+#: bws_menu/bws_functions.php:91
+msgid "Like the plugin?"
+msgstr "Сподобався плагін?"
+
+#: includes/package_loader.php:243
+msgid "One image has been updated or added to the database"
+msgid_plural "%s images have been updated or added to the database"
+msgstr[0] "Одне зображення було оновлено або додано до бази даних"
+msgstr[1] "%s зображення було оновлено або додано до бази даних"
+msgstr[2] "%s зображень було оновлено або додано до бази даних"
+
+#: includes/package_loader.php:242
+msgid "One package has been updated or added to the database"
+msgid_plural "%s packages have been updated or added to the database"
+msgstr[0] "Один пакет було оновлено або додано до бази даних"
+msgstr[1] "%s пакета було оновлено або додано до бази даних"
+msgstr[2] "%s пакетів було оновлено або додано до бази даних"
+
+#: captcha.php:1798
+msgid "You're using W3 Total Cache plugin. If %1$s doesn't work properly, please clear the cache in W3 Total Cache plugin and turn on '%2$s' option on the plugin %3$s."
+msgstr "Ви використовуєте плагін W3 Total Cache. У разі, якщо %1$s працює некоректно, будь ласка, видаліть кеш з плагіну W3 Total Cache та увімкніть опцію \"%2$s\" на %3$s плагіну."
+
+#: captcha.php:1795
+msgid "settings page"
+msgstr "сторінці налаштувань"
+
+#: includes/whitelist.php:452
 msgid "the whitelist of"
 msgstr "білий список плагіну"
 
-#: includes/whitelist.php:201
+#: includes/whitelist.php:195
 msgid "No IP in the whitelist"
 msgstr "Список IP порожній"
 
-#: includes/settings_page.php:787
+#: includes/settings_page.php:800
 msgid "The image packages list is empty. Please restore default settings or re-install the plugin to fix this error"
-msgstr "Список пакетів з зображеннями порожній. Будь-ласка, поновіть налаштування за замовчуванням чи переустановть плагін для виправлення цієї помилки"
+msgstr "Список пакетів з зображеннями порожній. Будь ласка, поновіть налаштування за замовчуванням чи переустановть плагін для виправлення цієї помилки"
 
-#: includes/settings_page.php:690
+#: includes/settings_page.php:704
 msgid "Check off for adding the CAPTCHA to forms on their settings pages"
 msgstr "Увімуніть для того, щоб додати CAPTCHA до форм на їх сторінках налаштувань  "
 
-#: includes/settings_page.php:678
+#: includes/settings_page.php:692
 msgid "This option is available only for network or for main blog"
 msgstr "Ця опція доступна тільки для нетворку чи для головного блогу"
 
-#: includes/settings_page.php:631
+#: includes/settings_page.php:645
 msgid "install"
 msgstr "установити"
 
-#: includes/settings_page.php:624
+#: includes/settings_page.php:638
 msgid "to the current version"
 msgstr "до поточної версії"
 
-#: includes/settings_page.php:577
+#: includes/settings_page.php:588
 msgid "Errors"
 msgstr "При помилках"
 
-#: includes/settings_page.php:547
+#: includes/settings_page.php:543
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "секунда"
 msgstr[1] "секунди"
 msgstr[2] "секунд"
 
-#: includes/settings_page.php:426
+#: includes/settings_page.php:390
 msgid "Multiplication"
 msgstr "Множення"
 
-#: captcha.php:1740 includes/settings_page.php:412
+#: captcha.php:1800 includes/settings_page.php:450
 msgid "Show CAPTCHA after the end of the page loading"
 msgstr "Відображати CAPTCHA після завершення завантаження сторінки"
 
-#: includes/settings_page.php:410
+#: includes/settings_page.php:444
 msgid "CAPTCHA title"
 msgstr "Підпис для CAPTCHA"
 
-#: includes/settings_page.php:402
+#: includes/settings_page.php:451
 msgid "With this option the CAPTCHA will be generated via %s into the form after the end of the page loading. In this case, the most of spam bots can't figure out the answer to the CAPTCHA automatically because they just can't get the CAPTCHA content"
 msgstr "CAPTCHA буде сгенеровано в форму за допомогою %s після закінчення завантаження сторінки. В цьому разі більшість спам-ботів не зможуть автоматично визначити відповідь на  CAPTCHA через те, що вони просто не зможуть отримати контент CAPTCHA"
 
-#: includes/settings_page.php:282
-msgid "In order to use images in the CAPTCHA, please select at least one of the items in the option \"Use image packages\". The \"Images\" checkbox in \"Complexity\" option has been disabled"
-msgstr "Для того, щоб використовувати зображення в CAPTCHA будь-ласка виберіть хоча б один пакет в блоці налаштувань  \"Використовувати пакети зображень\". Пункт \"Зображення\" в блоці налаштувань \"Рівень складності\" вимкнений"
+#: includes/settings_page.php:256
+msgid "In order to use images in the CAPTCHA, please select at least one of the items in the option \"Use image packages\". The \"Images\" checkbox in \"Complexity\" option has been disabled."
+msgstr "Для того, щоб використовувати зображення в CAPTCHA, будь ласка, оберіть хоча б один пакет в блоці налаштувань  \"Використовувати пакети зображень\". Пункт \"Зображення\" в блоці налаштувань \"Рівень складності\" вимкнений."
 
-#: includes/settings_page.php:235
+#: includes/settings_page.php:223
 msgid "Text fields in the \"Notification messages\" option must not be empty"
 msgstr "Текстові поля блоку налаштувань \"Повідомлення\" не повинні бути порожніми"
 
-#: includes/settings_page.php:221
+#: includes/settings_page.php:209
 msgid "\"%s\" option must not be fully disabled"
 msgstr "Опція \"%s\" не повинна бути повністю вимкнена"
 
@@ -102,25 +366,25 @@ msgstr "Форма логіну WordPress"
 msgid "General Options"
 msgstr "Загальні налаштування"
 
-#: includes/pro_banners.php:234 includes/settings_page.php:657
+#: includes/pro_banners.php:139 includes/settings_page.php:671
 msgid "Hide from registered users"
 msgstr "Приховати для зареєстрованих користувачів"
 
-#: includes/pro_banners.php:230 includes/settings_page.php:656
+#: includes/pro_banners.php:135 includes/settings_page.php:670
 msgid "Enable"
 msgstr "Включити"
 
-#: includes/pro_banners.php:211 includes/pro_banners.php:272
-#: includes/settings_page.php:546
+#: includes/pro_banners.php:116 includes/pro_banners.php:177
+#: includes/settings_page.php:542
 msgid "for"
 msgstr "протягом"
 
-#: includes/pro_banners.php:181 includes/pro_banners.php:242
-#: includes/settings_page.php:406
+#: includes/pro_banners.php:86 includes/pro_banners.php:147
+#: includes/settings_page.php:430
 msgid "Use image packages"
 msgstr "Використовувати пакети зображень"
 
-#: includes/pro_banners.php:177 includes/pro_banners.php:238
+#: includes/pro_banners.php:82 includes/pro_banners.php:143
 msgid "Use general settings"
 msgstr "Використовувати загальні налаштування"
 
@@ -130,7 +394,7 @@ msgstr "Неправильні дані"
 
 #: includes/package_loader.php:699
 msgid "Some settings of the package %s were set incorrectly. They have been skipped"
-msgstr "Де-які налаштування пакунку %s були встановлені неправильно. Вони були пропущені"
+msgstr "Деякі налаштування пакунку %s були встановлені неправильно. Вони були пропущені"
 
 #: includes/package_loader.php:351
 msgid "Archive is empty"
@@ -172,55 +436,39 @@ msgstr "перевірте архів"
 msgid "Error during package uploading"
 msgstr "Помилка під час завантаження пакунку"
 
-#: includes/deprecated.php:118
-msgid "Enable the CAPTCHA for"
-msgstr "Відображати CAPTCHA для"
-
-#: includes/deprecated.php:115
-msgid "some call functions for the \"%s\" filter hook"
-msgstr "де-які функції для хуку \"%s\""
-
-#: includes/deprecated.php:96
-msgid "Functions from the %1s plugin are used on your site. These functions are deprecated ( %2s ) since version %4s. Please replace them according to the %3s. If you close this message it will appear in case if deprecated function would be called again only"
-msgstr "На Вашому сайті використовуються функції плагіну %1s, які на даний час є застарілі ( %2s ), починаючи з версії %4s. Будь-ласка, замініть їх згідно %3s. Якщо ви закриєте це повідомлення, то воно з’явиться тільки при поворному виклику застарілої функції"
-
-#: includes/deprecated.php:87
-msgid "instruction"
-msgstr "інструкції"
-
-#: captcha.php:1943
+#: captcha.php:1969
 msgid "You need to update this plugin for correct work with"
 msgstr "Вам необхідно оновити цей плагін для коректної роботи із"
 
-#: captcha.php:1936
+#: captcha.php:1962
 msgid "has compatibility problems with"
 msgstr "має проблеми сумісносі із "
 
-#: captcha.php:1933
+#: captcha.php:1959
 msgid "has old version"
 msgstr "має застарілу версію"
 
-#: captcha.php:1930
+#: captcha.php:1956
 msgid "after"
 msgstr "після"
 
-#: captcha.php:1930
+#: captcha.php:1956
 msgid "in the future"
 msgstr "в майбутньому"
 
-#: captcha.php:1929
+#: captcha.php:1955
 msgid "plugin contains deprecated functionality that will be removed"
 msgstr "містить застарілий функціонал, що будуе видалений"
 
-#: captcha.php:1925
+#: captcha.php:1951
 msgid "Warning"
 msgstr "Увага"
 
-#: captcha.php:1019
+#: captcha.php:1051
 msgid "In order to pass the CAPTCHA please enable JavaScript"
-msgstr "Для того щоб скласти тест CAPTCHA будь-ласка увімкніть JavaScript"
+msgstr "Для того щоб скласти тест CAPTCHA, будь ласка, увімкніть JavaScript"
 
-#: bws_menu/bws_menu.php:494
+#: bws_menu/bws_menu.php:522
 msgid "Not installed"
 msgstr "Не встановлен"
 
@@ -256,139 +504,132 @@ msgstr "Зміст & Медіа"
 msgid "Advertisement"
 msgstr "Реклама"
 
-#: bws_menu/bws_menu.php:554
+#: bws_menu/bws_menu.php:582
 msgid "Nothing found. Try another criteria."
 msgstr "Нічого не знайдено. Спробуйте інші критерії."
 
-#: bws_menu/bws_menu.php:545
+#: bws_menu/bws_menu.php:573
 msgid "Install this plugin"
 msgstr "Встановити плагін"
 
-#: bws_menu/bws_menu.php:523
+#: bws_menu/bws_functions.php:107 bws_menu/bws_menu.php:551
 msgid "Donate"
 msgstr "Пожертвувати"
 
-#: bws_menu/bws_menu.php:519
+#: bws_menu/bws_menu.php:547 bws_menu/class-bws-settings.php:155
+#: bws_menu/class-bws-settings.php:1045 includes/pro_banners.php:26
 msgid "Upgrade to Pro"
 msgstr "Оновитися на Pro"
 
-#: bws_menu/bws_menu.php:501
+#: bws_menu/bws_menu.php:529
 msgid "Update to v %s"
 msgstr "Оновити до версії %s"
 
-#: bws_menu/bws_menu.php:498
+#: bws_menu/bws_menu.php:526
 msgid "Renew to get updates"
 msgstr "Продовжити для поновлення"
 
-#: bws_menu/bws_menu.php:430 bws_menu/bws_menu.php:559
+#: bws_menu/bws_menu.php:458 bws_menu/bws_menu.php:587
 msgid "Category"
 msgstr "Категорія"
 
-#: bws_menu/bws_menu.php:427
+#: bws_menu/bws_menu.php:455
 msgid "Filter results"
 msgstr "Фільтр результатів"
 
-#: bws_menu/bws_menu.php:421
+#: bws_menu/bws_menu.php:449
 msgid "Not Installed"
 msgstr "Не встановлені"
 
-#: bws_menu/bws_menu.php:409 bws_menu/bws_menu.php:415
+#: bws_menu/bws_menu.php:437 bws_menu/bws_menu.php:443
 msgid "Return to BestWebSoft Panel"
 msgstr "Назад до BestWebSoft Panel"
 
-#: bws_menu/bws_menu.php:409
+#: bws_menu/bws_menu.php:437
 msgid "Activate Plugin"
 msgstr "Активувати плагін"
 
-#: bws_menu/bws_menu.php:397
-msgid "Successfully installed the plugin"
-msgstr "Успішно встановлено плагін"
-
-#: bws_menu/bws_menu.php:383 bws_menu/bws_menu.php:391
+#: bws_menu/bws_menu.php:411 bws_menu/bws_menu.php:419
 msgid "Installing the plugin"
 msgstr "Встановлення плагіну"
 
-#: bws_menu/bws_menu.php:378
+#: bws_menu/bws_menu.php:406
 msgid "Unpacking the package"
 msgstr "Розпакування пакета"
 
-#: bws_menu/bws_menu.php:353
+#: bws_menu/bws_menu.php:381
 msgid "Downloading install package from"
 msgstr "Завантаження встановлюючого пакунку з"
 
-#: bws_menu/bws_menu.php:347
+#: bws_menu/bws_menu.php:375
 msgid "Installing Plugin"
 msgstr "Встановлення плагіну"
 
-#: bws_menu/bws_menu.php:340
+#: bws_menu/bws_menu.php:368
 msgid "Plugin <strong>activated</strong>."
 msgstr "Плагін <strong>активовано</strong>."
 
-#: bws_menu/bws_menu.php:337
+#: bws_menu/bws_menu.php:365
 msgid "Plugin could not be activated because it triggered a <strong>fatal error</strong>."
 msgstr "Плагін не вдалося активувати, бо він спричинив <strong>критичну помилку</strong>."
 
-#: bws_menu/bws_menu.php:335
+#: bws_menu/bws_menu.php:363
 msgid "The plugin generated %d characters of <strong>unexpected output</strong> during activation. If you notice &#8220;headers already sent&#8221; messages, problems with syndication feeds or other issues, try deactivating or removing this plugin."
 msgstr "Цей плагін згенерував стільки символів <strong>неочікуваного виводу</strong> під час активації: %d. Якщо ви помітите повідомлення &#8220;заголовки вже надіслані&#8221;, проблеми з каналами чи інші неполадки, спробуйте вимкнути чи видалити цей плагін."
 
-#: bws_menu/bws_menu.php:331
+#: bws_menu/bws_menu.php:359
 msgid "Upload Plugin"
 msgstr "Завантажити плагін"
 
-#: bws_menu/bws_menu.php:298
+#: bws_menu/bws_menu.php:326
 msgid "Subscribe to Pro Membership"
 msgstr "Підписатися на Pro Membership"
 
-#: bws_menu/bws_menu.php:309
+#: bws_menu/bws_menu.php:337
 msgid "Enter your license key"
 msgstr "Ваш ліцензійний ключ"
 
-#: bws_menu/bws_menu.php:296
+#: bws_menu/bws_menu.php:324
 msgid "Get Access to %s+ Premium Plugins"
 msgstr "Отримати Доступ до %s+ Преміум Плагинам"
 
-#: bws_menu/bws_menu.php:288
+#: bws_menu/bws_menu.php:316
 msgid "Manage purchased licenses & subscriptions"
 msgstr "Управління придбаними ліцензіями і підписками"
 
-#: bws_menu/bws_menu.php:149
+#: bws_menu/bws_menu.php:161
 msgid "Please enter your license key."
 msgstr "Будь ласка, введіть ваш ліцензійний ключ."
 
-#: bws_menu/bws_menu.php:132
-msgid "Congratulations! Pro Membership license is successfully activated."
-msgstr "Вітаємо! Pro Membership ліцензія успішно активована."
-
-#: bws_menu/bws_menu.php:116
+#: bws_menu/bws_menu.php:128
 msgid "Log in"
 msgstr "Увійти"
 
-#: bws_menu/bws_menu.php:116
-msgid "This license key is bind to another website. Change it via personal Client Area."
+#: bws_menu/bws_menu.php:128
+msgid "This license key is bound to another site. Change it via personal Client Area."
 msgstr "Цей ліцензійний ключ прив'язано до іншого сайту. Змініть це в Client Area."
 
-#: bws_menu/bws_functions.php:1450
+#: bws_menu/class-bws-settings.php:431 bws_menu/deprecated.php:620
 msgid "This PHP code will be hooked to the %s action and will be printed on front end only."
 msgstr "Цей PHP код буде прикріплений до %s action  і буде додано лише у фронтенді."
 
-#: bws_menu/bws_functions.php:1410
+#: bws_menu/deprecated.php:580
 msgid "Not enough permissions to create the file"
 msgstr "У Вас недостатньо дозволів для створення файлу"
 
-#: bws_menu/bws_functions.php:167
+#: bws_menu/bws_functions.php:234
 msgid "Less Details"
 msgstr "Сховати Деталі"
 
-#: bws_menu/bws_functions.php:166
+#: bws_menu/bws_functions.php:233
 msgid "More Details"
 msgstr "Деталі"
 
-#: bws_menu/bws_functions.php:164
+#: bws_menu/bws_functions.php:231
 msgid "Thank you for installing plugins by BestWebSoft!"
 msgstr "Дякуємо, що встановили плагіни від BestWebSoft!"
 
-#: bws_menu/bws_functions.php:62
+#: bws_menu/deprecated.php:93
 msgid "System Status"
 msgstr "Системна інформація"
 
@@ -396,31 +637,31 @@ msgstr "Системна інформація"
 msgid "#1 super security anti-spam captcha plugin for Wordpress forms."
 msgstr "Плагін CAPTCHA #1 у боротьбі зі спамом для форм Wordpress."
 
-#: includes/pro_banners.php:83 includes/pro_banners.php:160
+#: captcha.php:488 captcha.php:510
 msgid "Date"
 msgstr "Дата"
 
-#: includes/pro_banners.php:80 includes/pro_banners.php:157
+#: captcha.php:485 captcha.php:507
 msgid "Package"
 msgstr "Пакунок"
 
-#: includes/package_loader.php:93 includes/pro_banners.php:69
+#: includes/package_loader.php:93 includes/pro_banners.php:66
 msgid "Browse packages"
 msgstr "Огляд пакетів"
 
-#: includes/package_loader.php:86 includes/pro_banners.php:65
+#: includes/package_loader.php:86 includes/pro_banners.php:62
 msgid "Save it as new"
 msgstr "Зберегти як новий"
 
-#: includes/package_loader.php:82 includes/pro_banners.php:64
+#: includes/package_loader.php:82 includes/pro_banners.php:61
 msgid "Update the existed one"
 msgstr "Оновити"
 
-#: includes/package_loader.php:78 includes/pro_banners.php:63
+#: includes/package_loader.php:78 includes/pro_banners.php:60
 msgid "Skip it"
 msgstr "Пропустити"
 
-#: includes/package_loader.php:73 includes/pro_banners.php:61
+#: includes/package_loader.php:73 includes/pro_banners.php:58
 msgid "If the package already exists"
 msgstr "Якщо пакунок був завантажений"
 
@@ -440,66 +681,62 @@ msgstr "Форма реєстрації плагіну WooCommerce"
 msgid "WooCommerce Login form"
 msgstr "Форма логіну плагіну WooCommerce"
 
-#: includes/settings_page.php:571
+#: includes/settings_page.php:582
 msgid "If the time limit is exhausted (this message will be displayed above the CAPTCHA)"
 msgstr " Якщо лiмiт часу вичерпаний (вказане повідомлення буде відображатися над блоком CAPTCHA)"
 
-#: includes/settings_page.php:582
+#: includes/settings_page.php:593
 msgid "These messages will be displayed inside of the CAPTCHA"
 msgstr "Ці повідомлення будуть відображатися всередині CAPTCHA"
 
-#: includes/settings_page.php:578
+#: includes/settings_page.php:589
 msgid "These messages will be displayed if the CAPTCHA answer has not passed the verification"
 msgstr "Ці повідомлення будуть відображатися, якщо відповідь на CAPTCHA не пройшла веріфікацію"
 
-#: captcha.php:435
+#: captcha.php:434
 msgid "Packages"
 msgstr "Пакунки"
 
-#: captcha.php:435
+#: captcha.php:434
 msgid "This setting is available in Pro version"
 msgstr "Ця опція є доступною тільки для Pro версії плагіну"
 
-#: includes/helpers.php:33
+#: includes/helpers.php:34
 msgid "Time limit is exhausted. Please reload the CAPTCHA."
-msgstr "Ліміт часу вичерпаний. Будь-ласка,  перезавантажте CAPTCHA."
+msgstr "Ліміт часу вичерпаний. Будь ласка,  перезавантажте CAPTCHA."
 
-#: bws_menu/bws_menu.php:629
+#: bws_menu/bws_menu.php:657
 msgid "Browse Free WordPress Themes"
 msgstr "Огляд безкоштовних WordPress тем"
 
-#: bws_menu/bws_functions.php:1025
+#: bws_menu/bws_functions.php:631
 msgid "Add BWS Shortcode"
 msgstr "Додати шорткод BWS "
 
-#: bws_menu/bws_functions.php:500 bws_menu/bws_functions.php:541
+#: bws_menu/deprecated.php:251 bws_menu/deprecated.php:690
 msgid "(your username is the email address specified during the purchase)."
 msgstr "(ваше ім'я користувача - це емейл, який ви вказували при купівлі)"
 
-#: bws_menu/bws_functions.php:498 bws_menu/bws_functions.php:539
+#: bws_menu/deprecated.php:249 bws_menu/deprecated.php:688
 msgid "License key can be found in the"
 msgstr "Ліцензійний ключ можна знайти в"
 
-#: bws_menu/bws_functions.php:496
+#: bws_menu/deprecated.php:686
 msgid "version of the plugin."
 msgstr "версія плагіна."
 
-#: bws_menu/bws_functions.php:494
+#: bws_menu/deprecated.php:684
 msgid "Enter your license key to install and activate"
 msgstr "Введіть ліцензійний ключ для установки і активації"
 
-#: bws_menu/bws_functions.php:269
-msgid "Donations play an important role in supporting great projects"
-msgstr "Пожертви грають важливу роль в підтримці проектів"
-
-#: includes/whitelist.php:375
+#: includes/whitelist.php:369
 msgid "%s IP was deleted successfully"
 msgid_plural "%s IPs were deleted successfully"
 msgstr[0] "%s IP було видалено успішно"
 msgstr[1] "%s IP було видалено успішно"
 msgstr[2] "%s IP було видалено успішно"
 
-#: includes/pro_banners.php:40
+#: includes/pro_banners.php:39
 msgid "Allowed formats"
 msgstr "Доступні формати"
 
@@ -515,387 +752,387 @@ msgstr "Форма коментарів плагіну Buddypress"
 msgid "Buddypress Registration form"
 msgstr "Форма реєстрації плагіну Buddypress"
 
-#: captcha.php:1474
+#: captcha.php:1534
 msgid "ninety nine"
 msgstr "дев'яносто дев'ять"
 
-#: captcha.php:1473
+#: captcha.php:1533
 msgid "ninety eight"
 msgstr "дев'яносто вісім"
 
-#: captcha.php:1472
+#: captcha.php:1532
 msgid "ninety seven"
 msgstr "дев'яносто сім"
 
-#: captcha.php:1471
+#: captcha.php:1531
 msgid "ninety six"
 msgstr "дев'яносто шість"
 
-#: captcha.php:1470
+#: captcha.php:1530
 msgid "ninety five"
 msgstr "дев'яносто п'ять"
 
-#: captcha.php:1469
+#: captcha.php:1529
 msgid "ninety four"
 msgstr "дев'яносто чотири"
 
-#: captcha.php:1468
+#: captcha.php:1528
 msgid "ninety three"
 msgstr "дев'яносто три"
 
-#: captcha.php:1467
+#: captcha.php:1527
 msgid "ninety two"
 msgstr "дев'яносто два"
 
-#: captcha.php:1466
+#: captcha.php:1526
 msgid "ninety one"
 msgstr "дев'яносто один"
 
-#: captcha.php:1463
+#: captcha.php:1523
 msgid "eighty nine"
 msgstr "вісімдесят дев'ять"
 
-#: captcha.php:1462
+#: captcha.php:1522
 msgid "eighty eight"
 msgstr "вісімдесят вісім"
 
-#: captcha.php:1461
+#: captcha.php:1521
 msgid "eighty seven"
 msgstr "вісімдесят сім"
 
-#: captcha.php:1460
+#: captcha.php:1520
 msgid "eighty six"
 msgstr "вісімдесят шість"
 
-#: captcha.php:1459
+#: captcha.php:1519
 msgid "eighty five"
 msgstr "вісімдесят п'ять"
 
-#: captcha.php:1458
+#: captcha.php:1518
 msgid "eighty four"
 msgstr "вісімдесят чотири"
 
-#: captcha.php:1457
+#: captcha.php:1517
 msgid "eighty three"
 msgstr "вісімдесят три"
 
-#: captcha.php:1456
+#: captcha.php:1516
 msgid "eighty two"
 msgstr "вісімдесят два"
 
-#: captcha.php:1455
+#: captcha.php:1515
 msgid "eighty one"
 msgstr "вісімдесят один"
 
-#: captcha.php:1452
+#: captcha.php:1512
 msgid "seventy nine"
 msgstr "сімдесят дев'ять"
 
-#: captcha.php:1451
+#: captcha.php:1511
 msgid "seventy eight"
 msgstr "сімдесят вісім"
 
-#: captcha.php:1450
+#: captcha.php:1510
 msgid "seventy seven"
 msgstr "сімдесят сім"
 
-#: captcha.php:1449
+#: captcha.php:1509
 msgid "seventy six"
 msgstr "сімдесят шість"
 
-#: captcha.php:1448
+#: captcha.php:1508
 msgid "seventy five"
 msgstr "сімдесят п'ять"
 
-#: captcha.php:1447
+#: captcha.php:1507
 msgid "seventy four"
 msgstr "сімдесят чотири"
 
-#: captcha.php:1446
+#: captcha.php:1506
 msgid "seventy three"
 msgstr "сімдесят три"
 
-#: captcha.php:1445
+#: captcha.php:1505
 msgid "seventy two"
 msgstr "сімдесят два"
 
-#: captcha.php:1444
+#: captcha.php:1504
 msgid "seventy one"
 msgstr "сімдесят один"
 
-#: captcha.php:1441
+#: captcha.php:1501
 msgid "sixty nine"
 msgstr "шістдесят дев'ять"
 
-#: captcha.php:1440
+#: captcha.php:1500
 msgid "sixty eight"
 msgstr "шістдесят вісім"
 
-#: captcha.php:1439
+#: captcha.php:1499
 msgid "sixty seven"
 msgstr "шістдесят сім"
 
-#: captcha.php:1438
+#: captcha.php:1498
 msgid "sixty six"
 msgstr "шістдесят шість"
 
-#: captcha.php:1437
+#: captcha.php:1497
 msgid "sixty five"
 msgstr "шістдесят п'ять"
 
-#: captcha.php:1436
+#: captcha.php:1496
 msgid "sixty four"
 msgstr "шістдесят чотири"
 
-#: captcha.php:1435
+#: captcha.php:1495
 msgid "sixty three"
 msgstr "шістдесят три"
 
-#: captcha.php:1434
+#: captcha.php:1494
 msgid "sixty two"
 msgstr "шістдесят два"
 
-#: captcha.php:1433
+#: captcha.php:1493
 msgid "sixty one"
 msgstr "шістдесят один"
 
-#: captcha.php:1430
+#: captcha.php:1490
 msgid "fifty nine"
 msgstr "п'ятдесят дев'ять"
 
-#: captcha.php:1429
+#: captcha.php:1489
 msgid "fifty eight"
 msgstr "п'ятдесят вісім"
 
-#: captcha.php:1428
+#: captcha.php:1488
 msgid "fifty seven"
 msgstr "п'ятдесят сім"
 
-#: captcha.php:1427
+#: captcha.php:1487
 msgid "fifty six"
 msgstr "п'ятдесят шість"
 
-#: captcha.php:1426
+#: captcha.php:1486
 msgid "fifty five"
 msgstr "п'ятдесят п'ять"
 
-#: captcha.php:1425
+#: captcha.php:1485
 msgid "fifty four"
 msgstr "п'ятдесят чотири"
 
-#: captcha.php:1424
+#: captcha.php:1484
 msgid "fifty three"
 msgstr "п'ятдесят три"
 
-#: captcha.php:1423
+#: captcha.php:1483
 msgid "fifty two"
 msgstr "п'ятдесят два"
 
-#: captcha.php:1422
+#: captcha.php:1482
 msgid "fifty one"
 msgstr "п'ятдесят один"
 
-#: captcha.php:1419
+#: captcha.php:1479
 msgid "forty nine"
 msgstr "сорок дев'ять"
 
-#: captcha.php:1418
+#: captcha.php:1478
 msgid "forty eight"
 msgstr "сорок вісім"
 
-#: captcha.php:1417
+#: captcha.php:1477
 msgid "forty seven"
 msgstr "сорок сім"
 
-#: captcha.php:1416
+#: captcha.php:1476
 msgid "forty six"
 msgstr "сорок шість"
 
-#: captcha.php:1415
+#: captcha.php:1475
 msgid "forty five"
 msgstr "сорок п'ять"
 
-#: captcha.php:1414
+#: captcha.php:1474
 msgid "forty four"
 msgstr "сорок чотири"
 
-#: captcha.php:1413
+#: captcha.php:1473
 msgid "forty three"
 msgstr "сорок три"
 
-#: captcha.php:1412
+#: captcha.php:1472
 msgid "forty two"
 msgstr "сорок два"
 
-#: captcha.php:1411
+#: captcha.php:1471
 msgid "forty one"
 msgstr "сорок один"
 
-#: captcha.php:1408
+#: captcha.php:1468
 msgid "thirty nine"
 msgstr "тридцять дев'ять"
 
-#: captcha.php:1407
+#: captcha.php:1467
 msgid "thirty eight"
 msgstr "тридцять вісім"
 
-#: captcha.php:1406
+#: captcha.php:1466
 msgid "thirty seven"
 msgstr "тридцять сім"
 
-#: captcha.php:1405
+#: captcha.php:1465
 msgid "thirty six"
 msgstr "тридцять шість"
 
-#: captcha.php:1404
+#: captcha.php:1464
 msgid "thirty five"
 msgstr "тридцять п'ять"
 
-#: captcha.php:1403
+#: captcha.php:1463
 msgid "thirty four"
 msgstr "тридцять чотири"
 
-#: captcha.php:1402
+#: captcha.php:1462
 msgid "thirty three"
 msgstr "тридцять три"
 
-#: captcha.php:1401
+#: captcha.php:1461
 msgid "thirty two"
 msgstr "тридцять два"
 
-#: captcha.php:1400
+#: captcha.php:1460
 msgid "thirty one"
 msgstr "тридцять один"
 
-#: captcha.php:1397
+#: captcha.php:1457
 msgid "twenty nine"
 msgstr "двадцять дев'ять"
 
-#: captcha.php:1396
+#: captcha.php:1456
 msgid "twenty eight"
 msgstr "двадцять вісім"
 
-#: captcha.php:1395
+#: captcha.php:1455
 msgid "twenty seven"
 msgstr "двадцять сім"
 
-#: captcha.php:1394
+#: captcha.php:1454
 msgid "twenty six"
 msgstr "двадцять шість"
 
-#: captcha.php:1393
+#: captcha.php:1453
 msgid "twenty five"
 msgstr "двадцять п'ять"
 
-#: captcha.php:1392
+#: captcha.php:1452
 msgid "twenty four"
 msgstr "двадцять чотири"
 
-#: captcha.php:1391
+#: captcha.php:1451
 msgid "twenty three"
 msgstr "двадцять три"
 
-#: captcha.php:1390
+#: captcha.php:1450
 msgid "twenty two"
 msgstr "двадцять два"
 
-#: captcha.php:1389
+#: captcha.php:1449
 msgid "twenty one"
 msgstr "двадцять один"
 
-#: captcha.php:438
+#: captcha.php:436
 msgid "Custom code"
 msgstr "Користувацький код"
 
-#: bws_menu/bws_functions.php:1474
+#: bws_menu/class-bws-settings.php:442 bws_menu/deprecated.php:644
 msgid "You need to make this files writable before you can save your changes. See %s the Codex %s for more information."
 msgstr "Вам потрібно зробити цей файл доступним для запису, перед тим як ви зможете зберегти свої зміни. Перегляньте %sКодекс%s для додаткової інформації."
 
-#: bws_menu/bws_functions.php:1463
+#: bws_menu/class-bws-settings.php:463 bws_menu/deprecated.php:633
 msgid "Learn more about %s"
 msgstr "Дізнатись більше про %s"
 
-#: bws_menu/bws_functions.php:1456
+#: bws_menu/class-bws-settings.php:452 bws_menu/deprecated.php:626
 msgid "Browsing"
 msgstr "Огляд"
 
-#: bws_menu/bws_functions.php:1454
+#: bws_menu/deprecated.php:624
 msgid "Editing"
 msgstr "Редагування"
 
-#: bws_menu/bws_functions.php:1448
+#: bws_menu/class-bws-settings.php:428 bws_menu/deprecated.php:618
 msgid "These styles will be added to the header on all pages of your site."
 msgstr "Ці стилі будуть додані в заголовок на всіх сторінках вашого сайту."
 
-#: bws_menu/bws_functions.php:1380 bws_menu/bws_functions.php:1407
+#: bws_menu/deprecated.php:550 bws_menu/deprecated.php:577
 msgid "Not enough permissions to create or update the file"
 msgstr "У Вас недостатньо дозволів для створення або поновлення файлу"
 
-#: bws_menu/bws_functions.php:1378 bws_menu/bws_functions.php:1405
+#: bws_menu/deprecated.php:548 bws_menu/deprecated.php:575
 msgid "File %s edited successfully."
 msgstr "Файл %s успішно відредаговано."
 
-#: bws_menu/bws_functions.php:1327
+#: bws_menu/class-bws-settings.php:423 bws_menu/deprecated.php:497
 msgid "You do not have sufficient permissions to edit plugins for this site."
 msgstr "У вас недостатньо повноважень для редагування плагінів цього сайту."
 
-#: bws_menu/bws_functions.php:888
+#: bws_menu/bws_functions.php:479
 msgid "Suggest a Feature"
 msgstr "Запропонувати функціонал"
 
-#: bws_menu/bws_functions.php:887
+#: bws_menu/bws_functions.php:478
 msgid "If you have a feature, suggestion or idea you'd like to see in the plugin, we'd love to hear about it!"
 msgstr "Якщо у вас є пропозиції по додаванню нового або поліпшення поточного функціоналу плагіна, будь ласка, надсилайте їх нам! Ми завжди відкриті для нових ідей!"
 
-#: bws_menu/bws_functions.php:886
+#: bws_menu/bws_functions.php:477
 msgid "Thank you for choosing"
 msgstr "Дякуємо, що обрали"
 
-#: includes/whitelist.php:457
+#: includes/whitelist.php:469
 msgid "you should install %s to use this functionality"
 msgstr "Вам слід встановити %s для того, щоб використовувати даний функціонал"
 
-#: includes/whitelist.php:449
+#: includes/whitelist.php:461
 msgid "you should %s to use this functionality"
 msgstr "Вам слід %s для того, щоб використовувати даний функціонал"
 
-#: includes/whitelist.php:448 includes/whitelist.php:456
+#: includes/whitelist.php:460 includes/whitelist.php:468
 msgid "use the whitelist of %s"
 msgstr "використовувати білий список плагіну %s"
 
-#: includes/whitelist.php:440
+#: includes/whitelist.php:452
 msgid "use"
 msgstr "використовувати"
 
-#: includes/whitelist.php:415
+#: includes/whitelist.php:425
 msgid "IP-address(es) successfully copied to the whitelist"
 msgstr "IP-адрес(и) успішно завантажені до білого спіску"
 
-#: includes/whitelist.php:361
+#: includes/whitelist.php:355
 msgid "IP is already in the whitelist"
 msgstr "IP вже знаходиться в білому списку"
 
-#: includes/whitelist.php:357
+#: includes/whitelist.php:351
 msgid "IP added to the whitelist successfully"
 msgstr "IP  успішно додано до білого списку"
 
-#: includes/whitelist.php:114
+#: includes/whitelist.php:106
 msgid "Save changes"
 msgstr "Зберегти зміни"
 
-#: includes/whitelist.php:105
+#: includes/whitelist.php:98
 msgid "By click on this button, all IP-addresses from the whitelist of %s will be loaded to the whitelist of %s"
 msgstr "При натисканні на цю кнопку, усі IP-адреси із білого списку плагіну  %s будуть завантажені до білого списку плагіну %s"
 
-#: includes/whitelist.php:102
+#: includes/whitelist.php:96
 msgid "Load IP to the whitelist"
 msgstr "Завантажити IP до білого списку"
 
-#: includes/whitelist.php:88
+#: includes/whitelist.php:84
 msgid "With this option, CAPTCHA will not be displayed for IP-addresses from the whitelist of %s"
 msgstr "Якщо цю опцією вімкнено, СAPTCHA не буде відображатися  для IP-адрес із білого списку плагіну %s "
 
-#: includes/pro_banners.php:290
+#: includes/pro_banners.php:195
 msgid "Use several image packages at the same time"
 msgstr "Використовувати декілька пакетів одночасно"
 
@@ -907,164 +1144,162 @@ msgstr "Ця опція є доступною тільки для Pro версі
 msgid "Can not load images in to the \"uploads\" folder. Please, check your permissions"
 msgstr "Неможливо завантажити зображення до папки \"uploads\". Перевірте свої права"
 
-#: includes/settings_page.php:572
+#: includes/settings_page.php:583
 msgid "If the user IP is added to the whitelist (this message will be displayed instead of the CAPTCHA)"
 msgstr "Якщо IP у білому списку (вказане повідомлення буде відображатися замість CAPTCHA)"
 
-#: includes/settings_page.php:581
+#: includes/settings_page.php:592
 msgid "Info"
 msgstr "Інформаційні"
 
-#: includes/settings_page.php:568
+#: includes/settings_page.php:579
 msgid "If the time limit is exhausted"
 msgstr "Якщо ліміт часу вичерпаний"
 
-#: includes/settings_page.php:587
+#: includes/settings_page.php:598
 msgid "Notification messages"
 msgstr "Повідомлення"
 
-#: includes/pro_banners.php:213 includes/pro_banners.php:274
+#: includes/pro_banners.php:118 includes/pro_banners.php:179
 msgid "seconds"
 msgstr "секунд"
 
-#: includes/pro_banners.php:207 includes/pro_banners.php:268
-#: includes/settings_page.php:541
+#: includes/pro_banners.php:112 includes/pro_banners.php:173
+#: includes/settings_page.php:537
 msgid "Enable time limit"
 msgstr "Включити ліміт часу"
 
-#: includes/settings_page.php:408
+#: includes/settings_page.php:436
 msgid "Enlarge images on mouseover"
 msgstr "Збільшувати зображення при наведенні курсора миші"
 
-#: includes/settings_page.php:212 includes/settings_page.php:405
+#: includes/settings_page.php:200 includes/settings_page.php:398
 msgid "Complexity"
 msgstr "Рівень складності"
 
-#: includes/settings_page.php:211 includes/settings_page.php:404
+#: includes/settings_page.php:199 includes/settings_page.php:372
+#: includes/settings_page.php:379
 msgid "Arithmetic actions"
 msgstr "Арифметичні дії"
 
-#: includes/settings_page.php:409
+#: includes/settings_page.php:441
 msgid "Show reload button"
 msgstr "Показати кнопку перезавантаження"
 
-#: includes/settings_page.php:648
+#: includes/settings_page.php:662
 msgid "to use this functionality"
 msgstr "щоб використовувати даний функціонал"
 
-#: includes/settings_page.php:636 includes/whitelist.php:449
+#: includes/settings_page.php:650 includes/whitelist.php:461
 msgid "activate"
 msgstr "активувати"
 
-#: includes/settings_page.php:645
+#: includes/settings_page.php:659
 msgid "You should"
 msgstr "Вам слід"
 
-#: includes/settings_page.php:440
+#: includes/settings_page.php:409
 msgid "Images"
 msgstr "Зображення"
 
-#: includes/helpers.php:32
+#: includes/helpers.php:33
 msgid "Time limit is exhausted. Please enter a CAPTCHA value again."
 msgstr "Ліміт часу вичерпаний. Будь ласка, введіть CAPTCHA знову."
 
-#: bws_menu/bws_functions.php:1316
+#: bws_menu/bws_functions.php:930
 msgid "Submit a Request"
 msgstr "Надіслати запит"
 
-#: bws_menu/bws_functions.php:1315
+#: bws_menu/bws_functions.php:929
 msgid "Video Instructions"
 msgstr "Відео інструкції"
 
-#: bws_menu/bws_functions.php:1314
+#: bws_menu/bws_functions.php:928
 msgid "Documentation"
 msgstr "Документація"
 
-#: bws_menu/bws_functions.php:1313
+#: bws_menu/bws_functions.php:927
 msgid "For more information:"
 msgstr "Для отримання додаткової інформації:"
 
-#: bws_menu/bws_functions.php:1302
+#: bws_menu/bws_functions.php:103 bws_menu/bws_functions.php:916
+#: bws_menu/class-bws-settings.php:1036
 msgid "Visit Help Center"
 msgstr "Перейти в Help Center"
 
-#: bws_menu/bws_functions.php:1046
+#: bws_menu/bws_functions.php:651
 msgid "Add BestWebSoft plugins' shortcodes using this button."
 msgstr "Додайте шорткоди BestWebSoft плагінів за допомогою цієї кнопки."
 
-#: bws_menu/bws_functions.php:1046
+#: bws_menu/bws_functions.php:651
 msgid "Add shortcode"
 msgstr "Додати шорткод"
 
-#: bws_menu/bws_functions.php:919
-msgid "You can always look at premium options by clicking on the \"Show Pro features\" in the \"Go PRO\" tab"
-msgstr "Ви завжди можете подивитися на преміум опції, натиснувши на кнопку \"Показати Pro особливост\" на вкладці \"Перейти на PRO\""
-
-#: bws_menu/bws_functions.php:487
+#: bws_menu/deprecated.php:677
 msgid "Show Pro features"
 msgstr "Показати Pro опції"
 
-#: bws_menu/bws_functions.php:299
+#: bws_menu/deprecated.php:315
 msgid "Check premium options on the plugin settings page!"
 msgstr "Подивіться преміум опції на сторінці налаштувань плагіна!"
 
-#: includes/whitelist.php:209
+#: includes/whitelist.php:203
 msgid "Date added"
 msgstr "Дата додавання"
 
-#: includes/whitelist.php:131
+#: includes/whitelist.php:123
 msgid "My IP"
 msgstr "Мій IP"
 
-#: bws_menu/bws_functions.php:1269
+#: includes/helpers.php:35
+msgid "You are in the whitelist."
+msgstr "Ви у білому списку."
+
+#: bws_menu/bws_functions.php:861
 msgid "Insert"
 msgstr "Вставити"
 
-#: bws_menu/bws_functions.php:1264
+#: bws_menu/bws_functions.php:856
 msgid "The shortcode will be inserted"
 msgstr "Буде вставлено шорткод"
 
-#: bws_menu/bws_functions.php:1259
+#: bws_menu/bws_functions.php:851
 msgid "Shortcode settings"
 msgstr "Налаштування шорткоду"
 
-#: bws_menu/bws_functions.php:1250
+#: bws_menu/bws_functions.php:842
 msgid "Plugin"
 msgstr "Плагін"
 
-#: bws_menu/bws_functions.php:1026
+#: bws_menu/bws_functions.php:632
 msgid "Add BWS Plugins Shortcode"
 msgstr "Додати BWS шорткод"
 
-#: bws_menu/bws_functions.php:904
+#: bws_menu/bws_functions.php:495
 msgid "The plugin's settings have been changed."
 msgstr "Налаштування плагіну змінено."
 
-#: bws_menu/bws_functions.php:149 bws_menu/bws_functions.php:159
-#: bws_menu/bws_functions.php:235 bws_menu/bws_functions.php:787
-#: bws_menu/bws_functions.php:891
+#: bws_menu/bws_functions.php:216 bws_menu/bws_functions.php:226
+#: bws_menu/bws_functions.php:330 bws_menu/bws_functions.php:378
+#: bws_menu/bws_functions.php:482
 msgid "Close notice"
 msgstr "Закрити"
 
-#: bws_menu/bws_functions.php:145 bws_menu/bws_functions.php:177
+#: bws_menu/bws_functions.php:212 bws_menu/bws_functions.php:244
 msgid "Add New"
 msgstr "Додати"
 
-#: bws_menu/bws_functions.php:141
+#: bws_menu/bws_functions.php:208
 msgid "Let's get started"
 msgstr "Розпочнемо"
 
-#: bws_menu/bws_functions.php:140
+#: bws_menu/bws_functions.php:207
 msgid "Thank you for installing"
 msgstr "Дякуємо, що встановили"
 
-#: bws_menu/bws_functions.php:125
+#: bws_menu/bws_functions.php:192
 msgid "or higher! We do not guarantee that our plugin will work correctly. Please upgrade to WordPress latest version."
 msgstr "чи вище! Ми не гарантуємо, що наш плагін буде працювати правильно. Будь ласка, оновіть WordPress до останньої версії."
-
-#. Author URI of the plugin/theme
-msgid "http://bestwebsoft.com/"
-msgstr "http://bestwebsoft.com/"
 
 #. Author of the plugin/theme
 msgid "BestWebSoft"
@@ -1074,261 +1309,260 @@ msgstr "BestWebSoft"
 msgid "Captcha by BestWebSoft"
 msgstr "Captcha by BestWebSoft"
 
-#: includes/whitelist.php:401
+#: includes/whitelist.php:395
 msgid "Search results for"
 msgstr "Результати пошуку для"
 
-#: includes/whitelist.php:399
+#: includes/whitelist.php:393
 msgid "You have not entered any value in to the search form"
-msgstr "Ви не ввели ні якого значення у форму пошуку"
+msgstr "Ви не ввели ніякого значення у форму пошуку"
 
-#: includes/whitelist.php:396
+#: includes/whitelist.php:390
 msgid "You have not entered any value"
-msgstr "Ви не ввели ні якого значення"
+msgstr "Ви не ввели ніякого значення"
 
-#: includes/whitelist.php:387
+#: includes/whitelist.php:381
 msgid "One IP was deleted successfully"
 msgstr "Один IP було видалено успішно"
 
-#: includes/whitelist.php:364
+#: includes/whitelist.php:358
 msgid "Invalid IP. See allowed formats"
 msgstr "Неправильні дані. Дивіться доступні формати"
 
-#: includes/whitelist.php:359 includes/whitelist.php:381
-#: includes/whitelist.php:393
+#: includes/whitelist.php:353 includes/whitelist.php:375
+#: includes/whitelist.php:387
 msgid "Some errors occured"
-msgstr "Трапились де-які помилки "
+msgstr "Трапились деякі помилки "
 
-#: includes/whitelist.php:263 includes/whitelist.php:272
+#: includes/whitelist.php:257 includes/whitelist.php:266
 msgid "Remove from the whitelist"
 msgstr "Видалити"
 
-#: includes/whitelist.php:208
+#: includes/whitelist.php:202
 msgid "IP address"
 msgstr "IP-адреса"
 
-#: includes/whitelist.php:201
+#: includes/whitelist.php:195
 msgid "Nothing found"
 msgstr "Нічого не знайдено"
 
-#: includes/whitelist.php:146
+#: includes/whitelist.php:138
 msgid "Search IP"
 msgstr "Шукати IP"
 
-#: includes/pro_banners.php:42
+#: includes/pro_banners.php:41
 msgid "tab, new line or carriage return"
 msgstr "табуляція, новий рядок або повернення каретки"
 
-#: includes/pro_banners.php:42
+#: includes/pro_banners.php:41
 msgid "Allowed separators for reasons: a comma"
 msgstr "Доступні роздільики для причин: кома"
 
-#: includes/pro_banners.php:41
+#: includes/pro_banners.php:40
 msgid "ordinary space, tab, new line or carriage return"
 msgstr "звичайний пробіл, табуляція або новий рядок"
 
-#: includes/pro_banners.php:41 includes/pro_banners.php:42
+#: includes/pro_banners.php:40 includes/pro_banners.php:41
 msgid "semicolon"
 msgstr "крапка з комою"
 
-#: includes/pro_banners.php:41
+#: includes/pro_banners.php:40
 msgid "Allowed separators for IPs: a comma"
 msgstr "Доступні роздільики для причин: кома"
 
-#: includes/pro_banners.php:38
+#: includes/pro_banners.php:37
 msgid "Reason"
 msgstr "Причина"
 
-#: includes/whitelist.php:140
+#: includes/whitelist.php:132
 msgid "Allowed diapason:"
-msgstr "Достіпні діапазони:"
+msgstr "Доступні діапазони:"
 
-#: includes/whitelist.php:139
+#: includes/whitelist.php:131
 msgid "Allowed formats:"
 msgstr "Доступні формати:"
 
-#: includes/whitelist.php:99 includes/whitelist.php:135
+#: includes/whitelist.php:93 includes/whitelist.php:127
 msgid "Add IP to whitelist"
 msgstr "Додати IP до білого списку"
 
-#: includes/whitelist.php:76
+#: includes/whitelist.php:74
 msgid "For IP addresses from the whitelist CAPTCHA will not be displayed"
 msgstr "Для IP-адрес, що знаходяться у білому списку, CAPTCHA не буде відображатися"
 
-#: bws_menu/bws_menu.php:287 captcha.php:1694
+#: bws_menu/bws_menu.php:315 captcha.php:1754
 msgid "Support"
 msgstr "Підтримка"
 
-#: captcha.php:1560
+#: captcha.php:1620
 msgid "Decryption password is not set"
 msgstr "Пароль для дешифрування не встановлено"
 
-#: captcha.php:1539
+#: captcha.php:1599
 msgid "Encryption password is not set"
 msgstr "Пароль для шифрування не встановлено"
 
-#: captcha.php:1465
+#: captcha.php:1525
 msgid "ninety"
 msgstr "дев'яносто"
 
-#: captcha.php:1454
+#: captcha.php:1514
 msgid "eighty"
 msgstr "вісімдесят"
 
-#: captcha.php:1443
+#: captcha.php:1503
 msgid "seventy"
 msgstr "сімдесят"
 
-#: captcha.php:1432
+#: captcha.php:1492
 msgid "sixty"
 msgstr "шістдесят"
 
-#: captcha.php:1421
+#: captcha.php:1481
 msgid "fifty"
 msgstr "п'ятдесят"
 
-#: captcha.php:1410
+#: captcha.php:1470
 msgid "forty"
 msgstr "сорок"
 
-#: captcha.php:1399
+#: captcha.php:1459
 msgid "thirty"
 msgstr "тридцять"
 
-#: captcha.php:1388
+#: captcha.php:1448
 msgid "twenty"
 msgstr "двадцять"
 
-#: captcha.php:1377
+#: captcha.php:1437
 msgid "ten"
 msgstr "десять"
 
-#: captcha.php:1386
+#: captcha.php:1446
 msgid "nineteen"
 msgstr "дев'ятнадцять"
 
-#: captcha.php:1385
+#: captcha.php:1445
 msgid "eighteen"
 msgstr "вісімнадцять"
 
-#: captcha.php:1384
+#: captcha.php:1444
 msgid "seventeen"
 msgstr "сімнадцять"
 
-#: captcha.php:1383
+#: captcha.php:1443
 msgid "sixteen"
 msgstr "шістнадцять"
 
-#: captcha.php:1382
+#: captcha.php:1442
 msgid "fifteen"
 msgstr "п'ятнадцять"
 
-#: captcha.php:1381
+#: captcha.php:1441
 msgid "fourteen"
 msgstr "чотирнадцять"
 
-#: captcha.php:1380
+#: captcha.php:1440
 msgid "thirteen"
 msgstr "тринадцять"
 
-#: captcha.php:1379
+#: captcha.php:1439
 msgid "twelve"
 msgstr "дванадцять"
 
-#: captcha.php:1378
+#: captcha.php:1438
 msgid "eleven"
 msgstr "одинадцять"
 
-#: captcha.php:1375
+#: captcha.php:1435
 msgid "nine"
 msgstr "дев'ять"
 
-#: captcha.php:1374 includes/settings_page.php:423
+#: captcha.php:1434 includes/settings_page.php:387
 msgid "eight"
 msgstr "вісім"
 
-#: captcha.php:1373 includes/settings_page.php:419
-#: includes/settings_page.php:427
+#: captcha.php:1433 includes/settings_page.php:383
+#: includes/settings_page.php:391
 msgid "seven"
 msgstr "сім"
 
-#: captcha.php:1372 includes/settings_page.php:437
+#: captcha.php:1432 includes/settings_page.php:406
 msgid "six"
 msgstr "шість"
 
-#: captcha.php:1371
+#: captcha.php:1431
 msgid "five"
 msgstr "п'ять"
 
-#: captcha.php:1370
+#: captcha.php:1430
 msgid "four"
 msgstr "чотири"
 
-#: captcha.php:1369
+#: captcha.php:1429
 msgid "three"
 msgstr "три"
 
-#: captcha.php:1368
+#: captcha.php:1428
 msgid "two"
 msgstr "два"
 
-#: captcha.php:1367 includes/settings_page.php:437
+#: captcha.php:1427 includes/settings_page.php:406
 msgid "one"
 msgstr "один"
 
-#: captcha.php:1366
+#: captcha.php:1426
 msgid "zero"
 msgstr "нуль"
 
-#: captcha.php:774 captcha.php:780
+#: captcha.php:825 captcha.php:831
 msgid "Click the BACK button on your browser, and try again."
 msgstr "Натисніть НАЗАД у браузері та спробуйте ще раз."
 
-#: captcha.php:774 captcha.php:780
+#: captcha.php:825 captcha.php:831
 msgid "Error"
 msgstr "Помилка"
 
-#: captcha.php:548 captcha.php:554 captcha.php:570 captcha.php:572
-#: captcha.php:581 captcha.php:635 captcha.php:639 captcha.php:648
-#: captcha.php:671 captcha.php:681 captcha.php:706 captcha.php:709
-#: captcha.php:717
+#: captcha.php:599 captcha.php:605 captcha.php:621 captcha.php:623
+#: captcha.php:632 captcha.php:686 captcha.php:690 captcha.php:699
+#: captcha.php:722 captcha.php:732 captcha.php:757 captcha.php:760
+#: captcha.php:768
 msgid "ERROR"
 msgstr "ПОМИЛКА"
 
-#: bws_menu/bws_functions.php:905 bws_menu/bws_functions.php:1470
+#: bws_menu/bws_functions.php:496 bws_menu/class-bws-settings.php:181
+#: bws_menu/class-bws-settings.php:201 bws_menu/deprecated.php:640
 #: includes/settings_page.php:171
 msgid "Save Changes"
 msgstr "Зберегти зміни"
 
-#: includes/settings_page.php:567
+#: includes/settings_page.php:578
 msgid "If the CAPTCHA is incorrect"
 msgstr "Якщо значення CAPTCHA введено некоректно"
 
-#: includes/settings_page.php:566
+#: includes/settings_page.php:577
 msgid "If the CAPTCHA field is empty"
 msgstr "Якщо значення CAPTCHA не введено"
 
-#: includes/settings_page.php:411
+#: includes/settings_page.php:447
 msgid "Required symbol"
 msgstr "Необхідний символ"
 
-#: includes/pro_banners.php:26
-msgid "Unlock premium options by upgrading to Pro version"
-msgstr "Зробити доступними преміум-опції, перейшовши на Pro версію "
-
-#: bws_menu/bws_functions.php:904
+#: bws_menu/bws_functions.php:495 bws_menu/class-bws-settings.php:532
+#: bws_menu/class-bws-settings.php:535 bws_menu/class-bws-settings.php:583
+#: bws_menu/class-bws-settings.php:586
 msgid "Notice"
 msgstr "Зауважте"
 
-#: captcha.php:439
+#: captcha.php:437
 msgid "Go PRO"
 msgstr "Перейти на Pro версію"
 
-#: bws_menu/bws_functions.php:1307 captcha.php:1693
+#: bws_menu/bws_functions.php:921 captcha.php:1753
 msgid "FAQ"
 msgstr "FAQ"
 
-#: captcha.php:437
+#: captcha.php:435
 msgid "Whitelist"
 msgstr "Білий список"
 
@@ -1336,100 +1570,96 @@ msgstr "Білий список"
 msgid "How to Use Step-by-step Instruction"
 msgstr "Інструкція з використання"
 
-#: includes/settings_page.php:145
+#: bws_menu/class-bws-settings.php:281 includes/settings_page.php:145
 msgid "All plugin settings were restored."
 msgstr "Всі налаштування плагіну було скинуто до стандартних."
 
-#: includes/settings_page.php:291
+#: includes/settings_page.php:266
 msgid "Settings saved"
 msgstr "Налаштування збережено."
 
-#: includes/settings_page.php:436
+#: includes/settings_page.php:405
 msgid "Words"
 msgstr "Слова"
 
-#: includes/settings_page.php:432
+#: includes/settings_page.php:401
 msgid "Numbers"
 msgstr "Цифри"
 
-#: includes/settings_page.php:422
+#: includes/settings_page.php:386
 msgid "Minus"
 msgstr "Мінус"
 
-#: includes/settings_page.php:418
+#: includes/settings_page.php:382
 msgid "Plus"
 msgstr "Плюс"
 
-#: includes/helpers.php:31
+#: includes/helpers.php:32
 msgid "Please enter a valid CAPTCHA value."
-msgstr "Будь ласка, введіть корректне значення CAPTCHA"
+msgstr "Будь ласка, введіть корректне значення CAPTCHA."
 
-#: includes/helpers.php:30
+#: includes/helpers.php:31
 msgid "Please enter a CAPTCHA value."
 msgstr "Будь ласка, введіть значення CAPTCHA."
 
-#: captcha.php:37
+#: captcha.php:33
 msgid "Captcha"
 msgstr "Captcha"
 
-#: captcha.php:37 captcha.php:428
+#: captcha.php:33 captcha.php:428
 msgid "Captcha Settings"
 msgstr "Налаштування Captcha"
 
-#: bws_menu/bws_menu.php:645
+#: bws_menu/bws_menu.php:673
 msgid "Send to custom email &#187;"
 msgstr "Відправити на електронну адресу &#187;"
 
-#: bws_menu/bws_menu.php:638
+#: bws_menu/bws_menu.php:666
 msgid "Send to support"
 msgstr "Відправити службі тех. підтримки"
 
-#: bws_menu/bws_menu.php:676
+#: bws_menu/bws_menu.php:237
 msgid "Inactive Plugins"
 msgstr "Не активні плагіни"
 
-#: bws_menu/bws_menu.php:663
+#: bws_menu/bws_menu.php:232
 msgid "Active Plugins"
 msgstr "Активні плагіни"
 
-#: bws_menu/bws_menu.php:652
-msgid "Environment"
-msgstr "Системне оточення"
-
-#: bws_menu/bws_menu.php:618
+#: bws_menu/bws_menu.php:646
 msgid "Already Installed"
 msgstr "Уже встановлено %s"
 
-#: bws_menu/bws_menu.php:591 bws_menu/bws_menu.php:611
+#: bws_menu/bws_menu.php:619 bws_menu/bws_menu.php:639
 msgid "By %s"
 msgstr "За %s"
 
-#: bws_menu/bws_menu.php:595
+#: bws_menu/bws_menu.php:623
 msgctxt "theme"
 msgid "Installed"
 msgstr "Встановлені"
 
-#: bws_menu/bws_menu.php:595
+#: bws_menu/bws_menu.php:623
 msgid "This theme is already installed and is up to date"
 msgstr "Ця тема вже встановлена та оновлена"
 
-#: includes/settings_page.php:623
+#: includes/settings_page.php:637
 msgid "update"
 msgstr "оновити"
 
-#: bws_menu/bws_menu.php:513 bws_menu/bws_menu.php:536
-#: bws_menu/bws_menu.php:545 includes/package_loader.php:91
-#: includes/pro_banners.php:68
+#: bws_menu/bws_menu.php:541 bws_menu/bws_menu.php:564
+#: bws_menu/bws_menu.php:573 includes/package_loader.php:91
+#: includes/pro_banners.php:65
 msgid "Install Now"
 msgstr "Встановити"
 
-#: bws_menu/bws_menu.php:533 bws_menu/bws_menu.php:542
+#: bws_menu/bws_menu.php:561 bws_menu/bws_menu.php:570
 msgid "Activate this plugin"
 msgstr "Активувати плагін"
 
-#: bws_menu/bws_functions.php:142 bws_menu/bws_functions.php:175
-#: bws_menu/bws_menu.php:527 bws_menu/bws_menu.php:529 captcha.php:433
-#: captcha.php:1679 captcha.php:1692
+#: bws_menu/bws_functions.php:209 bws_menu/bws_functions.php:242
+#: bws_menu/bws_menu.php:555 bws_menu/bws_menu.php:557 captcha.php:433
+#: captcha.php:1739 captcha.php:1752
 msgid "Settings"
 msgstr "Налаштування"
 
@@ -1437,435 +1667,398 @@ msgstr "Налаштування"
 msgid "Recommended"
 msgstr "Рекомендовані "
 
-#: bws_menu/bws_menu.php:420 bws_menu/bws_menu.php:620
+#: bws_menu/bws_menu.php:448 bws_menu/bws_menu.php:648
 msgid "Installed"
 msgstr "Встановлені"
 
-#: bws_menu/bws_menu.php:419 bws_menu/bws_menu.php:434
-#: bws_menu/bws_menu.php:563
+#: bws_menu/bws_menu.php:447 bws_menu/bws_menu.php:462
+#: bws_menu/bws_menu.php:591
 msgid "All"
 msgstr "Всі"
 
-#: bws_menu/bws_functions.php:61 bws_menu/bws_menu.php:283
-#: bws_menu/bws_menu.php:581
+#: bws_menu/bws_menu.php:306 bws_menu/bws_menu.php:310
+#: bws_menu/bws_menu.php:609 bws_menu/deprecated.php:92
 msgid "Themes"
 msgstr "Теми"
 
-#: bws_menu/bws_functions.php:60 bws_menu/bws_menu.php:282
-#: bws_menu/bws_menu.php:330
+#: bws_menu/bws_menu.php:305 bws_menu/bws_menu.php:309
+#: bws_menu/bws_menu.php:358 bws_menu/deprecated.php:91
 msgid "Plugins"
 msgstr "Плагіни"
 
-#: bws_menu/bws_menu.php:286 bws_menu/bws_menu.php:632
+#: bws_menu/bws_menu.php:307 bws_menu/bws_menu.php:311
+#: bws_menu/bws_menu.php:660
 msgid "System status"
 msgstr "Системна інформація"
 
-#: bws_menu/bws_menu.php:288
-msgid "Client Area"
-msgstr "Client Area"
+#: bws_menu/class-bws-settings.php:1032
+msgid "Need Help?"
+msgstr "Потрібна допомога?"
 
-#: bws_menu/bws_menu.php:267
+#: bws_menu/bws_menu.php:289
 msgid "Sorry, email message could not be delivered."
 msgstr "Вибачте, ваше емейл не може бути доставлено"
 
-#: bws_menu/bws_menu.php:234
+#: bws_menu/bws_menu.php:266
 msgid "Thank you for contacting us."
 msgstr "Дякуємо, що звернулись до нас."
 
-#: bws_menu/bws_menu.php:230
-msgid "Email with system info is sent to "
+#: bws_menu/bws_menu.php:262
+msgid "Email with system info is sent to"
 msgstr "Емейл з системною інформацією надіслано на"
 
-#: bws_menu/bws_menu.php:226
+#: bws_menu/bws_menu.php:258
 msgid "Please enter a valid email address."
 msgstr "Будь ласка, введіть коректний емейл."
 
-#: bws_menu/bws_menu.php:212
+#: bws_menu/bws_menu.php:201
 msgid "Active Theme"
 msgstr "Активна тема"
 
-#: bws_menu/bws_menu.php:211
-msgid "Multisite"
-msgstr "Мультисайт"
-
-#: bws_menu/bws_menu.php:210
-msgid "WordPress DB Version"
-msgstr "Версія бази даних WordPress"
-
-#: bws_menu/bws_menu.php:209
-msgid "WordPress Version"
-msgstr "Версія WordPress"
-
-#: bws_menu/bws_menu.php:206
+#: bws_menu/bws_menu.php:196
 msgid "Home URL"
 msgstr "Адреса домашньої сторінки"
 
-#: bws_menu/bws_menu.php:205
-msgid "Site URL"
-msgstr "Адреса сайту"
-
-#: bws_menu/bws_menu.php:204
+#: bws_menu/bws_menu.php:218
 msgid "PHP XML support"
 msgstr "Підтримка PHP XML"
 
-#: bws_menu/bws_menu.php:203
+#: bws_menu/bws_menu.php:217
 msgid "PHP IPTC support"
 msgstr "Підтримка PHP IPTC"
 
-#: bws_menu/bws_menu.php:202
+#: bws_menu/bws_menu.php:216
 msgid "PHP Exif support"
 msgstr "Підтримка PHP Exif"
 
-#: bws_menu/bws_menu.php:201
+#: bws_menu/bws_menu.php:215
 msgid "PHP Max Script Execute Time"
 msgstr "Макс. час виконання сценарію"
 
-#: bws_menu/bws_menu.php:200
+#: bws_menu/bws_menu.php:214
 msgid "PHP Max Post Size"
 msgstr "Макс. розмір посту"
 
-#: bws_menu/bws_menu.php:199
+#: bws_menu/bws_menu.php:213
 msgid "PHP Max Upload Size"
 msgstr "Макс. розмір файлу, що завантажується"
 
-#: bws_menu/bws_menu.php:198
+#: bws_menu/bws_menu.php:211
 msgid "PHP Memory Limit"
 msgstr "Ліміт пам’яті"
 
-#: bws_menu/bws_menu.php:197
+#: bws_menu/bws_menu.php:210
 msgid "PHP Allow URL fopen"
 msgstr "Дозволити PHP URL fopen"
 
-#: bws_menu/bws_menu.php:196
-msgid "PHP Safe Mode"
-msgstr "PHP Безпечний режим"
-
-#: bws_menu/bws_menu.php:195
+#: bws_menu/bws_menu.php:209
 msgid "PHP Version"
 msgstr "Версія PHP"
 
-#: bws_menu/bws_menu.php:194
+#: bws_menu/bws_menu.php:228
 msgid "SQL Mode"
 msgstr "Режим SQL"
 
-#: bws_menu/bws_menu.php:193
-msgid "MYSQL Version"
+#: bws_menu/bws_menu.php:227
+msgid "MySQL version"
 msgstr "Версія MYSQL"
 
-#: bws_menu/bws_menu.php:192
-msgid "Memory usage"
-msgstr "Пам’яті використано"
+#: bws_menu/bws_menu.php:212
+msgid "Memory Usage"
+msgstr "Використання пам'яті"
 
-#: bws_menu/bws_menu.php:191
+#: bws_menu/bws_menu.php:208
 msgid "Server"
 msgstr "Тип серверу"
 
-#: bws_menu/bws_menu.php:190
+#: bws_menu/bws_menu.php:207
 msgid "Operating System"
 msgstr "Операційна система"
 
-#: bws_menu/bws_menu.php:170 bws_menu/bws_menu.php:171
-#: bws_menu/bws_menu.php:172 bws_menu/bws_menu.php:179
+#: bws_menu/bws_menu.php:181 bws_menu/bws_menu.php:182
+#: bws_menu/bws_menu.php:183 bws_menu/bws_menu.php:187
 msgid "No"
 msgstr "Ні"
 
-#: bws_menu/bws_menu.php:170 bws_menu/bws_menu.php:171
-#: bws_menu/bws_menu.php:172 bws_menu/bws_menu.php:177
+#: bws_menu/bws_menu.php:181 bws_menu/bws_menu.php:182
+#: bws_menu/bws_menu.php:183 bws_menu/bws_menu.php:187
 msgid "Yes"
 msgstr "Так"
 
-#: bws_menu/bws_menu.php:169
+#: bws_menu/bws_menu.php:180
 msgid " Mb"
 msgstr "Мб"
 
-#: bws_menu/bws_menu.php:165 bws_menu/bws_menu.php:166
-#: bws_menu/bws_menu.php:167 bws_menu/bws_menu.php:168
-#: bws_menu/bws_menu.php:169 bws_menu/bws_menu.php:181
+#: bws_menu/bws_menu.php:175 bws_menu/bws_menu.php:176
+#: bws_menu/bws_menu.php:177 bws_menu/bws_menu.php:178
+#: bws_menu/bws_menu.php:179 bws_menu/bws_menu.php:180
+#: bws_menu/bws_menu.php:189
 msgid "N/A"
 msgstr "Невідомо"
 
-#: bws_menu/bws_menu.php:163 bws_menu/bws_menu.php:164
+#: bws_menu/bws_menu.php:174
 msgid "Off"
 msgstr "Вимк."
 
-#: bws_menu/bws_menu.php:163 bws_menu/bws_menu.php:164
+#: bws_menu/bws_menu.php:174
 msgid "On"
 msgstr "Увімк."
 
-#: bws_menu/bws_menu.php:161
+#: bws_menu/bws_menu.php:172
 msgid "Not set"
 msgstr "Не задано"
 
-#: bws_menu/bws_functions.php:1204
+#: bws_menu/bws_functions.php:796
 msgid "No, go back to the settings page"
 msgstr "Ні, повернутись назад на сторінку налаштувань"
 
-#: bws_menu/bws_functions.php:1203
+#: bws_menu/bws_functions.php:795
 msgid "Yes, restore all settings"
 msgstr "Так, скинути налаштування"
 
-#: bws_menu/bws_functions.php:1200
-msgid "Are you sure you want to restore all settings by default?"
-msgstr "Ви впевнені, що хочете скинути налаштування плагіну до стандартних?"
-
-#: bws_menu/bws_functions.php:1189
+#: bws_menu/deprecated.php:480
 msgid "Restore settings"
 msgstr "Скинути налаштування"
 
-#: bws_menu/bws_functions.php:1187
+#: bws_menu/deprecated.php:478
 msgid "Restore all plugin settings to defaults"
 msgstr "Скинути налаштування плагіну до стандартних"
 
-#: bws_menu/bws_functions.php:1095 includes/pro_banners.php:20
+#: bws_menu/bws_functions.php:700 includes/pro_banners.php:20
 msgid "Close"
 msgstr "Закрити"
 
-#: bws_menu/bws_functions.php:791
-msgid "and you won't be granted TOP-PRIORITY SUPPORT or UPDATES."
-msgstr "та ви більше не будете отримувати першочергову технічну підтримку та оновлення."
-
-#: bws_menu/bws_functions.php:791
-msgid "expires on"
-msgstr "витікає"
-
-#: bws_menu/bws_functions.php:791
-msgid "You license for"
-msgstr "Ваша ліцензія для"
-
-#: bws_menu/bws_functions.php:751
+#: bws_menu/bws_functions.php:169
 msgid "The Pro Trial license will expire on"
-msgstr "Тріал період Pro версії плагіну закінчується"
+msgstr "Trial період Pro версії плагіну закінчується"
 
-#: bws_menu/bws_functions.php:748
+#: bws_menu/bws_functions.php:166
 msgid "Notice: You are using the Pro Trial license of plugin."
 msgstr "Увага: Ви використовуєте тріал Pro версію плагіну."
 
-#: bws_menu/bws_functions.php:746
+#: bws_menu/bws_functions.php:164
 msgid "Notice: You are using the Pro Trial license of %s plugin."
 msgstr "Увага: Ви використовуєте тріал Pro версію плагіну %s."
 
-#: bws_menu/bws_functions.php:728 bws_menu/bws_functions.php:791
-#: bws_menu/bws_functions.php:1414
+#: bws_menu/bws_functions.php:146 bws_menu/bws_functions.php:382
+#: bws_menu/deprecated.php:584
 msgid "Learn more"
 msgstr "Дізнатись більше"
 
-#: bws_menu/bws_functions.php:728
-msgid "Your license has expired. To continue getting top-priority support and plugin updates you should extend it."
-msgstr "Строк вашої ліцензії витік. Якщо ви хочете оновлювати наш плагін у майбутньому, вам слід подовжити ліцензію."
+#: bws_menu/bws_functions.php:146
+msgid "Your license has expired. To continue getting top-priority support and plugin updates, you should extend it."
+msgstr "Строк вашої ліцензії витік. Якщо ви хочете отримувати першочергову технічну підтримку та оновлювати плагін у майбутньому, вам слід подовжити ліцензію."
 
-#: bws_menu/bws_functions.php:726
-msgid "Notice: Your Pro Trial license has expired. To continue using the plugin you should buy a Pro license"
-msgstr "Увага: Термін дії тріал періоду Pro версії плагіну скінчився. Щоб продовжити користуватись плагіном, будь ласка, придбайте ліцензію Pro"
+#: bws_menu/bws_functions.php:144
+msgid "Notice: Your Pro Trial license has expired. To continue using the plugin, you should buy a Pro license"
+msgstr "Увага: Термін дії Pro Trial версії плагіну скінчився. Щоб продовжити користуватись плагіном, будь ласка, придбайте Pro ліцензію"
 
-#: bws_menu/bws_functions.php:709
+#: bws_menu/bws_functions.php:127
 msgid "You can use one license of the Pro plugin for one domain only. Please check and edit your license or domain if necessary using you personal Client Area. We strongly recommend you to solve the problem within 24 hours, otherwise the Pro plugin will be deactivated."
 msgstr "Ви можете використовувати одну ліцензію Про-плагіну для одного домену. Будь ласка, переконайтесь, що інформацію щодо ліцензії і домену введено вірно, у вкладці Client Area. Ми настійливо рекомендуємо Вам вирішити це питання протягом 24 годин, інакше плагін буде деактивовано."
 
-#: bws_menu/bws_functions.php:709
+#: bws_menu/bws_functions.php:127
 msgid "WARNING: Illegal use notification"
 msgstr "УВАГА: виявлено несанкціоноване використання плагіну"
 
-#: bws_menu/bws_functions.php:688 bws_menu/bws_menu.php:306
-#: bws_menu/bws_menu.php:317
+#: bws_menu/bws_menu.php:334 bws_menu/bws_menu.php:345
+#: bws_menu/class-bws-settings.php:738 bws_menu/deprecated.php:227
 msgid "Check license key"
 msgstr "Перевірте ліцензійний ключ"
 
-#: bws_menu/bws_functions.php:684
+#: bws_menu/deprecated.php:223
 msgid "(your username is the email address specified during the purchase). If necessary, please submit \"Lost your password?\" request."
 msgstr "(ваше ім'я користувача - це емейл, який ви вказували при купівлі). При необхідності, будь ласка, відправте запит на відновлення вашого паролю."
 
-#: bws_menu/bws_functions.php:684
-msgid "If needed you can check if the license key is correct or reenter it in the field below. You can find your license key on your personal page - Client area - on our website"
-msgstr "При необхідності ви можете перевірити правильність вашого ліцензійного ключа або знову ввести його у полі, що знаходиться нижче. Ви можете знайти свій ліцензійний ключ на вашій персональній сторінці - Client area - на нашому сайті."
+#: bws_menu/deprecated.php:223
+msgid "If necessary, you can check if the license key is correct or reenter it in the field below. You can find your license key on your personal page - Client Area - on our website"
+msgstr "При необхідності ви можете перевірити правильність вашого ліцензійного ключа або знову ввести його у полі, що знаходиться нижче. Ви можете знайти свій ліцензійний ключ на вашій персональній сторінці - Client area - на нашому сайті"
 
-#: bws_menu/bws_functions.php:671
+#: bws_menu/deprecated.php:204
 msgid "Please, enter your license key"
 msgstr "Будь ласка, введіть ваш ліцензійний ключ"
 
-#: bws_menu/bws_functions.php:629 bws_menu/bws_menu.php:130
+#: bws_menu/bws_menu.php:142 bws_menu/class-bws-settings.php:820
+#: bws_menu/deprecated.php:156
 msgid "Your license will expire on"
 msgstr "Ваша ліцензія закінчується"
 
-#: bws_menu/bws_functions.php:626 bws_menu/bws_menu.php:128
+#: bws_menu/bws_menu.php:140 bws_menu/class-bws-settings.php:817
+#: bws_menu/deprecated.php:153
 msgid "The license key is valid."
 msgstr "Ліцензійний ключ дійсний."
 
-#: bws_menu/bws_functions.php:624
+#: bws_menu/class-bws-settings.php:815 bws_menu/deprecated.php:151
 msgid "The Pro Trial license key is valid."
 msgstr "Ключ тріал Pro версії вірний."
 
-#: bws_menu/bws_functions.php:620
+#: bws_menu/class-bws-settings.php:810 bws_menu/deprecated.php:147
 msgid "Unfortunately, the Pro Trial licence was already installed to this domain. The Pro Trial license can be installed only once."
-msgstr "На жаль, тріал Pro версія плагіну уже встановлювалась на цей домен. Тріал Pro версію можна встановлювати лише один раз."
+msgstr "На жаль, Trial Pro версія плагіну уже встановлювалась на цей домен. Trial Pro версію можна встановлювати лише один раз."
 
-#: bws_menu/bws_functions.php:618
+#: bws_menu/class-bws-settings.php:808 bws_menu/deprecated.php:145
 msgid "Unfortunately, you have exceeded the number of available tries."
 msgstr "На жаль, ви перевищили кількість допустимих спроб."
 
-#: bws_menu/bws_functions.php:616
+#: bws_menu/class-bws-settings.php:806 bws_menu/deprecated.php:143
 msgid "This license key is valid, but Your license has expired. If you want to update our plugin in future, you should extend the license."
 msgstr "Даний ліцензійний ключ дійсний, але строк вашої ліцензії витік. Якщо ви хочете оновлювати наш плагін у майбутньому, вам слід подовжити ліцензію."
 
-#: bws_menu/bws_functions.php:614
-msgid "This license key is bind to another site."
+#: bws_menu/class-bws-settings.php:804 bws_menu/class-bws-settings.php:907
+#: bws_menu/deprecated.php:141 bws_menu/deprecated.php:360
+msgid "This license key is bound to another site."
 msgstr "Цей ліцензійний ключ прив'язано до іншого сайту."
 
-#: bws_menu/bws_functions.php:612
+#: bws_menu/bws_menu.php:126 bws_menu/class-bws-settings.php:802
+#: bws_menu/class-bws-settings.php:905 bws_menu/deprecated.php:139
+#: bws_menu/deprecated.php:358
 msgid "Wrong license key."
 msgstr "Неправильний ліцензійний ключ."
 
-#: bws_menu/bws_functions.php:568
-msgid "Congratulations! The Pro license of the plugin is successfully activated."
-msgstr "Вітаємо! Pro версію плагіну успішно активовано."
-
-#: bws_menu/bws_functions.php:551 bws_menu/bws_menu.php:118
-#: bws_menu/bws_menu.php:304
+#: bws_menu/bws_menu.php:130 bws_menu/bws_menu.php:332
+#: bws_menu/deprecated.php:261
 msgid "Unfortunately, you have exceeded the number of available tries per day."
 msgstr "На жаль, ви перевищили кількість допустимих спроб."
 
-#: bws_menu/bws_functions.php:537
-msgid "After that you can activate it by entering your license key."
+#: bws_menu/deprecated.php:247
+msgid "After that, you can activate it by entering your license key."
 msgstr "Після цього ви зможете активувати його ввівши ліцензійний ключ."
 
-#: bws_menu/bws_functions.php:536 bws_menu/bws_functions.php:632
+#: bws_menu/class-bws-settings.php:823 bws_menu/deprecated.php:159
+#: bws_menu/deprecated.php:246
 msgid "In order to continue using the plugin it is necessary to buy a %s license."
 msgstr "Щоб продовжити користуватись плагіном, потрібно придбати %s ліцензію."
 
-#: bws_menu/bws_functions.php:510 bws_menu/bws_functions.php:519
-#: bws_menu/bws_functions.php:549 bws_menu/bws_functions.php:557
-#: bws_menu/bws_functions.php:1459 bws_menu/bws_menu.php:315
-#: bws_menu/bws_menu.php:533 bws_menu/bws_menu.php:542
+#: bws_menu/bws_menu.php:343 bws_menu/bws_menu.php:561
+#: bws_menu/bws_menu.php:570 bws_menu/class-bws-settings.php:717
+#: bws_menu/deprecated.php:259 bws_menu/deprecated.php:267
+#: bws_menu/deprecated.php:629 bws_menu/deprecated.php:700
+#: bws_menu/deprecated.php:709
 msgid "Activate"
 msgstr "Активувати"
 
-#: bws_menu/bws_functions.php:504
+#: bws_menu/class-bws-settings.php:725 bws_menu/deprecated.php:694
 msgid "Start Your Free %s-Day Trial Now"
-msgstr "Спробуйте %s-денну тріал версію безкоштовно"
+msgstr "Спробуйте %s-денну Trial версію безкоштовно"
 
-#: bws_menu/bws_functions.php:144 bws_menu/bws_functions.php:504
-#: bws_menu/bws_menu.php:298
+#: bws_menu/bws_functions.php:211 bws_menu/bws_menu.php:326
+#: bws_menu/class-bws-settings.php:725 bws_menu/class-bws-settings.php:1038
+#: bws_menu/class-bws-settings.php:1048 bws_menu/deprecated.php:694
 msgid "or"
 msgstr "або"
 
-#: bws_menu/bws_functions.php:480 bws_menu/bws_functions.php:571
+#: bws_menu/deprecated.php:281 bws_menu/deprecated.php:670
 msgid "You will be redirected automatically in 5 seconds."
 msgstr "Вас буде перенаправлено автоматично через 5 секунд."
 
-#: bws_menu/bws_functions.php:479 bws_menu/bws_functions.php:570
+#: bws_menu/deprecated.php:280 bws_menu/deprecated.php:669
 msgid "the setting page"
 msgstr "сторінку установок"
 
-#: bws_menu/bws_functions.php:479 bws_menu/bws_functions.php:570
+#: bws_menu/deprecated.php:280 bws_menu/deprecated.php:669
 msgid "Please, go to"
 msgstr "Будь ласка, перейдіть на"
 
-#: bws_menu/bws_functions.php:477
-msgid "Congratulations! Pro version of the plugin is successfully installed and activated."
-msgstr "Вітаємо! Pro версію плагіну успішно завантажено та активовано."
-
-#: bws_menu/bws_functions.php:447
+#: bws_menu/class-bws-settings.php:1020 bws_menu/deprecated.php:463
 msgid "Please, enter Your license key"
 msgstr "Будь ласка, впишіть ваш ліцензійний ключ"
 
-#: bws_menu/bws_functions.php:419 bws_menu/bws_menu.php:139
+#: bws_menu/bws_menu.php:151 bws_menu/class-bws-settings.php:985
+#: bws_menu/deprecated.php:435
 msgid "Something went wrong. Try again later or upload the plugin manually. We are sorry for inconvenience."
 msgstr "Виникли певні проблеми. Спробуйте ще раз пізніше або завантажте плагін вручну. Просимо вибачення за незручності."
 
-#: bws_menu/bws_functions.php:396 bws_menu/bws_menu.php:404
+#: bws_menu/bws_menu.php:432 bws_menu/class-bws-settings.php:962
+#: bws_menu/deprecated.php:412
 msgid "UploadDir is not writable. Please, upload the plugin manually"
 msgstr "Немає доступу до теки завантажень WordPress. Будь ласка, завантажте плагін вручну"
 
-#: bws_menu/bws_functions.php:389 bws_menu/bws_menu.php:394
+#: bws_menu/bws_menu.php:422 bws_menu/class-bws-settings.php:955
+#: bws_menu/deprecated.php:405
 msgid "Your server does not support either ZipArchive or Phar. Please, upload the plugin manually"
 msgstr "Ваш сервер не підтримує формати Zip і Phar. Будь ласка, завантажте плагін вручну"
 
-#: bws_menu/bws_functions.php:383 bws_menu/bws_menu.php:387
+#: bws_menu/bws_menu.php:415 bws_menu/class-bws-settings.php:949
+#: bws_menu/deprecated.php:399
 msgid "Failed to open the zip archive. Please, upload the plugin manually"
 msgstr "Помилка при відкритті zip-архіву. Будь ласка, завантажте плагін вручну"
 
-#: bws_menu/bws_functions.php:371 bws_menu/bws_functions.php:393
-#: bws_menu/bws_functions.php:415 bws_menu/bws_menu.php:370
-#: bws_menu/bws_menu.php:401 bws_menu/bws_menu.php:412
+#: bws_menu/bws_menu.php:398 bws_menu/bws_menu.php:429
+#: bws_menu/bws_menu.php:440 bws_menu/class-bws-settings.php:937
+#: bws_menu/class-bws-settings.php:959 bws_menu/class-bws-settings.php:981
+#: bws_menu/deprecated.php:387 bws_menu/deprecated.php:409
+#: bws_menu/deprecated.php:431
 msgid "Failed to download the zip archive. Please, upload the plugin manually"
 msgstr "Помилка при завантаженні zip-архіву. Будь ласка, завантажте плагін вручну"
 
-#: bws_menu/bws_functions.php:350 bws_menu/bws_menu.php:122
+#: bws_menu/bws_menu.php:134 bws_menu/class-bws-settings.php:913
+#: bws_menu/deprecated.php:366
 msgid "Unfortunately, the Pro licence was already installed to this domain. The Pro Trial license can be installed only once."
 msgstr "На жаль, Pro ліцензія уже використовувалась на цьому домені.  Тріал Pro версії плагіну можна використати лише один раз."
 
-#: bws_menu/bws_functions.php:348 bws_menu/bws_menu.php:120
-msgid "Unfortunately, Your license has expired. To continue getting top-priority support and plugin updates you should extend it in your"
-msgstr "На жаль, ваша ліцензія скінчилась. Для того, щоб і надалі отримувати першочергову техпідтримку і оновлення, будь ласка, продовжте ліцензію"
+#: bws_menu/bws_menu.php:132 bws_menu/class-bws-settings.php:911
+#: bws_menu/deprecated.php:364
+msgid "Unfortunately, Your license has expired. To continue getting top-priority support and plugin updates, you should extend it in your %s"
+msgstr "На жаль, ваша ліцензія скінчилась. Для того, щоб і надалі отримувати першочергову техпідтримку і оновлення, будь ласка, продовжте ліцензію на  %s"
 
-#: bws_menu/bws_functions.php:346 bws_menu/bws_functions.php:513
+#: bws_menu/class-bws-settings.php:722 bws_menu/class-bws-settings.php:909
+#: bws_menu/deprecated.php:362 bws_menu/deprecated.php:703
 msgid "Unfortunately, you have exceeded the number of available tries per day. Please, upload the plugin manually."
 msgstr "На жаль, ви перевищили кількість доступних спроб на день. Будь ласка, завантажте плагін вручну"
 
-#: bws_menu/bws_functions.php:344
-msgid "This license key is bind to another site"
-msgstr "Цей ліцензійний ключ прив'язано до іншого сайту"
-
-#: bws_menu/bws_functions.php:336 bws_menu/bws_functions.php:606
-#: bws_menu/bws_functions.php:666 bws_menu/bws_menu.php:108
+#: bws_menu/bws_menu.php:120 bws_menu/class-bws-settings.php:796
+#: bws_menu/class-bws-settings.php:863 bws_menu/class-bws-settings.php:899
+#: bws_menu/deprecated.php:133 bws_menu/deprecated.php:199
+#: bws_menu/deprecated.php:352
 msgid "We are sorry for inconvenience."
 msgstr "Просимо вибачення за незручності."
 
-#: bws_menu/bws_functions.php:336 bws_menu/bws_functions.php:606
-#: bws_menu/bws_functions.php:666 bws_menu/bws_menu.php:108
+#: bws_menu/bws_menu.php:120 bws_menu/class-bws-settings.php:796
+#: bws_menu/class-bws-settings.php:863 bws_menu/class-bws-settings.php:899
+#: bws_menu/deprecated.php:133 bws_menu/deprecated.php:199
+#: bws_menu/deprecated.php:352
 msgid "Something went wrong. Please try again later. If the error appears again, please contact us"
 msgstr "Щось не так, спробуйте пізніше. Якщо помилка повториться, будь ласка, повідомте нам"
 
-#: bws_menu/bws_functions.php:306 bws_menu/bws_functions.php:342
-#: bws_menu/bws_menu.php:87 bws_menu/bws_menu.php:114
+#: bws_menu/bws_menu.php:99 bws_menu/class-bws-settings.php:770
+#: bws_menu/deprecated.php:322
 msgid "Wrong license key"
 msgstr "Невірний ключ ліцензії"
 
-#: bws_menu/bws_functions.php:265
-msgid "If there is something wrong about it, please contact us"
-msgstr "Якщо щось не так, будь ласка, повідомте нам"
-
-#: bws_menu/bws_functions.php:262
-msgid "Rate the plugin"
-msgstr "Оцінити плагін"
-
-#: bws_menu/bws_functions.php:261
-msgid "If you enjoy our plugin, please give it 5 stars on WordPress"
-msgstr "Якщо вам сподобався плагін, будь ласка, поставте нам 5 зірочок на WordPress"
-
-#: bws_menu/bws_functions.php:244 bws_menu/bws_functions.php:709
-#: bws_menu/bws_menu.php:597 bws_menu/bws_menu.php:614
-#: includes/pro_banners.php:27
+#: bws_menu/bws_functions.php:127 bws_menu/bws_functions.php:339
+#: bws_menu/bws_menu.php:625 bws_menu/bws_menu.php:642
+#: bws_menu/class-bws-settings.php:142
 msgid "Learn More"
-msgstr "Дізнатись більше "
+msgstr "Дізнатись більше"
 
-#: bws_menu/bws_functions.php:241
+#: bws_menu/bws_functions.php:336
 msgid "Extend standard plugin functionality with new great options."
 msgstr "Розширює можливості стандартного функціоналу плагіна."
 
-#: bws_menu/bws_functions.php:240
+#: bws_menu/bws_functions.php:335
 msgid "version!"
 msgstr "версії!"
 
-#: bws_menu/bws_functions.php:240
+#: bws_menu/bws_functions.php:335
 msgid "to"
 msgstr "до"
 
-#: bws_menu/bws_functions.php:240
+#: bws_menu/bws_functions.php:335
 msgid "It’s time to upgrade your"
 msgstr "Настав час модернізувати Ваш"
 
-#: bws_menu/bws_functions.php:102
+#: bws_menu/bws_functions.php:77
 msgid "Plugins page"
 msgstr "Сторінку Плагінів"
 
-#: bws_menu/bws_functions.php:100
+#: bws_menu/bws_functions.php:75
 msgid "Back to the WordPress"
 msgstr "Повернутися на WordPress на"
 
-#: bws_menu/bws_functions.php:99
+#: bws_menu/bws_functions.php:74
 msgid "or higher, that is why it has been deactivated! Please upgrade WordPress and try again."
 msgstr "чи вище, тому його було деактивовано! Будь ласка оновіть WordPress та спробуйте ще раз."
 
-#: bws_menu/bws_functions.php:97 bws_menu/bws_functions.php:123
+#: bws_menu/bws_functions.php:72 bws_menu/bws_functions.php:190
 msgid "requires"
 msgstr "потребує"
