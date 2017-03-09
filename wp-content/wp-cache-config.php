@@ -27,7 +27,7 @@ if ( ! defined('WPCACHEHOME') )
 $cache_compression = 1; //Added by WP-Cache Manager
 $cache_enabled = true; //Added by WP-Cache Manager
 $super_cache_enabled = true; //Added by WP-Cache Manager
-$cache_max_time = 3600; //Added by WP-Cache Manager
+$cache_max_time = 86400; //Added by WP-Cache Manager
 //$use_flock = true; // Set it true or false if you know what to use
 $cache_path = WP_CONTENT_DIR . '/cache/';
 $file_prefix = 'wp-cache-';
