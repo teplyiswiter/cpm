@@ -5,5 +5,6 @@ Disallow: /logout/
 Disallow: /register/
 Disallow: /lostpassword/
 Disallow: /resetpass/
+Disallow: /author/
 Host: lepta.sm.ua
 Sitemap: http://lepta.sm.ua/xmlsitemap.xml

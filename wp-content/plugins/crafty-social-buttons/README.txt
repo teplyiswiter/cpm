@@ -101,6 +101,12 @@ Since the *Share buttons* are page/post specific, the shortcode is usually best,
 
 == Changelog ==
 
+= 1.5.8 =
+* Added additional defences against cross site scripting
+
+= 1.5.7 =
+* Fixed potential cross site scripting vulnerability in admin page
+
 = 1.5.6 =
 * Fixed issue with Facebook share counts
 
@@ -249,6 +255,12 @@ Since the *Share buttons* are page/post specific, the shortcode is usually best,
 * First version!
 
 == Upgrade Notice ==
+
+= 1.5.8 =
+* Added additional defences against cross site scripting
+
+= 1.5.7 =
+* Fixed potential cross site scripting vulnerability in admin page
 
 = 1.5.6 =
 * Fixed issue with Facebook share counts
