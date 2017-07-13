@@ -2,9 +2,9 @@
 Contributors: bestwebsoft
 Donate link: https://bestwebsoft.com/donate/
 Tags: contact, contact form, feedback form, contact us form, contact button, email form, contac, form, web-page feedback, cf, cf plugin, contact form plugin
-Requires at least: 3.8
-Tested up to: 4.7.2
-Stable tag: 4.0.5
+Requires at least: 3.9
+Tested up to: 4.8
+Stable tag: 4.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Allow your customers to reach you in seconds!
 
 [View Demo](https://bestwebsoft.com/demo-for-contact-form-pro/)
 
-http://www.youtube.com/watch?v=F_piQa0hmkU
+https://www.youtube.com/watch?v=F_piQa0hmkU
 
 = Free Features =
 
@@ -26,13 +26,22 @@ http://www.youtube.com/watch?v=F_piQa0hmkU
 * Data validation before the submission
 * Send a copy of the submitted message to the email
 * Receive submissions to the default admin or custom email addresses
-* Add additional data about the sender to the email notification
+* Add additional data about the sender to the email notification:
+	* Sent from (IP address) 
+	* Date/Time 
+	* Sent from (referer)
+	* Using (user agent)
 * Responsive Layout
 * Editable field labels
 * Required fields
+* Select used/required for the following fields:
+	* Name
+	* Address
+	* Phone number
 * File attachments
 * Enable additional pre-build fields
 * Enable two column layout
+* Change the width for contact form
 * Re-order form fields using drag & drop interface
 * Translate your form to any language with a simple language customizer
 * Protect contact form from spam with [Captcha](https://bestwebsoft.com/products/wordpress/plugins/captcha/?k=45dcf2a5ccd70a7fc8606f8030730ac7) or [Google reCaptcha](https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=159789f556e3a9c58df8f25384903ba5)
@@ -54,7 +63,11 @@ http://www.youtube.com/watch?v=F_piQa0hmkU
 > * Automatically populate name and email input fields for logged-in users
 > * Add "Reply to" email address in the message head
 > * Set default text for subject and message input fields
-> * Hide and disable fields
+> * Show, hide or disable fields:
+> 	* Name
+> 	* Email Address
+> 	* Subject
+> 	* Message
 > * Enable auto response option with editable message
 > * Customizable form
 > 	* Styles (no programming knowledge required)
@@ -102,7 +115,7 @@ Visit our Help Center if you have any questions, our friendly Support Team is ha
 * Ukrainian (uk)
 * Vietnamese (vi) (thanks to [Dich Anh Viet](mailto:bizover@gmail.com), www.bizover.net)
 
-Some of these translations are not complete. We are constantly adding new features which should be translated. If you would like to create your own language pack or update the existing one, you can send [the text of PO and MO files](http://codex.wordpress.org/Translating_WordPress) to [BestWebSoft](https://support.bestwebsoft.com/hc/en-us/requests/new) and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO [files Poedit](http://www.poedit.net/download.php).
+Some of these translations are not complete. We are constantly adding new features which should be translated. If you would like to create your own language pack or update the existing one, you can send [the text of PO and MO files](https://codex.wordpress.org/Translating_WordPress) to [BestWebSoft](https://support.bestwebsoft.com/hc/en-us/requests/new) and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO [files Poedit](https://www.poedit.net/download.php).
 
 = Recommended Plugins =
 
@@ -110,17 +123,11 @@ The author of the Contact Form also recommends the following plugins:
 
 * [SMTP](https://bestwebsoft.com/products/wordpress/plugins/smtp/) – Configure SMTP server to receive email messages from WordPress to Gmail, Yahoo, Hotmail and other services.
 * [Captcha](https://bestwebsoft.com/products/wordpress/plugins/captcha/?k=45dcf2a5ccd70a7fc8606f8030730ac7) – #1 super security anti-spam captcha plugin for WordPress forms.
-* [Google Captcha (Re-captcha)](https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=159789f556e3a9c58df8f25384903ba5) – Protect WordPress website forms from spam entries with Google Captcha (reCaptcha).
+* [Google Captcha (Re-captcha)](https://bestwebsoft.com/products/wordpress/plugins/google-captcha/?k=159789f556e3a9c58df8f25384903ba5) –  Protect WordPress website forms from spam entries with Google reCaptcha.
 * [Limit Attempts](https://bestwebsoft.com/products/wordpress/plugins/limit-attempts/?k=129e34c19fc68ae4a15b4fc1b4983081) – Protect WordPress website against brute force attacks. Limit rate of login attempts.
 * [Contact Form Multi](https://bestwebsoft.com/products/wordpress/plugins/contact-form-multi/?k=34543c152eff369d529e9b4da85985a9) – Add unlimited number of contact forms to WordPress website.
 * [Contact Form to DB](https://bestwebsoft.com/products/wordpress/plugins/contact-form-to-db/?k=d7d962591b5be0ce6c27af778b1b36ee) – Save and manage contact form messages. Never lose important data.
 * [Updater](https://bestwebsoft.com/products/wordpress/plugins/updater/?k=982fae837f4c6e3b152183537448dbca) – Automatically check and update WordPress website core with all installed plugins and themes to the latest versions.
-
-= Donate =
-
-Donations play an important role in supporting open-source projects. We greatly appreciate any donation you can make to help us continue further development of free products.
-
-[Donate Now](https://bestwebsoft.com/donate/)
 
 == Installation ==
 
@@ -129,17 +136,17 @@ Donations play an important role in supporting open-source projects. We greatly 
 3. You can adjust the necessary settings using your WordPress admin panel in "BWS Panel" > "Contact Form".
 4. Create a page or a post and insert the shortcode [bestwebsoft_contact_form] into the text.
 
-[View a PDF version of Step-by-step Instruction on Contact Form Installation](https://docs.google.com/document/d/1obcWMPDPIIhUxcclYDwKSwNoFSHvGHyg_VKibjpQWTA/).
+[View a PDF version of Step-by-step Instruction on Contact Form Installation](https://docs.google.com/document/d/1-hvn6WRvWnOqj5v5pLUk7Awyu87lq5B_dO-Tv-MC9JQ/).
 
-http://www.youtube.com/watch?v=JwG2c4PcO8o
+https://www.youtube.com/watch?v=JwG2c4PcO8o
 
 == Frequently Asked Questions ==
 
 = Where can I find the settings to adjust the plugin work after activation? =
 
-In the 'Plugin' menu you can find a link to the settings page.
+You can find the link to the Settings Page in the Plugin menu.
 
-= After the plugin installation I haven't adjusted the settings. What is the default email address used for a contact via the form? =
+= I haven't adjusted the settings after the plugin installation. What is the default email address used for a contact via the form? =
 
 The address specified during WordPress installation will be used by the Contact Form plugin as the default one.
 
@@ -147,7 +154,7 @@ The address specified during WordPress installation will be used by the Contact 
 
 You should put the shortcode [bestwebsoft_contact_form] into your page or post.
 
-= I chose a user via the plugin settings and got this error: "Please enter a valid email address. Settings are not saved." =
+= I choosed a user via the plugin settings and got this error: "Please enter a valid email address. Settings are not saved." =
 
 This means that you made a syntax error.
 
@@ -157,7 +164,7 @@ This means that you made a syntax error.
 2. Mark the check box (if it's not marked yet) in the block  "Change the names of the contact form fields and error messages", choose the necessary tab,click the twistie to expand the list of the fields and fill in the fields. Choose the necessary tab in the block "Action after email is sent" as well and fill in the field. Save the changes.
 3. You will see the shortcode under the tab with the necessary language. Please paste that shortcode to the page or post.
 
-= I'm not receiving messages from Contact Form OR The plugin does not send an email - "Sorry, email message could not be delivered." =
+= I'm not receiving messages from Contact Form OR the plugin does not send an email - "Sorry, email message could not be delivered." =
 
 Please follow the instructions below:
 
@@ -167,9 +174,23 @@ Please follow the instructions below:
 
 Note: If the Contact Form sends letters, but you don't receive them, you can install our plugin Contact Form to DB in order not to lose the sent letters for the time the problem is being solved.
 
+***
+Additional info:
+[How to Use Contact Form - Step-by-step Instruction](https://docs.google.com/document/d/1qZYPJhkSdVyyM6XO5WfiBcTS2Sa9_9UMn4vS2g48JRY/)
+***
+
+Submit a support request if the problem still remains. Please include the following information when contacting support:
+1. URL of the page where Contact Form is located (make sure that the plugin is activated and the form is displayed on the page).
+2. Log generated by the SMTP plugin after sending the test message. 
+[Submit a request](https://support.bestwebsoft.com/hc/en-us/requests/new)
+
 = Why the contact form is displayed in one column, if I've chosen two columns displaying on the plugin settings page? =
 
 This happens when there is not enough the minimum width of the parent block where the contact form is located.
+
+= Is it possible to create two contact forms using Contact Form? =
+
+Install and activate [Contact Form Multi](http://bestwebsoft.com/products/wordpress/plugins/contact-form-multi/?k=34543c152eff369d529e9b4da85985a9) in order to add unlimited number of forms to your Wordpress website. 
 
 = I have some problems with the plugin's work. What Information should I provide to receive proper support? =
 
@@ -178,7 +199,7 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 1. the link to the page where the problem occurs
 2. the name of the plugin and its version. If you are using a pro version - your order number.
 3. the version of your WordPress installation
-4. copy and paste into the message your system status report. Please read more here: [Instruction on System Status](https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/edit)
+4. copy and paste into the message your system status report. Please read more here: [Instruction on System Status](https://docs.google.com/document/d/1Wi2X8RdRGXk9kMszQy1xItJrpN0ncXgioH935MaBKtc/)
 
 == Screenshots ==
 
@@ -199,6 +220,15 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 15. Re-order contact form fields using drag & drop interface.
 
 == Changelog ==
+
+= V4.0.7 - 04.07.2017 =
+* Bugfix : The compatibility issue with Google Captcha (reCAPTCHA) plugin was fixed.
+* NEW : The ability to change width for contact form fields has been added.
+* Update : French language file is updated.
+
+= V4.0.6 - 14.04.2017 =
+* Bugfix : Multiple Cross-Site Scripting (XSS) vulnerability was fixed.
+* Update : The French language file is updated.
 
 = V4.0.5 - 03.03.2017 =
 * Bugfix : The bug with selecting language via BWS Shortcode button was fixed.
@@ -672,6 +702,14 @@ Please make sure that the problem hasn't been discussed yet on our forum (<https
 * Ability to add Contact Form into a post. Ability to adjust displaying of the form via shortcode is added.
 
 == Upgrade Notice ==
+
+= V4.0.7 =
+* Bugs fixed.
+* New features added.
+* Languages updated.
+
+= V4.0.6 =
+* Bugs fixed.
 
 = V4.0.5 =
 * Bugs fixed.

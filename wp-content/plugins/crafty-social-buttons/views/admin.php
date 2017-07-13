@@ -2,7 +2,7 @@
 
     <h2><?php _e('Crafty Social Buttons', $this->plugin_slug); ?></h2>
 
-    <?php $active_tab = (isset($_GET['tab'])) ? $_GET['tab'] : 'share_options'; ?>
+    <?php $active_tab = sanitize_key(isset($_GET['tab'])) ? $_GET['tab'] : 'share_options'; ?>
 
     <h2 class="nav-tab-wrapper">
 
@@ -33,7 +33,7 @@
         settings_fields($this->plugin_slug);
 
         $tab = $this->plugin_slug . '[tab]';
-        echo '<input type="hidden" name="' . $tab . '" value="' . $active_tab . '">';
+        echo '<input type="hidden" name="' . $tab . '" value="' . esc_attr($active_tab) . '">';
 
         if ($active_tab == 'share_options') {
             do_settings_sections($this->plugin_slug . '-share');
