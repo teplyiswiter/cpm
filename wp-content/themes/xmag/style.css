@@ -2710,7 +2710,7 @@ h2.comments-title {
  * 12: Responsive 
  */
 
-@media screen and (min-width: 360px) {
+@media screen and (min-width: 320px) {
 	/* Post Navigation */
 	.nav-previous,
 	.nav-next {

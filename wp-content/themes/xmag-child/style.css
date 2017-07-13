@@ -23,3 +23,9 @@ Tags: custom-background, custom-colors, custom-header, custom-menu, featured-ima
 .mobile-header {
 	background-color: #5c6089 !important;	
 }
+
+@media screen and (min-width: 320px) {
+	.list-post .entry-summary {
+		display: block;
+	}
+}
