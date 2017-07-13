@@ -10,8 +10,6 @@ Tags: custom-background, custom-colors, custom-header, custom-menu, featured-ima
 
 */
 
-@import url("../xmag/style.css");
-
 .main-navbar {
   background-color: #5c6089 !important;
 }
