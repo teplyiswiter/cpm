@@ -4,7 +4,7 @@ Theme URI: http://www.designlabthemes.com/xmag-wordpress-theme/
 Author: Design Lab
 Author URI: http://www.designlabthemes.com/
 Description: xMag is a free Magazine WordPress Theme. It features a simple and elegant design. This theme comes with great features for magazine, blog and news websites.
-Version: 1.2.0
+Version: 1.2.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: xmag
@@ -18,9 +18,6 @@ Tags: custom-background, custom-colors, custom-header, custom-menu, featured-ima
  * Please don't edit this file.  You can lose all modifications if the theme is updated.
  * Please use Additional CSS via Customizer (since WordPress 4.7) or a child theme. You can overwrite specific style rules in your child theme's 'style.css' file.
  * See here more about Child Themes: https://codex.wordpress.org/Child_Themes
- *
- * This file is only loaded if 'SCRIPT_DEBUG' is set to 'TRUE' in your 'wp-config.php' file. Otherwise,
- * the 'style.min.css' file is loaded.
 ********************************************************************************************************/ 
  
 
@@ -41,7 +38,6 @@ Index:
 12: - Responsive
 
 */
-
 
 /*
  * 01: Normalize
@@ -99,7 +95,7 @@ table {
  */
 
 body {
-	background-color: #f2f2f2;
+	background-color: #ffffff;
 }
 
 #page {
@@ -204,7 +200,7 @@ h1, h2, h3, h4 {
 
 h1 {
 	font-size: 2em; /* 32px */
-	font-weight: 300;
+	font-weight: 400;
 	margin: 20px 0 10px;
 	line-height: 1.4;
 }
@@ -1148,7 +1144,8 @@ a:active {
 }
 
 .mobile-navigation ul a,
-.mobile-navigation ul ul a {
+.mobile-navigation ul ul a,
+.mobile-navigation .woo-cart-link a {
 	display: block;
 	width: auto;
 	padding: 10px 15px;
@@ -1542,9 +1539,7 @@ body.mobile-menu-open {
 .page .hentry .entry-header,
 .single .hentry .entry-header,
 .page-header {
-	padding-bottom: 10px;
 	margin-bottom: 20px;
-	border-bottom: 1px solid #eee;
 }
 
 .page .hentry .hentry h1,
@@ -1556,12 +1551,6 @@ body.mobile-menu-open {
 
 .page-header span {
 	font-weight: 700;
-}
-
-.single .hentry .has-featured-image,
-.page .hentry .has-featured-image {
-	border: 0;
-	padding-bottom: 0;
 }
 
 .page .hentry .entry-meta,
@@ -1588,8 +1577,8 @@ body.mobile-menu-open {
     font-size: 0.867em;
 }
 
-.single .hentry .entry-footer > span {
-	padding: 0 1em 0 0;
+.single .entry-footer > span {
+	padding: 0 15px 0 0;
 }
 
 .page-links {
@@ -2417,50 +2406,11 @@ h2.comments-title {
 	background-color: #fff;
 }
 
-/* Widgets Style */
-
-.widget-white .widget-title {
-	border-bottom-color: #eee;
-}
-
-.widget-white .widget {
-	background-color: #fff;
-	border: 1px solid #eee;
-	box-shadow: 0 1px 1px rgba(0,0,0,.05);
-}
-
-.widget-minimal .widget {
-	padding: 0;
-	background-color: transparent;
-}
-
-.widget-minimal .widget-title {
-	border: 0;
-	font-size: 15px;
-	text-transform: uppercase;
-}
-
-.widget-minimal .widget-title span {
-	padding: 0;
-}
-
-.widget-minimal .widget-title span:before {
-	content: none;
-}
-
-.widget-minimal .widget-profile img.size-thumbnail {
-	border-radius: 0;
-}
-
-.widget-minimal .social-links {
-	padding: 0;
-}
-
 /* Social Links */
 
 .social-links {
 	list-style-type: none;
-	margin: 0 0 20px 0;
+	margin: 0 0 1.5em 0;
 	padding: 0 20px;
 	font-size: 0.933em;
 }
@@ -2570,15 +2520,11 @@ h2.comments-title {
  * 11: Additional Styles
  */
 
-/* Full width Layout */
-
-.site-fullwidth,
-.site-fullwidth.custom-background {
-	background-color: #fff;
-	background-image: none;
-}
-
 /* Boxed Style */
+
+.site-boxed {
+	background-color: #f2f2f2;
+}
 
 .site-boxed #page {
 	background-color: #fff;
@@ -2607,7 +2553,7 @@ h2.comments-title {
 /* Fullwidth Page Template */
 
 .page-template-no-sidebar .content-area,
-.page-template-no-sidebar-php .content-area {
+.page-template-no-sidebar.site-boxed .content-area {
 	width: 100%;
 	float: none;
 }
@@ -2676,7 +2622,7 @@ h2.comments-title {
 	padding-bottom: 15px;
 }
 
-.large-post h2.entry-title a:before {
+.large-post h2.entry-title a:after {
 	content: "";
 	position: absolute;
 	width: 50px;
@@ -2723,6 +2669,41 @@ h2.comments-title {
 	color: #fff;
 	text-decoration: none;
 	opacity: 0.9;
+}
+
+/* Widget Styles */
+
+.widget-white .widget-title {
+	border-bottom-color: #eee;
+}
+
+.widget-white .widget {
+	background-color: #fff;
+	border: 1px solid #eee;
+	box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.widget-minimal .widget {
+	padding: 0;
+	background-color: transparent;
+}
+
+.widget-minimal .widget-title {
+	border: 0;
+	font-size: 15px;
+	text-transform: uppercase;
+}
+
+.widget-minimal .widget-title span {
+	padding: 0;
+}
+
+.widget-minimal .widget-title span:before {
+	content: none;
+}
+
+.widget-minimal .social-links {
+	padding: 0;
 }
 
 /*
@@ -2831,10 +2812,10 @@ h2.comments-title {
 	}
 	.list-post .category {
 	display: inline-block;
-	}	
+	}
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 600px) {
 	/* Grid */
 	.col-sm-3, .col-sm-4, .col-sm-6, .col-sm-8, .col-sm-12 {
 	float: left;
@@ -2921,7 +2902,7 @@ h2.comments-title {
 	}
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 840px) {
 	/* Grid */
 	.col-3, .col-4, .col-6, .col-8, .col-12 {
 	float: left;
@@ -3065,16 +3046,6 @@ h2.comments-title {
 	.site-boxed .featured-image {
 	margin-bottom: 40px;
 	}
-	/* Widgets Style */
-	.widget-minimal .widget_designlab_image img {
-	margin-left: 0;
-	margin-right: 0;
-	}
-	.widget-minimal .widget-profile img.size-thumbnail {
-	max-width: 100px;
-	float: left;
-	margin: 0 15px 5px 0;
-	}
 }
 
 @media screen and (min-width: 1440px) {
@@ -3083,10 +3054,10 @@ h2.comments-title {
 	max-width: 1140px;
 	}
 	.content-area {
-	width: 740px;
+	width: 64.9123%; /* 740px */
 	}
 	.sidebar {
-	width: 340px;
+	width: 29.8246%; /* 340px */
 	}
 	/* Content */
 	.page .hentry,
@@ -3140,11 +3111,8 @@ h2.comments-title {
 	.site-boxed .sidebar {
 	width: 29.6297%;
 	}
-	/* Widgets Style */
+	/* Widget Styles */
 	.widget-minimal .widget {
 	margin-bottom: 30px;
-	}
-	.widget-minimal .widget-profile img.size-thumbnail {
-	max-width: 120px;
 	}
 }

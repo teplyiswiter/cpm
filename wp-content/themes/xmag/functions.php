@@ -52,14 +52,10 @@ function xmag_setup() {
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
 	 */
-	add_theme_support( 'html5', array(
-		'search-form', 'comment-form', 'comment-list', 'gallery', 'caption',
-	) );
-
+	add_theme_support( 'html5', array( 'comment-form', 'comment-list', 'gallery', 'caption' ) );
+	
 	// Enable support for Post Formats
-	add_theme_support( 'post-formats', array(
-		'audio', 'gallery', 'image', 'link', 'quote', 'status', 'video',
-	) );
+	add_theme_support( 'post-formats', array( 'audio', 'gallery', 'image', 'link', 'quote', 'status', 'video' ) );
 	
 	// Custom template tags for this theme
 	require get_template_directory() . '/inc/template-tags.php';	
@@ -69,7 +65,7 @@ function xmag_setup() {
 	
 	// Set up the WordPress Custom Background Feature.
 	$defaults = array(
-    'default-color'	=> 'f2f2f2',
+    'default-color'	=> 'ffffff',
     'default-image'	=> '',
 	);
 	add_theme_support( 'custom-background', $defaults );
@@ -140,7 +136,7 @@ function xmag_scripts() {
 	wp_enqueue_style( 'xmag-icons', get_template_directory_uri() . '/fonts/simple-line-icons.css', array(), '2.2.2' );
 	
 	// Loads our main stylesheet.
-	wp_enqueue_style( 'xmag-style', get_stylesheet_uri(), array(), '1.2.0' );
+	wp_enqueue_style( 'xmag-style', get_stylesheet_uri(), array(), '1.2.3' );
 	
 	// Loads our main js.
 	wp_enqueue_script( 'xmag-js', get_template_directory_uri() . '/js/main.js', array( 'jquery' ), '20170211', true );
@@ -248,7 +244,7 @@ function xmag_custom_excerpt_length( $length ) {
 	} else {
 		$excerpt_length = 30;
 	}
-    return $excerpt_length;
+    return intval($excerpt_length);
 }
 add_filter( 'excerpt_length', 'xmag_custom_excerpt_length', 999 );
 
@@ -282,7 +278,7 @@ function xmag_thumb_size() {
 			$thumb_size = 'medium';
 		}
 	}
-	return $thumb_size;
+	return esc_attr( $thumb_size );
 }
 
 
@@ -292,7 +288,7 @@ function xmag_thumb_size() {
 function xmag_credits() {
 	$website_credits = '';
 	$website_author = get_bloginfo('name');
-	$website_date =  date ('Y');
+	$website_date = date_i18n(__( 'Y', 'xmag' ) );
 	$website_credits = '&copy; ' . $website_date . ' ' . $website_author;	
 	echo esc_html( $website_credits );
 }
@@ -350,47 +346,6 @@ function xmag_header_image() {
 
 
 /**
- * Helper function for getting the script/style `.min` suffix for minified files.
- *
- */
-function xmag_get_min_suffix() {
-	return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-}
-
-
-/**
- * Filters the 'stylesheet_uri' to allow theme developers to offer a minimized version of their main 
- * 'style.css' file.  It will detect if a 'style.min.css' file is available and use it if SCRIPT_DEBUG 
- * is disabled.
- *
- */
-function xmag_min_stylesheet_uri( $stylesheet_uri, $stylesheet_dir_uri ) {
-
-	/* Get the minified suffix. */
-	$suffix = xmag_get_min_suffix();
-
-	/* Use the .min stylesheet if available. */
-	if ( !empty( $suffix ) ) {
-
-		/* Remove the stylesheet directory URI from the file name. */
-		$stylesheet = str_replace( trailingslashit( $stylesheet_dir_uri ), '', $stylesheet_uri );
-
-		/* Change the stylesheet name to 'style.min.css'. */
-		$stylesheet = str_replace( '.css', "{$suffix}.css", $stylesheet );
-
-		/* If the stylesheet exists in the stylesheet directory, set the stylesheet URI to the dev stylesheet. */
-		if ( file_exists( trailingslashit( get_stylesheet_directory() ) . $stylesheet ) )
-			$stylesheet_uri = trailingslashit( $stylesheet_dir_uri ) . $stylesheet;
-	}
-
-	/* Return the theme stylesheet. */
-	return $stylesheet_uri;
-}
-/* Load the development stylsheet in script debug mode. */
-add_filter( 'stylesheet_uri', 'xmag_min_stylesheet_uri', 5, 2 );
-
-
-/**
  * Blog: Posts Templates
  */
 function xmag_blog_post_template() {
@@ -404,7 +359,7 @@ function xmag_blog_post_template() {
 	// Layout 1,2
 	$blog_template = 'content';
 	}
-	return esc_attr($blog_template);
+	return sanitize_file_name($blog_template);
 }
 
 
@@ -426,7 +381,7 @@ function xmag_archive_post_template() {
 			$archive_template = 'content';	
 		}
 	}
-	return esc_attr($archive_template);
+	return sanitize_file_name($archive_template);
 }
 
 
@@ -435,6 +390,6 @@ function xmag_archive_post_template() {
  */
 function xmag_widget_style() {
 	$xmag_widget = get_theme_mod( 'xmag_widget_style', 'grey' );
-	echo 'widget-' . $xmag_widget;
+	echo esc_attr( 'widget-' . $xmag_widget );
 }
 

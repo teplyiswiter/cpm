@@ -58,23 +58,76 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-	// Move Background Color Control to 'xmag_layout_section'
-	$wp_customize->get_control( 'background_color' )->section = 'xmag_layout_section';
-	// Add Callback Function to Background Color
-	$wp_customize->get_control( 'background_color' )->active_callback = 'xmag_has_boxed_layout';
-	// Add Callback Function to Background Section
-	$wp_customize->get_section( 'background_image' )->active_callback = 'xmag_has_boxed_layout';
-		
+
 	// Theme Settings
 	$wp_customize->add_panel( 'xmag_panel', array(
     	'title' => __( 'Theme Settings', 'xmag' ),
 		'priority' => 10,
 	) );
 	
+	// General Section
+	$wp_customize->add_section( 'xmag_general_section', array(
+		'title'       => __( 'General', 'xmag' ),
+		'priority'    => 10,
+		'panel' => 'xmag_panel',
+		'description'	=> __( 'General Settings.', 'xmag' ),
+	) );
+	
+	// Layout Style
+	$wp_customize->add_setting( 'xmag_layout_style', array(
+        'default' => 'site-fullwidth',
+        'type' => 'option',
+		'capability' => 'edit_theme_options',
+        'sanitize_callback' => 'xmag_sanitize_choices',
+    ) );
+   	   	
+	$wp_customize->add_control( 'xmag_layout_style', array(
+	    'label'    => __( 'Layout Style', 'xmag' ),
+	    'section'  => 'xmag_general_section',
+	    'settings' => 'xmag_layout_style',
+	    'priority' => 1,
+	    'type'     => 'select',
+		'choices'  => array(
+			'site-fullwidth' => __('Full Width', 'xmag'),
+			'site-boxed' => __('Boxed', 'xmag'),
+			),
+	) );
+	
+	// Widgets Style
+	$wp_customize->add_setting( 'xmag_widget_style', array(
+        'default' => 'grey',
+        'sanitize_callback' => 'xmag_sanitize_choices',
+    ) );
+   	   	
+	$wp_customize->add_control( 'xmag_widget_style', array(
+	    'label'    => __( 'Widgets Style', 'xmag' ),
+	    'section'  => 'xmag_general_section',
+	    'settings' => 'xmag_widget_style',
+	    'type'     => 'select',
+		'choices'  => array(
+			'grey' => __('Grey', 'xmag'),
+			'white' => __('White', 'xmag'),
+			'minimal' => __('Minimal', 'xmag'),
+			),
+	) );
+	
+	// Read More
+	$wp_customize->add_setting( 'xmag_read_more', array(
+        'default' => '',
+        'sanitize_callback' => 'xmag_sanitize_checkbox',
+    ) );
+   	
+	$wp_customize->add_control( 'xmag_read_more', array(
+	    'label'    => __( 'Display Read More Link', 'xmag' ),
+	    'section'  => 'xmag_general_section',
+	    'settings' => 'xmag_read_more',
+	    'type'     => 'checkbox',
+	) );
+	
 	// Header Section
 	$wp_customize->add_section( 'xmag_header_section', array(
 		'title'       => __( 'Header', 'xmag' ),
-		'priority'    => 10,
+		'priority'    => 15,
 		'panel' => 'xmag_panel',
 	) );
 	
@@ -153,7 +206,7 @@ function xmag_theme_customizer( $wp_customize ) {
 	// Header Image Custom Width
 	$wp_customize->add_setting( 'xmag_header_image_width', array(
         'default' => 1920,
-        'sanitize_callback' => 'xmag_sanitize_integer',
+        'sanitize_callback' => 'absint',
     ) );
 	
 	$wp_customize->add_control( 'xmag_header_image_width', array(
@@ -167,7 +220,7 @@ function xmag_theme_customizer( $wp_customize ) {
 	// Header Image Custom Height
 	$wp_customize->add_setting( 'xmag_header_image_height', array(
         'default' => 360,
-        'sanitize_callback' => 'xmag_sanitize_integer',
+        'sanitize_callback' => 'absint',
     ) );
 	
 	$wp_customize->add_control( 'xmag_header_image_height', array(
@@ -202,67 +255,7 @@ function xmag_theme_customizer( $wp_customize ) {
 	    'settings' => 'xmag_show_header_image',
 	    'type'     => 'checkbox',
 	) );
-	
-	// General Section
-	$wp_customize->add_section( 'xmag_general_section', array(
-		'title'       => __( 'General', 'xmag' ),
-		'priority'    => 15,
-		'panel' => 'xmag_panel',
-		'description'	=> __( 'General Settings.', 'xmag' ),
-	) );
-	
-	// Layout Style
-	$wp_customize->add_setting( 'xmag_layout_style', array(
-        'default' => 'site-fullwidth',
-        'type' => 'option',
-		'capability' => 'edit_theme_options',
-        'sanitize_callback' => 'xmag_sanitize_choices',
-    ) );
-   	   	
-	$wp_customize->add_control( 'xmag_layout_style', array(
-	    'label'    => __( 'Layout Style', 'xmag' ),
-	    'description' => __( 'Choose between Full width or Boxed Layout. If you select Boxed Layout option, you can edit Background Settings.', 'xmag' ),
-	    'section'  => 'xmag_general_section',
-	    'settings' => 'xmag_layout_style',
-	    'priority' => 1,
-	    'type'     => 'select',
-		'choices'  => array(
-			'site-fullwidth' => __('Full Width', 'xmag'),
-			'site-boxed' => __('Boxed', 'xmag'),
-			),
-	) );
-	
-	// Widgets Style
-	$wp_customize->add_setting( 'xmag_widget_style', array(
-        'default' => 'grey',
-        'sanitize_callback' => 'xmag_sanitize_choices',
-    ) );
-   	   	
-	$wp_customize->add_control( 'xmag_widget_style', array(
-	    'label'    => __( 'Widgets Style', 'xmag' ),
-	    'section'  => 'xmag_general_section',
-	    'settings' => 'xmag_widget_style',
-	    'type'     => 'select',
-		'choices'  => array(
-			'grey' => __('Grey', 'xmag'),
-			'white' => __('White', 'xmag'),
-			'minimal' => __('Minimal', 'xmag'),
-			),
-	) );
-	
-	// Read More
-	$wp_customize->add_setting( 'xmag_read_more', array(
-        'default' => '',
-        'sanitize_callback' => 'xmag_sanitize_checkbox',
-    ) );
-   	
-	$wp_customize->add_control( 'xmag_read_more', array(
-	    'label'    => __( 'Display Read More Link', 'xmag' ),
-	    'section'  => 'xmag_general_section',
-	    'settings' => 'xmag_read_more',
-	    'type'     => 'checkbox',
-	) );
-		
+
 	// Blog Section
 	$wp_customize->add_section( 'xmag_blog_section', array(
 		'title'       => __( 'Blog', 'xmag' ),
@@ -293,7 +286,7 @@ function xmag_theme_customizer( $wp_customize ) {
 	// Blog Excerpt Length
 	$wp_customize->add_setting( 'xmag_excerpt_size', array(
         'default' => 25,
-        'sanitize_callback' => 'xmag_sanitize_integer',
+        'sanitize_callback' => 'absint',
     ) );
 	
 	$wp_customize->add_control( 'xmag_excerpt_size', array(
@@ -332,7 +325,7 @@ function xmag_theme_customizer( $wp_customize ) {
 	// Archive Excerpt Length
 	$wp_customize->add_setting( 'xmag_archive_excerpt_size', array(
         'default' => 25,
-        'sanitize_callback' => 'xmag_sanitize_integer',
+        'sanitize_callback' => 'absint',
     ) );
 	
 	$wp_customize->add_control( 'xmag_archive_excerpt_size', array(
@@ -446,7 +439,7 @@ function xmag_theme_customizer( $wp_customize ) {
 
    $wp_customize->add_setting('xmag_links', array(
       'capability' => 'edit_theme_options',
-      'sanitize_callback' => 'xmag_links_sanitize',
+      'sanitize_callback' => 'esc_url_raw',
    ) );
 
    $wp_customize->add_control(new DL_Important_Links($wp_customize, 'xmag_links', array(
@@ -540,7 +533,7 @@ function xmag_sanitize_text( $input ) {
 
 
 /**
- * Strips all of the HTML in the content
+ * Strips all of the HTML in the content.
  *
  */ 
 function xmag_nohtml_sanitize( $input ) {
@@ -549,25 +542,7 @@ function xmag_nohtml_sanitize( $input ) {
 
 
 /**
- * Sanitize xMag Links
- *
- */ 
-function xmag_links_sanitize() {
-	return false;
-}
-
-
-/**
- * Sanitize Numbers
- *
- */
-function xmag_sanitize_integer( $input ) {
-	return intval( $input );
-}
-
-
-/**
- * Checks Main Menu Style
+ * Checks Main Menu Style.
  */
 function xmag_has_custom_menu( $control ) {
     if ( $control->manager->get_setting('xmag_menu_style')->value() == 'custom' ) {
@@ -579,19 +554,7 @@ function xmag_has_custom_menu( $control ) {
 
 
 /**
- * Checks Layout Style
- */
-function xmag_has_boxed_layout( $control ) {
-    if ( $control->manager->get_setting('xmag_layout_style')->value() == 'site-boxed' ) {
-		return true;
-    } else {
-        return false;
-    }
-}
-
-
-/**
- * Checks if Post has Featured Image
+ * Checks if Post has Featured Image.
  */
 function xmag_post_has_featured_image( $control ) {
     if ( $control->manager->get_setting('xmag_post_featured_image')->value() == 1 ) {
@@ -603,7 +566,7 @@ function xmag_post_has_featured_image( $control ) {
 
 
 /**
- * Checks is Page has Featured Image
+ * Checks is Page has Featured Image.
  */
 function xmag_page_has_featured_image( $control ) {
     if ( $control->manager->get_setting('xmag_page_featured_image')->value() == 1 ) {

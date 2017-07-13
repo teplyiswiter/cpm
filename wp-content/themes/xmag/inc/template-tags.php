@@ -52,7 +52,7 @@ function xmag_entry_footer() {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( __( ', ', 'xmag' ) );
 		if ( $categories_list && xmag_categorized_blog() ) {
-			printf( '<span class="cat-links"><span class="icon-folder"></span> ' . __( 'Category: %s', 'xmag' ) . '</span>', $categories_list );
+			printf( '<span class="cat-links"><span class="icon-folder"></span> ' . __( 'Category: %1$s', 'xmag' ) . '</span>', $categories_list );
 		}
 
 		/* translators: used between list items, there is a space after the comma */
