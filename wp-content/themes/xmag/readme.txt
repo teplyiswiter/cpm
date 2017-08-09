@@ -1,7 +1,6 @@
 === xMag ===
-Requires at least: WordPress 4.3
-Tested up to: WordPress 4.7
-Version: 1.1.9
+Requires at least: 4.3
+Tested up to: 4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,12 +16,25 @@ xMag is a simple and easy-to-use magazine WordPress theme. It features a simple 
 4. Click *Activate* to use the theme you just installed.
 
 
-== Copyright, License & Other info ==
-xMag WordPress Theme, Copyright 2016 Design Lab (http://www.designlabthemes.com/)
-xMag is distributed under the terms of the GNU General Public License (http://www.gnu.org/licenses/gpl-2.0.html)
+== Support ==
+Please visit https://wordpress.org/support/theme/xmag/ if you have any questions about the theme.
 
-xMag Theme bundles the following third-party resources:
 
+== Changelog ==
+= 1.0.0 =
+* initial release
+
+= 1.2.1 =
+* Improvements: New WordPress requirements and coding standards
+
+= 1.2.2 =
+* Fix: Background Color
+
+= 1.2.3 =
+* Improvements: Removed minified css
+* Improvements: New WordPress requirements and coding standards
+
+== Resources ==
 * 	The Theme is based on Underscores http://underscores.me/,
 	(C) 2012-2016 Automattic, Inc.,
 	[GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -56,10 +68,6 @@ xMag Theme bundles the following third-party resources:
 	(C) Unsplash https://unsplash.com/
 	Creative Commons Zero
 	http://creativecommons.org/publicdomain/zero/1.0/
-	
-
-Unless otherwise specified, all the theme files, scripts and images are licensed under GNU General Public License. See License URI in style.css for further details.
 
 
-== Support ==
-Please visit https://wordpress.org/support/theme/xmag/ if you have any questions about the theme.
+
