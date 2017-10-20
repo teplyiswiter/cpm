@@ -34,13 +34,6 @@ class Install extends Base {
 	protected static $install = array();
 
 	/**
-	 * Holds loaded API classes.
-	 *
-	 * @var
-	 */
-	private static $loaded_apis;
-
-	/**
 	 * Constructor.
 	 * Need class-wp-upgrader.php for upgrade classes.
 	 *
@@ -48,9 +41,8 @@ class Install extends Base {
 	 * @param array  $wp_cli_config
 	 */
 	public function __construct( $type, $wp_cli_config = array() ) {
+		parent::__construct();
 		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-		self::$loaded_apis = $this->load_apis();
-		$this->install( $type, $wp_cli_config );
 
 		wp_enqueue_script( 'ghu-install', plugins_url( basename( dirname( dirname( __DIR__ ) ) ) . '/js/ghu_install.js' ), array(), false, true );
 	}
@@ -63,12 +55,12 @@ class Install extends Base {
 	 *
 	 * @return bool
 	 */
-	public function install( $type, $wp_cli_config ) {
+	public function install( $type, $wp_cli_config = null ) {
 		$wp_cli = false;
 
 		if ( ! empty( $wp_cli_config['uri'] ) ) {
 			$wp_cli  = true;
-			$headers = Base::parse_header_uri( $wp_cli_config['uri'] );
+			$headers = $this->parse_header_uri( $wp_cli_config['uri'] );
 			$api     = false !== strpos( $headers['host'], '.com' )
 				? rtrim( $headers['host'], '.com' )
 				: rtrim( $headers['host'], '.org' );
@@ -114,7 +106,7 @@ class Install extends Base {
 			/*
 			 * Transform URI to owner/repo
 			 */
-			$headers                      = Base::parse_header_uri( $_POST['github_updater_repo'] );
+			$headers                      = $this->parse_header_uri( $_POST['github_updater_repo'] );
 			$_POST['github_updater_repo'] = $headers['owner_repo'];
 
 			self::$install         = Settings::sanitize( $_POST );
@@ -169,12 +161,12 @@ class Install extends Base {
 			 * Ensures `maybe_authenticate_http()` is available.
 			 */
 			if ( 'bitbucket' === self::$install['github_updater_api'] ) {
-				if ( self::$loaded_apis['bitbucket_api'] instanceof Bitbucket_API ) {
-					self::$install = self::$loaded_apis['bitbucket_api']->remote_install( $headers, self::$install );
+				if ( parent::$installed_apis['bitbucket_api'] ) {
+					self::$install = Singleton::get_instance( 'Bitbucket_API', new \stdClass() )->remote_install( $headers, self::$install );
 				}
 
-				if ( self::$loaded_apis['bitbucket_server_api'] instanceof Bitbucket_Server_API ) {
-					self::$install = self::$loaded_apis['bitbucket_server_api']->remote_install( $headers, self::$install );
+				if ( parent::$installed_apis['bitbucket_server_api'] ) {
+					self::$install = Singleton::get_instance( 'Bitbucket_Server_API', new \stdClass() )->remote_install( $headers, self::$install );
 				}
 			}
 
@@ -183,22 +175,12 @@ class Install extends Base {
 			 * Check for GitLab Self-Hosted.
 			 */
 			if ( 'gitlab' === self::$install['github_updater_api'] ) {
-				if ( self::$loaded_apis['gitlab_api'] instanceof GitLab_API ) {
-					self::$install = self::$loaded_apis['gitlab_api']->remote_install( $headers, self::$install );
+				if ( parent::$installed_apis['gitlab_api'] ) {
+					self::$install = Singleton::get_instance( 'GitLab_API', new \stdClass() )->remote_install( $headers, self::$install );
 				}
 			}
 
 			parent::$options['github_updater_install_repo'] = self::$install['repo'];
-
-			if ( ( defined( 'GITHUB_UPDATER_EXTENDED_NAMING' ) && GITHUB_UPDATER_EXTENDED_NAMING ) &&
-			     'plugin' === $type
-			) {
-				parent::$options['github_updater_install_repo'] = implode( '-', array(
-					self::$install['github_updater_api'],
-					$headers['owner'],
-					self::$install['repo'],
-				) );
-			}
 
 			update_site_option( 'github_updater', Settings::sanitize( parent::$options ) );
 			$url      = self::$install['download_link'];
@@ -243,8 +225,7 @@ class Install extends Base {
 			$upgrader->install( $url );
 
 			// Save branch setting.
-			$branch = new Branch();
-			$branch->set_branch_on_install( self::$install );
+			Singleton::get_instance( 'Branch' )->set_branch_on_install( self::$install );
 		}
 
 		if ( $wp_cli ) {
@@ -342,12 +323,12 @@ class Install extends Base {
 			$type
 		);
 
-		if ( self::$loaded_apis['bitbucket_api'] instanceof Bitbucket_API ) {
-			self::$loaded_apis['bitbucket_api']->add_install_settings_fields( $type );
+		if ( parent::$installed_apis['bitbucket_api'] ) {
+			Singleton::get_instance( 'Bitbucket_API', new \stdClass() )->add_install_settings_fields( $type );
 		}
 
-		if ( self::$loaded_apis['gitlab_api'] instanceof GitLab_API ) {
-			self::$loaded_apis['gitlab_api']->add_install_settings_fields( $type );
+		if ( parent::$installed_apis['gitlab_api'] ) {
+			Singleton::get_instance( 'GitLab_API', new \stdClass() )->add_install_settings_fields( $type );
 		}
 	}
 

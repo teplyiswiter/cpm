@@ -33,20 +33,19 @@ class Basic_Auth_Loader {
 	private static $options;
 
 	/**
-	 * Stores the object calling Basic_Auth_Loader.
+	 * Stores array of git servers requiring Basic Authentication.
 	 *
-	 * @access private
-	 * @var    \stdClass
+	 * @var array
 	 */
-	private static $object;
+	private static $basic_auth_required = array( 'Bitbucket' );
 
 	/**
-	 * Basic_Auth_Loader object.
+	 * Stores the object calling Basic_Auth_Loader.
 	 *
-	 * @access private
-	 * @var    Basic_Auth_Loader $instance
+	 * @access public
+	 * @var    \stdClass
 	 */
-	private static $instance;
+	public $caller;
 
 	/**
 	 * Basic_Auth_Loader constructor.
@@ -59,26 +58,6 @@ class Basic_Auth_Loader {
 		self::$options = empty( $options )
 			? get_site_option( 'github_updater', array() )
 			: $options;
-	}
-
-	/**
-	 * Gets an instance of the Basic_Auth_Loader class.
-	 *
-	 * The Basic_Auth_Loader object can be created/obtained via this
-	 * method - this prevents potential duplicate loading.
-	 *
-	 * @param array $options Additional options to pass to the instance.
-	 *
-	 * @return Basic_Auth_Loader
-	 */
-	public static function instance( $options ) {
-		if ( null === self::$instance ) {
-			self::$instance = new static( $options );
-			$backtrace      = debug_backtrace();
-			self::$object   = $backtrace[1]['object'];
-		}
-
-		return self::$instance;
 	}
 
 	/**
@@ -138,7 +117,7 @@ class Basic_Auth_Loader {
 	 */
 	private function get_credentials( $url ) {
 		$headers      = parse_url( $url );
-		$type         = self::$object;
+		$type         = $this->caller;
 		$username_key = null;
 		$password_key = null;
 		$credentials  = array(
@@ -149,13 +128,37 @@ class Basic_Auth_Loader {
 			'private'       => false,
 		);
 
-		$slug  = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : false;
-		$slug  = isset( $_REQUEST['plugin'] ) && ! $slug ? $_REQUEST['plugin'] : $slug;
-		$slug  = isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : $slug;
+		$slug = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : false;
+		$slug = ! $slug && isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : $slug;
+		$slug = ! $slug && isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : $slug;
+
+		// Set for bulk upgrade.
+		if ( ! $slug ) {
+			$plugins     = isset( $_REQUEST['plugins'] )
+				? array_map( 'dirname', explode( ',', $_REQUEST['plugins'] ) )
+				: array();
+			$themes      = isset( $_REQUEST['themes'] )
+				? explode( ',', $_REQUEST['themes'] )
+				: array();
+			$bulk_update = array_merge( $plugins, $themes );
+			if ( ! empty( $bulk_update ) ) {
+				$slug = array_filter( $bulk_update, function( $e ) use ( $url ) {
+					return false !== strpos( $url, $e );
+				} );
+				$slug = array_pop( $slug );
+			}
+		}
+
+		// Set for Remote Install.
+		$type = isset( $_POST['github_updater_api'], $_POST['github_updater_repo'] ) &&
+		        false !== strpos( $url, basename( $_POST['github_updater_repo'] ) )
+			? $_POST['github_updater_api'] . '_install'
+			: $type;
+
 		$repos = null !== $_REQUEST
 			? array_merge(
-				Plugin::instance()->get_plugin_configs(),
-				Theme::instance()->get_theme_configs()
+				Singleton::get_instance( 'Plugin' )->get_plugin_configs(),
+				Singleton::get_instance( 'Theme' )->get_theme_configs()
 			)
 			: false;
 		$type  = $slug && $repos &&
@@ -166,6 +169,7 @@ class Basic_Auth_Loader {
 		switch ( $type ) {
 			case ( 'bitbucket_plugin' ):
 			case ( 'bitbucket_theme' ):
+			case ( 'bitbucket_install' ):
 			case ( $type instanceof Bitbucket_API ):
 			case ( $type instanceof Bitbucket_Server_API ):
 				$bitbucket_org = 'bitbucket.org' === $headers['host'];
@@ -244,6 +248,45 @@ class Basic_Auth_Loader {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Loads authentication hooks when updating from update-core.php.
+	 *
+	 * @param bool                             $reply
+	 * @param string                           $package Update package URL, unused.
+	 * @param \Plugin_Upgrader|\Theme_Upgrader $class   Upgrader object
+	 *
+	 * @return mixed
+	 */
+	public function upgrader_pre_download( $reply, $package, $class ) {
+		if ( $class instanceof \Plugin_Upgrader &&
+		     property_exists( $class->skin, 'plugin_info' )
+		) {
+			$headers = $class->skin->plugin_info;
+			foreach ( self::$basic_auth_required as $git_server ) {
+				$ghu_header = $headers[ $git_server . ' Plugin URI' ];
+				if ( ! empty( $ghu_header ) ) {
+					$this->load_authentication_hooks();
+					break;
+				}
+			}
+		}
+		if ( $class instanceof \Theme_Upgrader &&
+		     property_exists( $class->skin, 'theme_info' )
+		) {
+			$theme = $class->skin->theme_info;
+			foreach ( self::$basic_auth_required as $git_server ) {
+				$ghu_header = $theme->get( $git_server . ' Theme URI' );
+				if ( ! empty( $ghu_header ) ) {
+					$this->load_authentication_hooks();
+					break;
+				}
+			}
+		}
+		remove_filter( 'upgrader_pre_download', array( &$this, 'upgrader_pre_download' ) );
+
+		return $reply;
 	}
 
 }

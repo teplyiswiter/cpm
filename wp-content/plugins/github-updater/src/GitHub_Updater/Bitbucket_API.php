@@ -31,7 +31,6 @@ class Bitbucket_API extends API implements API_Interface {
 	 * Constructor.
 	 *
 	 * @access public
-	 * @uses   Basic_Auth_Loader::instance()
 	 *
 	 * @param \stdClass $type The repo type.
 	 */
@@ -44,16 +43,33 @@ class Bitbucket_API extends API implements API_Interface {
 				? $branch->cache['current_branch']
 				: $type->branch;
 		}
+		$this->set_default_credentials();
+	}
 
-		Basic_Auth_Loader::instance( parent::$options )->load_authentication_hooks();
-
-		if ( ! isset( self::$options['bitbucket_username'] ) ) {
-			self::$options['bitbucket_username'] = null;
+	/**
+	 * Set default credentials if option not set.
+	 */
+	protected function set_default_credentials() {
+		$set_credentials = false;
+		if ( $this instanceof Bitbucket_API ) {
+			$username = 'bitbucket_username';
+			$password = 'bitbucket_password';
 		}
-		if ( ! isset( self::$options['bitbucket_password'] ) ) {
-			self::$options['bitbucket_password'] = null;
+		if ( $this instanceof Bitbucket_Server_API ) {
+			$username = 'bitbucket_server_username';
+			$password = 'bitbucket_server_password';
 		}
-		add_site_option( 'github_updater', self::$options );
+		if ( ! isset( self::$options[ $username ] ) ) {
+			self::$options[ $username ] = null;
+			$set_credentials            = true;
+		}
+		if ( ! isset( self::$options[ $password ] ) ) {
+			self::$options[ $password ] = null;
+			$set_credentials            = true;
+		}
+		if ( $set_credentials ) {
+			add_site_option( 'github_updater', self::$options );
+		}
 	}
 
 	/**
@@ -213,7 +229,7 @@ class Bitbucket_API extends API implements API_Interface {
 		if ( $response && isset( $response->data ) ) {
 			$file     = $response->data;
 			$parser   = new Readme_Parser( $file );
-			$response = $parser->parse_data( $this );
+			$response = $parser->parse_data();
 			$this->set_repo_cache( 'readme', $response );
 		}
 
@@ -428,7 +444,7 @@ class Bitbucket_API extends API implements API_Interface {
 		add_settings_field(
 			'bitbucket_username',
 			esc_html__( 'Bitbucket Username', 'github-updater' ),
-			array( Settings::instance(), 'token_callback_text' ),
+			array( Singleton::get_instance( 'Settings' ), 'token_callback_text' ),
 			'github_updater_bitbucket_install_settings',
 			'bitbucket_user',
 			array( 'id' => 'bitbucket_username' )
@@ -437,7 +453,7 @@ class Bitbucket_API extends API implements API_Interface {
 		add_settings_field(
 			'bitbucket_password',
 			esc_html__( 'Bitbucket Password', 'github-updater' ),
-			array( Settings::instance(), 'token_callback_text' ),
+			array( Singleton::get_instance( 'Settings' ), 'token_callback_text' ),
 			'github_updater_bitbucket_install_settings',
 			'bitbucket_user',
 			array( 'id' => 'bitbucket_password', 'token' => true )
@@ -465,7 +481,10 @@ class Bitbucket_API extends API implements API_Interface {
 	public function add_repo_setting_field() {
 		$setting_field['page']            = 'github_updater_bitbucket_install_settings';
 		$setting_field['section']         = 'bitbucket_id';
-		$setting_field['callback_method'] = array( Settings::instance(), 'token_callback_checkbox' );
+		$setting_field['callback_method'] = array(
+			Singleton::get_instance( 'Settings' ),
+			'token_callback_checkbox',
+		);
 
 		return $setting_field;
 	}
@@ -602,8 +621,6 @@ class Bitbucket_API extends API implements API_Interface {
 			if ( isset( $install['bitbucket_password'] ) ) {
 				parent::$options['bitbucket_password'] = $install['bitbucket_password'];
 			}
-
-			new Bitbucket_API( new \stdClass() );
 		}
 
 		return $install;
