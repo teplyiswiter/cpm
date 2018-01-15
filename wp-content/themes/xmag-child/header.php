@@ -24,18 +24,18 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'xmag' ); ?></a>
 	
 	<aside id="mobile-header" class="mobile-header">
-		<a class="mobile-menu-toggle" id="mobile-menu-toggle" href="#mobile-nav" title="<?php esc_attr_e( 'Menu', 'xmag' ); ?>"><span class="button-toggle"></span></a>
+		<a class="menu-toggle" id="menu-toggle" href="#" title="<?php esc_attr_e( 'Menu', 'xmag' ); ?>"><span class="button-toggle"></span></a>
 		<a class="mobile-title" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
 	</aside>
-	
-	<nav id="mobile-navigation" class="mobile-navigation" role="navigation"></nav>
+	<div id="mobile-sidebar" class="mobile-sidebar"> 
+		<nav id="mobile-navigation" class="mobile-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Main Menu', 'xmag' ); ?>"></nav>
+	</div>
 
 	<header id="masthead" class="site-header" role="banner">
 		
 		<div class="header-top collapse">
 			<div class="container">
 				<div class="row">
-					<div class="">
 						<div class="site-branding">
 							<?php if ( is_front_page() && is_home() ) : ?>
 									<h1 class="site-title text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
@@ -47,29 +47,40 @@
 							<?php if ( $description || is_customize_preview() ) { ?>
 									<p class="site-description"><?php echo $description; ?></p>
 							<?php } ?>
-						</div><!-- .site-branding -->
-					</div>
-				</div><!-- .row -->
-			</div>
-		</div><!-- Header Top -->
-		
-		<?php if ( get_header_image() ) { xmag_header_image(); } // End header image check ?>
-			
-		<nav id="main-navbar" class="main-navbar">
-			<div class="container">
-				<div id="main-navigation" class="main-navigation">
-					<?php if ( get_theme_mod( 'xmag_home_icon', 1 ) ) : ?>
-						<div class="home-link">
-		                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span class="icon-home"></span></a>
-		                </div>
-					<?php endif; // if xmag_home_icon ?>
-					
-					<?php xmag_menu('main_navigation'); ?>
+						</div>
 				</div>
 			</div>
-		</nav><!-- Main Navbar -->
+		</div><!-- .header-top -->
+		
+		<?php
+		// Header image
+		if ( get_header_image() ) { xmag_header_image();
+		} ?>
+		
+		<div id="main-navbar" class="main-navbar">
+			<div class="container">
+				<?php if ( get_theme_mod( 'xmag_home_icon', 1 ) ) : ?>
+					<div class="home-link">
+	                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><span class="icon-home"></span></a>
+	                </div>
+				<?php endif; // Home icon ?>
+
+				<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Main Menu', 'xmag' ); ?>">
+					<?php 
+						wp_nav_menu( array( 
+							'theme_location' => 'main_navigation', 
+							'menu_id' => 'main-menu', 
+							'menu_class' => 'main-menu', 
+							'container' => false,
+							'fallback_cb' => 'xmag_fallback_menu'
+							) ); 
+						// Main menu
+					?>
+				</nav>
+			</div>
+		</div>
 	
-	</header><!-- #masthead -->
+	</header><!-- .site-header -->
 	
 	<div id="content" class="site-content">
 		<div class="container">
