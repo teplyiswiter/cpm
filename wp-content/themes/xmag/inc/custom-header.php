@@ -63,8 +63,7 @@ function xmag_header_style() {
 		// If the user has set a custom color for the text use that
 		else :
 	?>
-		.site-header .site-title a,
-		.site-header .site-description {
+		.site-header .site-title a {
 			color: #<?php echo esc_attr( $header_text_color ); ?>;
 		}
 	<?php endif; ?>

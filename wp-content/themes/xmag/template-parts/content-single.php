@@ -13,12 +13,13 @@
 	
 		<?php if ( get_theme_mod('xmag_post_featured_image_size', 'default') == 'default' ) : ?>
 		
-			<header class="entry-header has-featured-image">	
+			<header class="entry-header">	
 				<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 				<div class="entry-meta">
-					<?php xmag_posted_on(); ?>
-					<span class="sep">/</span>
-					<?php xmag_entry_comments(); ?>
+					<?php
+						xmag_posted_on();
+						xmag_entry_comments(); 
+					?>
 				</div>
 				<figure class="entry-thumbnail">
 					<?php the_post_thumbnail('large'); ?>
@@ -33,7 +34,6 @@
 			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 			<div class="entry-meta">
 				<?php xmag_posted_on(); ?>
-				<span class="sep">/</span>
 				<?php xmag_entry_comments(); ?>
 			</div>
 		</header><!-- .entry-header -->

@@ -19,7 +19,7 @@ get_header(); ?>
 	$post_template = xmag_blog_post_template();
 	?>
 	
-	<div id="primary" class="content-area test">
+	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
 			<?php if ( have_posts() ) : ?>

@@ -25,8 +25,7 @@
 		<header class="entry-header">
 			<?php if ( 'post' === get_post_type() ) : ?>
 				<div class="entry-meta">
-					<span class="posted-on"><?php the_time('M j, Y') ?></span>
-					<span class="sep"></span>
+					<?php xmag_posted_on(); ?>
 					<span class="category"><?php the_category(' '); ?></span>
 				</div>
 			<?php endif; ?>

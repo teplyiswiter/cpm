@@ -17,10 +17,10 @@ get_header(); ?>
 				<span class="category"><?php the_category(' '); ?></span>
 				<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 				<div class="entry-meta">
-					<span class="icon-clock"></span>
-					<?php the_time( get_option( 'date_format' ) ); ?>
-					<span class="sep"></span>
-					<?php xmag_entry_comments(); ?>
+					<?php
+						xmag_posted_on();
+						xmag_entry_comments(); 
+					?>
 				</div>
 			</header>
 			<div class="cover-bg" style="background-image:url(<?php the_post_thumbnail_url('xmag-thumb'); ?>)"></div>

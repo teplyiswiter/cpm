@@ -10,10 +10,10 @@
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'large-post' ); ?>>
 		<header class="entry-header">
 			<?php if ( 'post' === get_post_type() ) : ?>
-				<span class="entry-category text-center"><?php the_category( ', ' ); ?></span>
+				<span class="category"><?php the_category( ', ' ); ?></span>
 				<?php the_title( sprintf( '<h2 class="entry-title text-center"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 				<div class="entry-meta text-center">
-					<span class="posted-on"><?php the_time( get_option( 'date_format' ) ); ?></span>
+					<?php xmag_time_link(); ?>
 				</div>
 			<?php else : ?>
 				<?php the_title( sprintf( '<h2 class="entry-title text-center"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>

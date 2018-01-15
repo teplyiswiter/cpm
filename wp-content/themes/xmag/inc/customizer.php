@@ -11,7 +11,7 @@
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function xmag_customize_preview_js() {
-	wp_enqueue_script( 'xmag_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20150920', true );
+	wp_enqueue_script( 'xmag_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20171003', true );
 }
 add_action( 'customize_preview_init', 'xmag_customize_preview_js' );
 
@@ -21,36 +21,44 @@ add_action( 'customize_preview_init', 'xmag_customize_preview_js' );
  */
 if ( class_exists( 'WP_Customize_Control' ) ) {
 
-	class DL_Important_Links extends WP_Customize_Control {
+	class Xmag_Important_Links extends WP_Customize_Control {
 
     	public $type = "xmag-important-links";
 	
 		public function render_content() {
         $important_links = array(
+	        'upgrade' => array(
+			'link' => esc_url('https://www.designlabthemes.com/xmag-plus-wordpress-theme/?utm_source=wordpress&utm_campaign=xmag&utm_content=customizer_link'),
+			'text' => __('Try xMag Plus', 'xmag'),
+			),
+			'theme' => array(
+			'link' => esc_url('https://www.designlabthemes.com/xmag-wordpress-theme/'),
+			'text' => __('Theme Homepage', 'xmag'),
+			),
 	        'documentation' => array(
-			'link' => esc_url('http://www.designlabthemes.com/xmag-wordpress-theme/'),
-			'text' => __('Theme Homepage &rarr;', 'xmag'),
+			'link' => esc_url('https://www.designlabthemes.com/xmag-documentation/'),
+			'text' => __('Theme Documentation', 'xmag'),
 			),
 			'rating' => array(
 			'link' => esc_url('https://wordpress.org/support/theme/xmag/reviews/#new-post'),
-			'text' => __('Rate This Theme &rarr;', 'xmag'),
+			'text' => __('Rate This Theme', 'xmag'),
 			),
-			'plus' => array(
-			'link' => esc_url('http://www.designlabthemes.com/xmag-plus-wordpress-theme/?utm_source=xMag%20Theme&utm_medium=WordPress%20Link&utm_campaign=xMag%20Plus'),
-			'text' => __('Try xMag Plus &rarr;', 'xmag'),
+			'twitter' => array(
+			'link' => esc_url('https://twitter.com/designlabthemes'),
+			'text' => __('Follow on Twitter', 'xmag'),
 			)
         );
         foreach ($important_links as $important_link) {
-        	echo '<p><a target="_blank" href="' . esc_url( $important_link['link'] ). '" >' . esc_html($important_link['text']) . ' </a></p>';
+        	echo '<p><a class="button" target="_blank" href="' . esc_url( $important_link['link'] ). '" >' . esc_html($important_link['text']) . ' </a></p>';
         	}
     	}
 	}
 
-} // end if class_exists
+}
 
 
 /**
- * xMag Theme Customizer
+ * Theme Settings
  */
 function xmag_theme_customizer( $wp_customize ) {
 	
@@ -58,7 +66,29 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-
+	
+	// Change Controls Priority
+	$wp_customize->get_control( 'background_color' )->priority  = 2;
+	$wp_customize->get_control( 'header_textcolor' )->priority  = 4;
+	
+	// Rename the label to "Site Title"
+	$wp_customize->get_control( 'header_textcolor' )->label = __( 'Site Title', 'xmag' );
+	
+	// xMag Links
+	$wp_customize->add_section('xmag_links_section', array(
+	  'priority' => 2,
+	  'title' => __('xMag Links', 'xmag'),
+	) );
+	
+	$wp_customize->add_setting('xmag_links', array(
+	  'capability' => 'edit_theme_options',
+	  'sanitize_callback' => 'esc_url_raw',
+	) );
+	
+	$wp_customize->add_control(new Xmag_Important_Links($wp_customize, 'xmag_links', array(
+	  'section' => 'xmag_links_section',
+	) ) );
+	
 	// Theme Settings
 	$wp_customize->add_panel( 'xmag_panel', array(
     	'title' => __( 'Theme Settings', 'xmag' ),
@@ -68,7 +98,7 @@ function xmag_theme_customizer( $wp_customize ) {
 	// General Section
 	$wp_customize->add_section( 'xmag_general_section', array(
 		'title'       => __( 'General', 'xmag' ),
-		'priority'    => 10,
+		'priority'    => 5,
 		'panel' => 'xmag_panel',
 		'description'	=> __( 'General Settings.', 'xmag' ),
 	) );
@@ -84,16 +114,14 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_layout_style', array(
 	    'label'    => __( 'Layout Style', 'xmag' ),
 	    'section'  => 'xmag_general_section',
-	    'settings' => 'xmag_layout_style',
 	    'priority' => 1,
 	    'type'     => 'select',
 		'choices'  => array(
 			'site-fullwidth' => __('Full Width', 'xmag'),
 			'site-boxed' => __('Boxed', 'xmag'),
-			),
-	) );
+	) ) );
 	
-	// Widgets Style
+	// Widget Styles
 	$wp_customize->add_setting( 'xmag_widget_style', array(
         'default' => 'grey',
         'sanitize_callback' => 'xmag_sanitize_choices',
@@ -102,14 +130,12 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_widget_style', array(
 	    'label'    => __( 'Widgets Style', 'xmag' ),
 	    'section'  => 'xmag_general_section',
-	    'settings' => 'xmag_widget_style',
 	    'type'     => 'select',
 		'choices'  => array(
 			'grey' => __('Grey', 'xmag'),
 			'white' => __('White', 'xmag'),
 			'minimal' => __('Minimal', 'xmag'),
-			),
-	) );
+	) ) );
 	
 	// Read More
 	$wp_customize->add_setting( 'xmag_read_more', array(
@@ -120,7 +146,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_read_more', array(
 	    'label'    => __( 'Display Read More Link', 'xmag' ),
 	    'section'  => 'xmag_general_section',
-	    'settings' => 'xmag_read_more',
 	    'type'     => 'checkbox',
 	) );
 	
@@ -140,7 +165,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_menu_style', array(
 	    'label'    => __( 'Main Menu Style', 'xmag' ),
 	    'section'  => 'xmag_header_section',
-	    'settings' => 'xmag_menu_style',
 	    'type'     => 'select',
 		'choices'  => array(
 			'dark' => __('Dark', 'xmag'),
@@ -160,7 +184,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'main_menu_background', array(
 		'description' => __( 'Set a custom background for the Main Menu', 'xmag' ),
 		'section'  => 'xmag_header_section',
-		'settings' => 'main_menu_background',
 		'active_callback' => 'xmag_has_custom_menu',
 	) ) );
 	
@@ -173,7 +196,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_sticky_menu', array(
 	    'label'    => __( 'Sticky Main Menu', 'xmag' ),
 	    'section'  => 'xmag_header_section',
-	    'settings' => 'xmag_sticky_menu',
 	    'type'     => 'checkbox',
 	) );
 	
@@ -186,7 +208,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_home_icon', array(
 	    'label'    => __( 'Display the Home icon in the Main Menu', 'xmag' ),
 	    'section'  => 'xmag_header_section',
-	    'settings' => 'xmag_home_icon',
 	    'type'     => 'checkbox',
 	) );
 	
@@ -199,7 +220,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_show_search', array(
 	    'label'    => __( 'Display Search Form in the Top Menu', 'xmag' ),
 	    'section'  => 'xmag_header_section',
-	    'settings' => 'xmag_show_search',
 	    'type'     => 'checkbox',
 	) );
 	
@@ -213,7 +233,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	    'label'    => __( 'Header Image', 'xmag' ),
 	    'description' => __( 'Width (If you change the size you have to add a new image)', 'xmag' ),
 	    'section'  => 'xmag_header_section',
-	    'settings' => 'xmag_header_image_width',
 	    'type'     => 'number',
 	) );
 	
@@ -226,7 +245,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_header_image_height', array(
 	    'description' => __( 'Height (If you change the size you have to add a new image)', 'xmag' ),
 	    'section'  => 'xmag_header_section',
-	    'settings' => 'xmag_header_image_height',
 	    'type'     => 'number',
 	) );
 	
@@ -239,7 +257,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'show_header_image', array(
 	    'label'    => __( 'Display Header Image on Mobile', 'xmag' ),
 	    'section'  => 'xmag_header_section',
-	    'settings' => 'show_header_image',
 	    'type'     => 'checkbox',
 	) );
 	
@@ -252,7 +269,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_show_header_image', array(
 	    'label'    => __( 'Display Header Image on Front Page Only', 'xmag' ),
 	    'section'  => 'xmag_header_section',
-	    'settings' => 'xmag_show_header_image',
 	    'type'     => 'checkbox',
 	) );
 
@@ -273,7 +289,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_blog', array(
 	    'label'    => __( 'Blog Layout', 'xmag' ),
 	    'section'  => 'xmag_blog_section',
-	    'settings' => 'xmag_blog',
 	    'type'     => 'select',
 		'choices'  => array(
 			'layout1' => __('List: Small Thumbnail + Sidebar', 'xmag'),
@@ -292,7 +307,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_excerpt_size', array(
 	    'label'    => __( 'Excerpt length', 'xmag' ),
 	    'section'  => 'xmag_blog_section',
-	    'settings' => 'xmag_excerpt_size',
 	    'type'     => 'number',
 	) );
 	
@@ -313,14 +327,12 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_archive', array(
 	    'label'    => __( 'Archives Layout', 'xmag' ),
 	    'section'  => 'xmag_archive_section',
-	    'settings' => 'xmag_archive',
 	    'type'     => 'select',
 		'choices'  => array(
 			'layout1' => __('Small Thumbnail + Sidebar', 'xmag'),
 			'layout2' => __('Medium Thumbnail + Sidebar', 'xmag'),
 			'layout3' => __('Classic: Large Posts + Sidebar', 'xmag'),
-			),
-	) );
+	) ) );
 	
 	// Archive Excerpt Length
 	$wp_customize->add_setting( 'xmag_archive_excerpt_size', array(
@@ -331,13 +343,12 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_archive_excerpt_size', array(
 	    'label'    => __( 'Excerpt length', 'xmag' ),
 	    'section'  => 'xmag_archive_section',
-	    'settings' => 'xmag_archive_excerpt_size',
 	    'type'     => 'number',
 	) );
 	
 	// Single Post Section
 	$wp_customize->add_section( 'xmag_post_section', array(
-		'title'       => __( 'Single Post', 'xmag' ),
+		'title'       => __( 'Post', 'xmag' ),
 		'priority'    => 30,
 		'panel' => 'xmag_panel',
 	) );
@@ -351,7 +362,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_post_featured_image', array(
 	    'label'    => __( 'Display Featured Image', 'xmag' ),
 	    'section'  => 'xmag_post_section',
-	    'settings' => 'xmag_post_featured_image',
 	    'type'     => 'checkbox',
 	) );
 	
@@ -364,7 +374,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_post_featured_image_size', array(
 	    'description' => __( 'Featured Image Size', 'xmag' ),
 	    'section'  => 'xmag_post_section',
-	    'settings' => 'xmag_post_featured_image_size',
 	    'type'     => 'radio',
 		'choices'  => array(
 			'default' => __('Default', 'xmag'),
@@ -389,7 +398,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_page_featured_image', array(
 	    'label'    => __( 'Display Featured Image', 'xmag' ),
 	    'section'  => 'xmag_page_section',
-	    'settings' => 'xmag_page_featured_image',
 	    'type'     => 'checkbox',
 	) );
 	
@@ -402,7 +410,6 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_page_featured_image_size', array(
 	    'label'    => __( 'Featured Image Size', 'xmag' ),
 	    'section'  => 'xmag_page_section',
-	    'settings' => 'xmag_page_featured_image_size',
 	    'type'     => 'radio',
 		'choices'  => array(
 			'default' => __('Default', 'xmag'),
@@ -427,27 +434,10 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( 'xmag_scroll_up', array(
 	    'label'    => __( 'Display Scroll Up button', 'xmag' ),
 	    'section'  => 'xmag_footer_section',
-	    'settings' => 'xmag_scroll_up',
 	    'type'     => 'checkbox',
 	) );
-	    	
-    // xMag Links
-    $wp_customize->add_section('xmag_links_section', array(
-      'priority' => 11,
-      'title' => __('xMag Links', 'xmag'),
-   ) );
 
-   $wp_customize->add_setting('xmag_links', array(
-      'capability' => 'edit_theme_options',
-      'sanitize_callback' => 'esc_url_raw',
-   ) );
-
-   $wp_customize->add_control(new DL_Important_Links($wp_customize, 'xmag_links', array(
-      'section' => 'xmag_links_section',
-      'settings' => 'xmag_links',
-   ) ) );
-   
-   // Accent Color
+	// Accent Color
 	$wp_customize->add_setting( 'accent_color', array(
 		'default' => '#e54e53',
 		'type' => 'option', 
@@ -458,7 +448,7 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'accent_color', array(
 		'label' => __( 'Accent Color', 'xmag' ),
 		'section' => 'colors',
-		'settings' => 'accent_color',
+		'priority' => 2,
 	) ) );
 	
 	// Header Background
@@ -472,7 +462,21 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_background', array(
 		'label' => __( 'Header Background', 'xmag' ),
 		'section' => 'colors',
-		'settings' => 'header_background',
+		'priority' => 3,
+	) ) );
+	
+	// Site Tagline Color
+	$wp_customize->add_setting( 'site_tagline_color', array(
+		'default' => '#777777',
+		'type' => 'option', 
+		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'sanitize_hex_color',
+	) );
+	
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'site_tagline_color', array(
+		'label' => __( 'Site Tagline', 'xmag' ),
+		'section' => 'colors',
+		'priority' => 5,
 	) ) );
 	
 	// Footer Background
@@ -486,9 +490,8 @@ function xmag_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'footer_background', array(
 		'label' => __( 'Footer Background', 'xmag' ),
 		'section' => 'colors',
-		'settings' => 'footer_background',
 	) ) );
-    			
+			
 }
 add_action('customize_register', 'xmag_theme_customizer');
 
@@ -602,12 +605,14 @@ function xmag_custom_style() {
 	
 	$accent_color = esc_attr( get_option('accent_color') ); 
 	$header_background = esc_attr( get_option('header_background') );
+	$site_tagline_color = esc_attr( get_option( 'site_tagline_color') );
 	$footer_background = esc_attr( get_option('footer_background') );
 	$main_menu_background = esc_attr( get_option('main_menu_background') );
 	$main_menu_style = get_theme_mod('xmag_menu_style');
 	
 	$custom_style = "";
 	
+	// Show Header Image on Mobile
 	if ( get_theme_mod( 'show_header_image' ) ) {
 		$custom_style .= ".header-image {display: block;}";
 	}
@@ -645,7 +650,44 @@ function xmag_custom_style() {
 			background-color: rgba(0,0,0,.7);
 			}";
 	    }
-	} // if $accent_color
+	}
+	
+	// Header Background
+	if ( $header_background != '' && $header_background != '#ffffff' ) {
+		$custom_style .= "
+		.site-header {
+		background-color: {$header_background};	
+		}";
+		if ( xmag_get_brightness($header_background) > 150) {
+			$custom_style .= "
+			.site-title a, .site-description, .top-navigation > ul > li > a {
+			color: rgba(0,0,0,.8);
+			}
+			.site-title a:hover, .top-navigation > ul > li > a:hover {
+			color: rgba(0,0,0,.6);
+			}";
+		} else {
+			$custom_style .= "
+			.site-title a, .site-description, .top-navigation > ul > li > a {
+			color: #fff;
+			}
+			.site-title a:hover, .top-navigation > ul > li > a:hover {
+			color: rgba(255,255,255,0.8);
+			}
+			.site-header .search-field {
+			border: 0;
+			}
+			.site-header .search-field:focus {
+			border: 0;
+			background-color: rgba(255,255,255,0.9);
+			}";
+		}
+	}
+	
+	// Site Tagline Color
+	if ( $site_tagline_color != '' ) {
+		$custom_style .= ".site-header .site-description {color: {$site_tagline_color};}";
+	}
 	
 	// Footer Background
 	if ( $footer_background != '' ) { 
@@ -689,40 +731,8 @@ function xmag_custom_style() {
 			border-top-color: rgba(255,255,255,.1);
 			}";
 		}
-	} // if $footer_background
+	}
 	
-	// Header Background
-	if ( $header_background != '' && $header_background != '#ffffff' ) {
-		$custom_style .= "
-		.site-header {
-		background-color: {$header_background};	
-		}";
-		if ( xmag_get_brightness($header_background) > 150) {
-			$custom_style .= "
-			.site-title a, .site-description, .top-navigation > ul > li > a {
-			color: rgba(0,0,0,.8);
-			}
-			.site-title a:hover, .top-navigation > ul > li > a:hover {
-			color: rgba(0,0,0,.7);
-			}";
-		} else {
-			$custom_style .= "
-			.site-title a, .site-description, .top-navigation > ul > li > a {
-			color: #fff;
-			}
-			.site-title a:hover, .top-navigation > ul > li > a:hover {
-			color: rgba(255,255,255,0.9);
-			}
-			.site-header .search-field {
-			border: 0;
-			}
-			.site-header .search-field:focus {
-			border: 0;
-			background-color: rgba(255,255,255,0.9);
-			}";
-		}
-	} // if $header_background
-		
 	// Main Menu Custom Background
 	if ( $main_menu_background != '' && $main_menu_style == 'custom' ) {
 	   	$custom_style .= "
@@ -755,7 +765,7 @@ function xmag_custom_style() {
 		if ( xmag_get_brightness($main_menu_background) > 150) {
 			$custom_style .= "
 			.main-menu > li > a, .main-menu ul a, .home-link a,
-			#mobile-header .mobile-title, #mobile-header .mobile-menu-toggle {
+			.mobile-header .mobile-title, .mobile-header .menu-toggle {
 			color: rgba(0,0,0,.9);
 			}
 			.home-link a:hover, .main-menu > li > a:hover,
@@ -775,7 +785,7 @@ function xmag_custom_style() {
 			background-color: rgba(0,0,0,.9);
 			} ";
 		}
-	} // if $main_menu_background
+	}
 	
 	// Main Menu Light
 	if ( $main_menu_style == 'light' ) {
@@ -787,24 +797,21 @@ function xmag_custom_style() {
 		-webkit-box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.03);
 		box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.03);
 		}
-		.main-menu > li > a,
-		.main-navigation .home-link a {
+		.main-menu > li > a, .home-link a {
 		color: #333;
 		border-left: 1px solid #f2f2f2;
 		}
 		.main-menu > li:last-child > a {
 		border-right: 1px solid #f2f2f2;
 		}
-		.main-menu > li > a:hover,
-		.main-navigation .home-link a:hover {
+		.home-link a:hover, .main-menu > li > a:hover,
+		.main-menu > li.current-menu-item > a,
+		.main-menu > li.current_page_item > a{
 		background-color: #fff;
 		color: {$accent_color};
 		}
-		.main-navigation .home-link a:hover:before,
-		.main-menu > li:hover:before,
-		.main-menu > li:active:before,
-		.main-menu > li.current_page_item:before,
-		.main-menu > li.current-menu-item:before {
+		.home-link a:hover:before, .main-menu > li:hover:before, .main-menu > li:active:before,
+		.main-menu > li.current_page_item:before, .main-menu > li.current-menu-item:before {
 		content: '';
 		position: absolute;
 		bottom: 0;
@@ -826,14 +833,14 @@ function xmag_custom_style() {
 		.main-menu ul a:hover {
 		color: {$accent_color};
 		}
-		#mobile-header {
+		.mobile-header {
 		background-color: #fff;
 		border-bottom: 1px solid #eee;
 		-webkit-box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.03);
 		box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.03);
 		}
-		#mobile-header .mobile-title, 
-		#mobile-header .mobile-menu-toggle {
+		.mobile-header .mobile-title, 
+		.mobile-header .menu-toggle {
 		color: #333;
 		}
 		.button-toggle,
@@ -841,7 +848,7 @@ function xmag_custom_style() {
 		.button-toggle:after {
 		background-color: #333;
 		} ";
-	} // if $main_menu_background
+	}
 	
 	if ( $custom_style != '' ) { 
 		wp_add_inline_style( 'xmag-style', $custom_style );

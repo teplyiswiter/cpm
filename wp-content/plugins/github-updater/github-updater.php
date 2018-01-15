@@ -12,7 +12,7 @@
  * Plugin Name:       GitHub Updater
  * Plugin URI:        https://github.com/afragen/github-updater
  * Description:       A plugin to automatically update GitHub, Bitbucket, or GitLab hosted plugins, themes, and language packs. It also allows for remote installation of plugins or themes into WordPress.
- * Version:           7.3.1
+ * Version:           7.4.4
  * Author:            Andy Fragen
  * License:           GNU General Public License v2
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,7 +37,7 @@ if ( version_compare( '5.3.0', PHP_VERSION, '>=' ) ) {
 	?>
 	<div class="error notice is-dismissible">
 		<p>
-			<?php esc_html_e( 'GitHub Updater cannot run on PHP versions older than 5.3.0. Please contact your hosting provider to update your site.', 'github-updater' ); ?>
+			<?php printf( esc_html__( 'GitHub Updater cannot run on PHP versions older than %s. Please contact your hosting provider to update your site.', 'github-updater' ), '5.3.0' ); ?>
 		</p>
 	</div>
 	<?php
@@ -49,10 +49,10 @@ if ( version_compare( '5.3.0', PHP_VERSION, '>=' ) ) {
 load_plugin_textdomain( 'github-updater' );
 
 // Plugin namespace root.
-$root = array( 'Fragen\\GitHub_Updater' => __DIR__ . '/src/GitHub_Updater' );
+$ghu['root'] = array( 'Fragen\\GitHub_Updater' => __DIR__ . '/src/GitHub_Updater' );
 
 // Add extra classes.
-$extra_classes = array(
+$ghu['extra_classes'] = array(
 	'WordPressdotorg\Plugin_Directory\Readme\Parser' => __DIR__ . '/vendor/class-parser.php',
 
 	'Parsedown' => __DIR__ . '/vendor/parsedown/Parsedown.php',
@@ -61,13 +61,13 @@ $extra_classes = array(
 
 // Load Autoloader.
 require_once __DIR__ . '/src/Autoloader.php';
-$loader = 'Fragen\\Autoloader';
-new $loader( $root, $extra_classes );
+$ghu['loader'] = 'Fragen\\Autoloader';
+new $ghu['loader']( $ghu['root'], $ghu['extra_classes'] );
 
 // Instantiate class GitHub_Updater.
-$instantiate = 'Fragen\\GitHub_Updater\\Base';
-$base = new $instantiate;
-$base->run();
+$ghu['instantiate'] = 'Fragen\\GitHub_Updater\\Base';
+$ghu['base']        = new $ghu['instantiate'];
+$ghu['base']->run();
 
 /**
  * Initialize Persist Admin notices Dismissal.

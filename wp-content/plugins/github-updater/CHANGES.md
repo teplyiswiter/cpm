@@ -1,5 +1,31 @@
 #### [unreleased]
 
+#### 7.4.4 / 2017-11-29
+* fixed bug in remote install where Bitbucket credentials weren't transferred to Basic_Auth_Loader, [#630](https://github.com/afragen/github-updater/issues/630)
+
+#### 7.4.3 / 2017-11-07
+* set all extra header values in `Base::parse_extra_headers()`
+* added more error messaging for `class WP_Error`
+* fixed some issues with GitHub Release Assets
+
+#### 7.4.2 / 2017-10-25
+* added check to see if wp-cron is updating and if not send and error message
+* fix for WP-CLI updating for private Bitbucket repos, thanks @v8-ict
+
+#### 7.4.1 / 2017-10-22
+* oops, during refactor of `Install` I copied the incorrect query for GitHub's remote install
+
+#### 7.4.0 / 2017-10-21
+* use wp-cron for background processing of `wp_remote_get()` calls for getting repo data 🚀
+* fixed [#603](https://github.com/afragen/github-updater/issues/603) by not creating generic global variables accidentally
+* fixed issue with remote install of private Bitbucket repos
+* added plugin icons to `update-core.php` page for WP 4.9
+* fixed stale AWS download link for GitHub release asset
+* cache `get_plugins()` and `wp_get_themes()` for short period giving better performance to some admin pages, fixes [#612](https://github.com/afragen/github-updater/issues/612)
+* refactor of methods from `class Base` to `class API`
+* created `class API_PseudoTrait` to share methods of `class API`, workaround for OOP traits
+* fixed removal of stale options
+
 #### 7.3.1 / 2017-09-20
 * removed parent constructor from `Branch`, thanks @fwolfst
 

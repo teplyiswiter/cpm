@@ -24,10 +24,7 @@
 		
 		<header class="entry-header">
 			<div class="entry-meta">
-				<span class="posted-on">
-					<?php the_time( get_option( 'date_format' ) ); ?>
-				</span>
-				<span class="sep"></span>
+				<?php xmag_time_link(); ?>
 				<span class="category"><?php the_category(' '); ?></span>
 			</div>
 			<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
@@ -42,7 +39,6 @@
 					</a>
 				<?php } ?>
 			</p>
-
 		</div><!-- .entry-summary -->
 	
 	</article><!-- #post-## -->
