@@ -75,7 +75,7 @@ final class Xmag_Pro_Customize {
 				array(
 					'title'    => esc_html__( 'xMag Plus', 'xmag' ),
 					'pro_text' => esc_html__( 'View xMag Plus', 'xmag' ),
-					'pro_url'  => 'https://www.designlabthemes.com/xmag-plus-wordpress-theme/',
+					'pro_url'  => 'https://www.designlabthemes.com/xmag-plus-wordpress-theme/?utm_source=wordpress&utm_campaign=xmag&utm_content=customizer_button',
 					'priority' => 1
 				)
 			)

@@ -43,9 +43,9 @@
 						<div class="site-info">
 							<?php xmag_credits(); ?>
 							<span class="sep">/</span>
-							<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'xmag' ) ); ?>"><?php printf( __( 'Powered by %s', 'xmag' ), 'WordPress' ); ?></a>
-							<span class="sep"> / </span>
-							<a href="<?php echo esc_url( __( 'http://www.designlabthemes.com/', 'xmag' ) ); ?>"><?php printf( __( 'Theme by %s', 'xmag' ), 'Design Lab' ); ?></a>
+							<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'xmag' ) ); ?>"><?php printf( __( 'Powered by %s', 'xmag' ), 'WordPress' ); ?></a>
+							<span class="sep">/</span>
+							<a href="<?php echo esc_url( __( 'https://www.designlabthemes.com/', 'xmag' ) ); ?>" rel="nofollow"><?php printf( __( 'Theme by %s', 'xmag' ), 'Design Lab' ); ?></a>
 						</div>
 					</div>
 					<div class="col-6">

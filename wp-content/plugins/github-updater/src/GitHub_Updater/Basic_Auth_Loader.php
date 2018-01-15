@@ -55,7 +55,7 @@ class Basic_Auth_Loader {
 	 * @param array $options Options to pass to the updater.
 	 */
 	public function __construct( $options ) {
-		self::$options = empty( $options )
+		static::$options = empty( $options )
 			? get_site_option( 'github_updater', array() )
 			: $options;
 	}
@@ -128,6 +128,11 @@ class Basic_Auth_Loader {
 			'private'       => false,
 		);
 
+		$repos = array_merge(
+			Singleton::get_instance( 'Plugin' )->get_plugin_configs(),
+			Singleton::get_instance( 'Theme' )->get_theme_configs()
+		);
+
 		$slug = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : false;
 		$slug = ! $slug && isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : $slug;
 		$slug = ! $slug && isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : $slug;
@@ -149,21 +154,25 @@ class Basic_Auth_Loader {
 			}
 		}
 
+		$type = $slug &&
+		        isset( $repos[ $slug ] ) && property_exists( $repos[ $slug ], 'type' )
+			? $repos[ $slug ]->type
+			: $type;
+
+		// Set for WP-CLI.
+		if ( ! $slug ) {
+			foreach ( $repos as $repo ) {
+				if ( property_exists( $repo, 'download_link' ) && $url === $repo->download_link ) {
+					$type = $repo->type;
+					break;
+				}
+			}
+		}
+
 		// Set for Remote Install.
 		$type = isset( $_POST['github_updater_api'], $_POST['github_updater_repo'] ) &&
 		        false !== strpos( $url, basename( $_POST['github_updater_repo'] ) )
 			? $_POST['github_updater_api'] . '_install'
-			: $type;
-
-		$repos = null !== $_REQUEST
-			? array_merge(
-				Singleton::get_instance( 'Plugin' )->get_plugin_configs(),
-				Singleton::get_instance( 'Theme' )->get_theme_configs()
-			)
-			: false;
-		$type  = $slug && $repos &&
-		         isset( $repos[ $slug ] ) && property_exists( $repos[ $slug ], 'type' )
-			? $repos[ $slug ]->type
 			: $type;
 
 		switch ( $type ) {
@@ -178,9 +187,13 @@ class Basic_Auth_Loader {
 				break;
 		}
 
-		if ( isset( self::$options[ $username_key ], self::$options[ $password_key ] ) ) {
-			$credentials['username'] = self::$options[ $username_key ];
-			$credentials['password'] = self::$options[ $password_key ];
+		// @TODO can use `( $this->caller )::$options` in PHP7
+		$caller          = $this->caller;
+		static::$options = $this->caller instanceof Install ? $caller::$options : static::$options;
+
+		if ( isset( static::$options[ $username_key ], static::$options[ $password_key ] ) ) {
+			$credentials['username'] = static::$options[ $username_key ];
+			$credentials['password'] = static::$options[ $password_key ];
 			$credentials['isset']    = true;
 			$credentials['private']  = $this->is_repo_private( $url );
 		}
@@ -203,8 +216,8 @@ class Basic_Auth_Loader {
 		$slug = isset( $_REQUEST['rollback'], $_REQUEST['theme'] ) ? $_REQUEST['theme'] : $slug;
 		$slug = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : $slug;
 
-		if ( $slug && array_key_exists( $slug, self::$options ) &&
-		     1 === (int) self::$options[ $slug ] &&
+		if ( $slug && array_key_exists( $slug, static::$options ) &&
+		     1 === (int) static::$options[ $slug ] &&
 		     false !== stripos( $url, $slug )
 		) {
 			return true;
@@ -218,8 +231,8 @@ class Basic_Auth_Loader {
 		}
 
 		// Used for refreshing cache.
-		foreach ( array_keys( self::$options ) as $option ) {
-			if ( 1 === (int) self::$options[ $option ] &&
+		foreach ( array_keys( static::$options ) as $option ) {
+			if ( 1 === (int) static::$options[ $option ] &&
 			     false !== strpos( $url, $option )
 			) {
 				return true;

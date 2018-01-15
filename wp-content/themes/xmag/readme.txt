@@ -1,6 +1,6 @@
 === xMag ===
 Requires at least: 4.3
-Tested up to: 4.7
+Tested up to: 4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,16 +31,27 @@ Please visit https://wordpress.org/support/theme/xmag/ if you have any questions
 * Fix: Background Color
 
 = 1.2.3 =
-* Improvements: Removed minified css
-* Improvements: New WordPress requirements and coding standards
+* Tweak: Removed minified css
+* Tweak: New WordPress requirements and coding standards
+
+= 1.2.4 =
+* Tweak: normalize.css
+* Tweak: Add nofollow to Theme Author link
+* Tweak: Color Options 
+* Tweak: Mobile Navigation
+* New: Russian Translations
+
+= 1.2.5 =
+* Tweak: Post Meta
+
 
 == Resources ==
 * 	The Theme is based on Underscores http://underscores.me/,
 	(C) 2012-2016 Automattic, Inc.,
 	[GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
 
-* 	normalize.css http://necolas.github.io/normalize.css/,
-	(C) 2012-2016 Nicolas Gallagher and Jonathan Neal,
+* 	normalize.css https://github.com/necolas/normalize.css,
+	(C) Copyright Nicolas Gallagher and Jonathan Neal
 	[MIT](http://opensource.org/licenses/MIT)
 
 *	Simple Line Icons, v2.2.2 - MIT License: https://github.com/thesabbir/simple-line-icons
@@ -69,5 +80,5 @@ Please visit https://wordpress.org/support/theme/xmag/ if you have any questions
 	Creative Commons Zero
 	http://creativecommons.org/publicdomain/zero/1.0/
 
-
+*	Russian Translations by @serenitatis
 

@@ -6,13 +6,6 @@
  * @since xMag 1.0
  */
 
-/**
- * Set the content width based on the theme's design and stylesheet
- */
-if ( ! isset( $content_width ) ) {
-	$content_width = 740; /* pixels */
-}
-
 
 if ( ! function_exists( 'xmag_setup' ) ) :
 /**
@@ -36,6 +29,9 @@ function xmag_setup() {
 	// Enable support for Post Thumbnail
 	add_theme_support( 'post-thumbnails' );
 	add_image_size( 'xmag-thumb', 1200, 520, true );
+	
+	// Set the default content width.
+	$GLOBALS['content_width'] = 740;
 	
 	// This theme styles the visual editor to resemble the theme style
 	add_editor_style( array( 'css/editor-styles.css', xmag_fonts_url() ) );
@@ -129,19 +125,19 @@ endif;
  */
 function xmag_scripts() {
 	
-	// Add custom fonts, used in the main stylesheet.
+	// Add custom fonts, used in the main stylesheet
 	wp_enqueue_style( 'xmag-fonts', xmag_fonts_url(), array(), null );
 	
-	// Add Icons font, used in the main stylesheet.
+	// Add Icons font, used in the main stylesheet
 	wp_enqueue_style( 'xmag-icons', get_template_directory_uri() . '/fonts/simple-line-icons.css', array(), '2.2.2' );
 	
-	// Loads our main stylesheet.
-	wp_enqueue_style( 'xmag-style', get_stylesheet_uri(), array(), '1.2.3' );
+	// Main stylesheet
+	wp_enqueue_style( 'xmag-style', get_stylesheet_uri(), array(), '1.2.5' );
 	
-	// Loads our main js.
-	wp_enqueue_script( 'xmag-js', get_template_directory_uri() . '/js/main.js', array( 'jquery' ), '20170211', true );
+	// Main js
+	wp_enqueue_script( 'xmag-js', get_template_directory_uri() . '/js/main.js', array( 'jquery' ), '20171003', true );
 	
-	// Sticky Menu.
+	// Sticky Menu
 	if ( get_theme_mod( 'xmag_sticky_menu', 0 ) == 1 ) {
 	wp_enqueue_script( 'xmag-sticky-menu', get_template_directory_uri() . '/js/jquery.sticky.js', array( 'jquery' ), '20160906', true );
     wp_enqueue_script( 'xmag-sticky-menu-setting', get_template_directory_uri() . '/js/sticky-setting.js', array( 'xmag-sticky-menu' ), '20160906', true );
@@ -163,7 +159,7 @@ function xmag_widgets_init() {
 	register_sidebar( array(
 		'name'          => __( 'Sidebar', 'xmag' ),
 		'id'            => 'sidebar-1',
-		'description'   => '',
+		'description'   => __( 'Add widgets here to appear in your Sidebar.', 'xmag' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h3 class="widget-title"><span>',
@@ -208,26 +204,13 @@ require get_template_directory() . '/inc/custom-header.php';
 
 
 /**
- * Add Upsell "pro" link to the customizer
+ * Main Menu Fallback
  *
  */
-require_once( trailingslashit( get_template_directory() ) . '/inc/customize-pro/class-customize.php' );
-
-
-/**
- * Main Navigation
- */
-if (!function_exists( 'xmag_menu' ) ) {
-	function xmag_menu( $location ) {
-		
-		if ( has_nav_menu( $location ) ) {
-			wp_nav_menu( array( 'theme_location' => $location, 'container' => false, 'menu_class' => 'main-menu' ) );
-		} else {
-			echo '<ul class="main-menu">';
-			wp_list_pages( 'title_li=' );
-			echo '</ul>';
-		}
-	}
+function xmag_fallback_menu() {
+	echo '<ul class="main-menu">';
+	wp_list_pages( 'title_li=' );
+	echo '</ul>';
 }
 
 
@@ -282,18 +265,6 @@ function xmag_thumb_size() {
 }
 
 
-/**
- * Prints Credits in the Footer
- */
-function xmag_credits() {
-	$website_credits = '';
-	$website_author = get_bloginfo('name');
-	$website_date = date_i18n(__( 'Y', 'xmag' ) );
-	$website_credits = '&copy; ' . $website_date . ' ' . $website_author;	
-	echo esc_html( $website_credits );
-}
-
-
 /** 
  * Add specific CSS class by filter
  *
@@ -316,6 +287,15 @@ function xmag_custom_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'xmag_custom_classes' );
+
+
+/*
+ * Add Widget Styles Class
+ */
+function xmag_widget_style() {
+	$xmag_widget = get_theme_mod( 'xmag_widget_style', 'grey' );
+	echo esc_attr( 'widget-' . $xmag_widget );
+}
 
 
 /**
@@ -385,11 +365,20 @@ function xmag_archive_post_template() {
 }
 
 
-/*
- * Widgets Style
+/**
+ * Prints Credits in the Footer
  */
-function xmag_widget_style() {
-	$xmag_widget = get_theme_mod( 'xmag_widget_style', 'grey' );
-	echo esc_attr( 'widget-' . $xmag_widget );
+function xmag_credits() {
+	$website_credits = '';
+	$website_author = get_bloginfo('name');
+	$website_date = date_i18n(__( 'Y', 'xmag' ) );
+	$website_credits = '&copy; ' . $website_date . ' ' . $website_author;	
+	echo esc_html( $website_credits );
 }
 
+
+/**
+ * Add Upsell "pro" link to the customizer
+ *
+ */
+require_once( trailingslashit( get_template_directory() ) . '/inc/customize-pro/class-customize.php' );

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xMag\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-08 13:42+0000\n"
+"POT-Creation-Date: 2017-11-20 15:07+0000\n"
 "POT-Revision-Date: Fri Jul 08 2016 17:24:50 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -28,7 +28,7 @@ msgid "Meta"
 msgstr ""
 
 #: footer.php:46
-msgid "http://wordpress.org/"
+msgid "https://wordpress.org/"
 msgstr ""
 
 #: footer.php:46
@@ -36,9 +36,8 @@ msgstr ""
 msgid "Powered by %s"
 msgstr ""
 
-#. Author URI of the theme
 #: footer.php:48
-msgid "http://www.designlabthemes.com/"
+msgid "https://www.designlabthemes.com/"
 msgstr ""
 
 #: footer.php:48
@@ -52,6 +51,10 @@ msgstr ""
 
 #: header.php:27
 msgid "Menu"
+msgstr ""
+
+#: header.php:31 header.php:86 functions.php:41
+msgid "Main Menu"
 msgstr ""
 
 #: searchform.php:12
@@ -69,57 +72,57 @@ msgctxt "submit button"
 msgid "Search"
 msgstr ""
 
-#: functions.php:45
-msgid "Main Menu"
-msgstr ""
-
-#: functions.php:46
+#: functions.php:42
 msgid "Top Menu"
 msgstr ""
 
-#: functions.php:47
+#: functions.php:43
 msgid "Footer Menu"
 msgstr ""
 
-#: functions.php:48
+#: functions.php:44
 msgid "Social Menu"
 msgstr ""
 
 #. translators: If there are characters in your language that are not supported by Noto Sans, translate this to 'off'. Do not translate into your own language.
-#: functions.php:93
+#: functions.php:89
 msgctxt "Open Sans: on or off"
 msgid "on"
 msgstr ""
 
 #. translators: If there are characters in your language that are not supported by Noto Serif, translate this to 'off'. Do not translate into your own language.
-#: functions.php:98
+#: functions.php:94
 msgctxt "Roboto: on or off"
 msgid "on"
 msgstr ""
 
 #. translators: To add an additional character subset specific to your language, translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
-#: functions.php:103
+#: functions.php:99
 msgctxt "Add new subset (greek, cyrillic, devanagari, vietnamese)"
 msgid "no-subset"
 msgstr ""
 
-#: functions.php:164
+#: functions.php:160
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:173
+#: functions.php:162
+msgid "Add widgets here to appear in your Sidebar."
+msgstr ""
+
+#: functions.php:169
 msgid "Footer Widget Area Left"
 msgstr ""
 
-#: functions.php:182
+#: functions.php:178
 msgid "Footer Widget Area Center"
 msgstr ""
 
-#: functions.php:191
+#: functions.php:187
 msgid "Footer Widget Area Right"
 msgstr ""
 
-#: functions.php:291
+#: functions.php:374
 msgid "Y"
 msgstr ""
 
@@ -164,9 +167,19 @@ msgid ""
 "below or a search?"
 msgstr ""
 
-#: search.php:22
+#: search.php:21
 #, php-format
 msgid "Search Results for: %s"
+msgstr ""
+
+#: search.php:23 template-parts/content-none.php:15
+msgid "Nothing Found"
+msgstr ""
+
+#: search.php:53
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
 msgstr ""
 
 #: template-parts/content-search.php:41 template-parts/content-large.php:49
@@ -174,23 +187,13 @@ msgstr ""
 msgid "Read more"
 msgstr ""
 
-#: template-parts/content-none.php:14
-msgid "Nothing Found"
-msgstr ""
-
-#: template-parts/content-none.php:20
+#: template-parts/content-none.php:22
 #, php-format
 msgid ""
 "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
-#: template-parts/content-none.php:24
-msgid ""
-"Sorry, but nothing matched your search terms. Please try again with some "
-"different keywords."
-msgstr ""
-
-#: template-parts/content-none.php:29
+#: template-parts/content-none.php:26
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
@@ -201,7 +204,7 @@ msgstr ""
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/content-page.php:46 inc/template-tags.php:71
+#: template-parts/content-page.php:46 inc/template-tags.php:81
 msgid "Edit"
 msgstr ""
 
@@ -223,254 +226,268 @@ msgid "Fullwidth Page Template"
 msgstr ""
 
 #: inc/template-tags.php:30
-#, php-format
-msgctxt "post date"
-msgid "<span class=\"icon-clock\"></span> %s"
+msgctxt "Used before publish date."
+msgid "Posted on"
 msgstr ""
 
-#: inc/template-tags.php:35
-#, php-format
-msgctxt "post author"
-msgid "by %s"
+#: inc/template-tags.php:37 inc/template-tags.php:45
+msgctxt "Used before post author name."
+msgid "Author"
 msgstr ""
 
 #. translators: used between list items, there is a space after the comma
 #. translators: used between list items, there is a space after the comma
-#: inc/template-tags.php:53 inc/template-tags.php:59
+#: inc/template-tags.php:63 inc/template-tags.php:69
 msgid ", "
 msgstr ""
 
-#: inc/template-tags.php:55
+#: inc/template-tags.php:65
 #, php-format
 msgid "Category: %1$s"
 msgstr ""
 
-#: inc/template-tags.php:61
+#: inc/template-tags.php:71
 #, php-format
 msgid "Tag: %1$s"
 msgstr ""
 
-#: inc/template-tags.php:67
+#: inc/template-tags.php:77
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/template-tags.php:67
+#: inc/template-tags.php:77
 msgid "1 Comment"
 msgstr ""
 
-#: inc/template-tags.php:67
+#: inc/template-tags.php:77
 msgid "% Comments"
 msgstr ""
 
 #: inc/customizer.php:32
-msgid "Theme Homepage &rarr;"
+msgid "Try xMag Plus"
 msgstr ""
 
 #: inc/customizer.php:36
-msgid "Rate This Theme &rarr;"
+msgid "Theme Homepage"
 msgstr ""
 
 #: inc/customizer.php:40
-msgid "Try xMag Plus &rarr;"
+msgid "Theme Documentation"
 msgstr ""
 
-#: inc/customizer.php:64
-msgid "Theme Settings"
+#: inc/customizer.php:44
+msgid "Rate This Theme"
 msgstr ""
 
-#: inc/customizer.php:70
-msgid "General"
+#: inc/customizer.php:48
+msgid "Follow on Twitter"
 msgstr ""
 
-#: inc/customizer.php:73
-msgid "General Settings."
+#: inc/customizer.php:75
+msgid "Site Title"
 msgstr ""
 
-#: inc/customizer.php:85
-msgid "Layout Style"
-msgstr ""
-
-#: inc/customizer.php:91
-msgid "Full Width"
-msgstr ""
-
-#: inc/customizer.php:92
-msgid "Boxed"
-msgstr ""
-
-#: inc/customizer.php:103
-msgid "Widgets Style"
-msgstr ""
-
-#: inc/customizer.php:108
-msgid "Grey"
-msgstr ""
-
-#: inc/customizer.php:109
-msgid "White"
-msgstr ""
-
-#: inc/customizer.php:110
-msgid "Minimal"
-msgstr ""
-
-#: inc/customizer.php:121
-msgid "Display Read More Link"
-msgstr ""
-
-#: inc/customizer.php:129
-msgid "Header"
-msgstr ""
-
-#: inc/customizer.php:141
-msgid "Main Menu Style"
-msgstr ""
-
-#: inc/customizer.php:146
-msgid "Dark"
-msgstr ""
-
-#: inc/customizer.php:147
-msgid "Light"
-msgstr ""
-
-#: inc/customizer.php:148
-msgid "Custom Background"
-msgstr ""
-
-#: inc/customizer.php:161
-msgid "Set a custom background for the Main Menu"
-msgstr ""
-
-#: inc/customizer.php:174
-msgid "Sticky Main Menu"
-msgstr ""
-
-#: inc/customizer.php:187
-msgid "Display the Home icon in the Main Menu"
-msgstr ""
-
-#: inc/customizer.php:200
-msgid "Display Search Form in the Top Menu"
-msgstr ""
-
-#: inc/customizer.php:213
-msgid "Header Image"
-msgstr ""
-
-#: inc/customizer.php:214
-msgid "Width (If you change the size you have to add a new image)"
-msgstr ""
-
-#: inc/customizer.php:227
-msgid "Height (If you change the size you have to add a new image)"
-msgstr ""
-
-#: inc/customizer.php:240
-msgid "Display Header Image on Mobile"
-msgstr ""
-
-#: inc/customizer.php:253
-msgid "Display Header Image on Front Page Only"
-msgstr ""
-
-#: inc/customizer.php:261
-msgid "Blog"
-msgstr ""
-
-#: inc/customizer.php:264
-msgid "Settings for Blog Homepage."
-msgstr ""
-
-#: inc/customizer.php:274
-msgid "Blog Layout"
-msgstr ""
-
-#: inc/customizer.php:279
-msgid "List: Small Thumbnail + Sidebar"
-msgstr ""
-
-#: inc/customizer.php:280
-msgid "List: Medium Thumbnail + Sidebar"
-msgstr ""
-
-#: inc/customizer.php:281 inc/customizer.php:321
-msgid "Classic: Large Posts + Sidebar"
-msgstr ""
-
-#: inc/customizer.php:282
-msgid "Full Content Post + Sidebar"
-msgstr ""
-
-#: inc/customizer.php:293 inc/customizer.php:332
-msgid "Excerpt length"
-msgstr ""
-
-#: inc/customizer.php:301
-msgid "Categories and Archives"
-msgstr ""
-
-#: inc/customizer.php:304
-msgid "Settings for Category, Tag, Search result, Author and Archive Pages."
-msgstr ""
-
-#: inc/customizer.php:314
-msgid "Archives Layout"
-msgstr ""
-
-#: inc/customizer.php:319
-msgid "Small Thumbnail + Sidebar"
-msgstr ""
-
-#: inc/customizer.php:320
-msgid "Medium Thumbnail + Sidebar"
-msgstr ""
-
-#: inc/customizer.php:340
-msgid "Single Post"
-msgstr ""
-
-#: inc/customizer.php:352 inc/customizer.php:390
-msgid "Display Featured Image"
-msgstr ""
-
-#: inc/customizer.php:365 inc/customizer.php:403
-msgid "Featured Image Size"
-msgstr ""
-
-#: inc/customizer.php:370 inc/customizer.php:408
-msgid "Default"
-msgstr ""
-
-#: inc/customizer.php:371 inc/customizer.php:409
-msgid "Full Width (images must be at least 1120px)"
-msgstr ""
-
-#: inc/customizer.php:378
-msgid "Page"
-msgstr ""
-
-#: inc/customizer.php:416
-msgid "Footer"
-msgstr ""
-
-#: inc/customizer.php:428
-msgid "Display Scroll Up button"
-msgstr ""
-
-#: inc/customizer.php:437
+#: inc/customizer.php:80
 msgid "xMag Links"
 msgstr ""
 
-#: inc/customizer.php:459
+#: inc/customizer.php:94
+msgid "Theme Settings"
+msgstr ""
+
+#: inc/customizer.php:100
+msgid "General"
+msgstr ""
+
+#: inc/customizer.php:103
+msgid "General Settings."
+msgstr ""
+
+#: inc/customizer.php:115
+msgid "Layout Style"
+msgstr ""
+
+#: inc/customizer.php:120
+msgid "Full Width"
+msgstr ""
+
+#: inc/customizer.php:121
+msgid "Boxed"
+msgstr ""
+
+#: inc/customizer.php:131
+msgid "Widgets Style"
+msgstr ""
+
+#: inc/customizer.php:135
+msgid "Grey"
+msgstr ""
+
+#: inc/customizer.php:136
+msgid "White"
+msgstr ""
+
+#: inc/customizer.php:137
+msgid "Minimal"
+msgstr ""
+
+#: inc/customizer.php:147
+msgid "Display Read More Link"
+msgstr ""
+
+#: inc/customizer.php:154
+msgid "Header"
+msgstr ""
+
+#: inc/customizer.php:166
+msgid "Main Menu Style"
+msgstr ""
+
+#: inc/customizer.php:170
+msgid "Dark"
+msgstr ""
+
+#: inc/customizer.php:171
+msgid "Light"
+msgstr ""
+
+#: inc/customizer.php:172
+msgid "Custom Background"
+msgstr ""
+
+#: inc/customizer.php:185
+msgid "Set a custom background for the Main Menu"
+msgstr ""
+
+#: inc/customizer.php:197
+msgid "Sticky Main Menu"
+msgstr ""
+
+#: inc/customizer.php:209
+msgid "Display the Home icon in the Main Menu"
+msgstr ""
+
+#: inc/customizer.php:221
+msgid "Display Search Form in the Top Menu"
+msgstr ""
+
+#: inc/customizer.php:233
+msgid "Header Image"
+msgstr ""
+
+#: inc/customizer.php:234
+msgid "Width (If you change the size you have to add a new image)"
+msgstr ""
+
+#: inc/customizer.php:246
+msgid "Height (If you change the size you have to add a new image)"
+msgstr ""
+
+#: inc/customizer.php:258
+msgid "Display Header Image on Mobile"
+msgstr ""
+
+#: inc/customizer.php:270
+msgid "Display Header Image on Front Page Only"
+msgstr ""
+
+#: inc/customizer.php:277
+msgid "Blog"
+msgstr ""
+
+#: inc/customizer.php:280
+msgid "Settings for Blog Homepage."
+msgstr ""
+
+#: inc/customizer.php:290
+msgid "Blog Layout"
+msgstr ""
+
+#: inc/customizer.php:294
+msgid "List: Small Thumbnail + Sidebar"
+msgstr ""
+
+#: inc/customizer.php:295
+msgid "List: Medium Thumbnail + Sidebar"
+msgstr ""
+
+#: inc/customizer.php:296 inc/customizer.php:334
+msgid "Classic: Large Posts + Sidebar"
+msgstr ""
+
+#: inc/customizer.php:297
+msgid "Full Content Post + Sidebar"
+msgstr ""
+
+#: inc/customizer.php:308 inc/customizer.php:344
+msgid "Excerpt length"
+msgstr ""
+
+#: inc/customizer.php:315
+msgid "Categories and Archives"
+msgstr ""
+
+#: inc/customizer.php:318
+msgid "Settings for Category, Tag, Search result, Author and Archive Pages."
+msgstr ""
+
+#: inc/customizer.php:328
+msgid "Archives Layout"
+msgstr ""
+
+#: inc/customizer.php:332
+msgid "Small Thumbnail + Sidebar"
+msgstr ""
+
+#: inc/customizer.php:333
+msgid "Medium Thumbnail + Sidebar"
+msgstr ""
+
+#: inc/customizer.php:351
+msgid "Post"
+msgstr ""
+
+#: inc/customizer.php:363 inc/customizer.php:399
+msgid "Display Featured Image"
+msgstr ""
+
+#: inc/customizer.php:375 inc/customizer.php:411
+msgid "Featured Image Size"
+msgstr ""
+
+#: inc/customizer.php:379 inc/customizer.php:415
+msgid "Default"
+msgstr ""
+
+#: inc/customizer.php:380 inc/customizer.php:416
+msgid "Full Width (images must be at least 1120px)"
+msgstr ""
+
+#: inc/customizer.php:387
+msgid "Page"
+msgstr ""
+
+#: inc/customizer.php:423
+msgid "Footer"
+msgstr ""
+
+#: inc/customizer.php:435
+msgid "Display Scroll Up button"
+msgstr ""
+
+#: inc/customizer.php:449
 msgid "Accent Color"
 msgstr ""
 
-#: inc/customizer.php:473
+#: inc/customizer.php:463
 msgid "Header Background"
 msgstr ""
 
-#: inc/customizer.php:487
+#: inc/customizer.php:477
+msgid "Site Tagline"
+msgstr ""
+
+#: inc/customizer.php:491
 msgid "Footer Background"
 msgstr ""
 
@@ -499,4 +516,8 @@ msgstr ""
 
 #. Author of the theme
 msgid "Design Lab"
+msgstr ""
+
+#. Author URI of the theme
+msgid "http://www.designlabthemes.com/"
 msgstr ""
