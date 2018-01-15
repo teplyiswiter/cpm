@@ -1,5 +1,32 @@
 #### [unreleased]
 
+#### 7.3.1 / 2017-09-20
+* removed parent constructor from `Branch`, thanks @fwolfst
+
+#### 7.3.0 / 2017-09-15
+* removed non-constructor stuff from all constructors
+* added `parent::__construct()` to extended classes where needed
+* fixed [#568](https://github.com/afragen/github-updater/issues/586), thanks @bradmkjr
+* fixed multisite bug for theme update rows that I introduced in v7.0.0 :-(
+* fixed PHP notice [#591](https://github.com/afragen/github-updater/issues/591)
+* fixed bug with current branch data being deleted when saving settings with refactor of `Settings::filter_options()`
+* fixed issues with _up to date_ notice during branch switch [#598](https://github.com/afragen/github-updater/issues/598)
+
+#### 7.2.0 / 2017-08-30
+* added a static proxy class to use for creating Singletons
+* fixed Override Dot Org for themes
+* fixed PHP Notice [#584](https://github.com/afragen/github-updater/issues/584)
+* fixed bug introduced in readme.txt parsing [#589](https://github.com/afragen/github-updater/issues/589)
+* fixed bug introduced in v7.0.0 with linter updates to properly display multisite theme updates in themes.php
+* fixed branch setting bug [#592](https://github.com/afragen/github-updater/issues/592) by moving trigger from filter hook to direct call, thanks @rob and @idpaterson
+
+#### 7.1.0 / 2017-08-10
+* always show _Install_ button for single site theme when branch switch is active [#567](https://github.com/afragen/github-updater/issues/567)
+* fixed override of dot org to correctly ignore dot org updates [#581](https://github.com/afragen/github-updater/issues/581)
+* no more extended naming
+* added constant for overriding dot org updates when plugins have identical slugs, `GITHUB_UPDATER_OVERRIDE_DOT_ORG` replacing the `GITHUB_UPDATER_EXTENDED_NAMING` constant
+* added Overriding Dot Org functions for both plugins and themes
+
 #### 7.0.0 / 2017-08-01
 * added support for GitLab Groups [#556](https://github.com/afragen/github-updater/issues/556), thanks @rolandsaven
 * refactored Settings and Install to place API Settings data in individual API classes

@@ -30,13 +30,6 @@ if ( ! defined( 'WPINC' ) ) {
 class Plugin extends Base {
 
 	/**
-	 * Plugin object.
-	 *
-	 * @var Plugin
-	 */
-	private static $instance;
-
-	/**
 	 * Rollback variable
 	 *
 	 * @var string branch
@@ -47,13 +40,12 @@ class Plugin extends Base {
 	 * Constructor.
 	 */
 	public function __construct() {
+		parent::__construct();
 
-		/*
-		 * Get details of installed git sourced plugins.
-		 */
+		// Get details of installed git sourced plugins.
 		$this->config = $this->get_plugin_meta();
 
-		if ( empty( $this->config ) ) {
+		if ( null === $this->config ) {
 			return;
 		}
 	}
@@ -68,29 +60,12 @@ class Plugin extends Base {
 	}
 
 	/**
-	 * The Plugin object can be created/obtained via this
-	 * method - this prevents unnecessary work in rebuilding the object and
-	 * querying to construct a list of categories, etc.
-	 *
-	 * @return Plugin $instance
-	 */
-	public static function instance() {
-		if ( null === self::$instance ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
-
-	/**
 	 * Get details of Git-sourced plugins from those that are installed.
 	 *
 	 * @return array Indexed array of associative arrays of plugin details.
 	 */
 	protected function get_plugin_meta() {
-		/*
-		 * Ensure get_plugins() function is available.
-		 */
+		// Ensure get_plugins() function is available.
 		include_once ABSPATH . '/wp-admin/includes/plugin.php';
 
 		$plugins     = get_plugins();
@@ -147,21 +122,22 @@ class Plugin extends Base {
 					? parent::$options[ $current_branch ]
 					: false;
 
-				$git_plugin['type']                = $repo_parts['type'];
-				$git_plugin['uri']                 = $header['base_uri'] . '/' . $header['owner_repo'];
-				$git_plugin['enterprise']          = $header['enterprise_uri'];
-				$git_plugin['enterprise_api']      = $header['enterprise_api'];
-				$git_plugin['owner']               = $header['owner'];
-				$git_plugin['repo']                = $header['repo'];
-				$git_plugin['extended_repo']       = implode( '-', array(
+				$git_plugin['type']           = $repo_parts['type'];
+				$git_plugin['uri']            = $header['base_uri'] . '/' . $header['owner_repo'];
+				$git_plugin['enterprise']     = $header['enterprise_uri'];
+				$git_plugin['enterprise_api'] = $header['enterprise_api'];
+				$git_plugin['owner']          = $header['owner'];
+				$git_plugin['repo']           = $header['repo'];
+				$git_plugin['branch']         = $branch ?: 'master';
+				$git_plugin['slug']           = $plugin;
+				$git_plugin['local_path']     = WP_PLUGIN_DIR . '/' . $header['repo'] . '/';
+
+				// @TODO remove extended naming stuff
+				$git_plugin['extended_repo'] = implode( '-', array(
 					$repo_parts['git_server'],
 					str_replace( '/', '-', $header['owner'] ),
 					$header['repo'],
 				) );
-				$git_plugin['branch']              = $branch ?: 'master';
-				$git_plugin['slug']                = $plugin;
-				$git_plugin['local_path']          = WP_PLUGIN_DIR . '/' . $header['repo'] . '/';
-				$git_plugin['local_path_extended'] = WP_PLUGIN_DIR . '/' . $git_plugin['extended_repo'] . '/';
 
 				$plugin_data                           = get_plugin_data( WP_PLUGIN_DIR . '/' . $git_plugin['slug'] );
 				$git_plugin['author']                  = $plugin_data['AuthorName'];
@@ -236,8 +212,7 @@ class Plugin extends Base {
 	 * @return bool
 	 */
 	public function plugin_branch_switcher( $plugin_file, $plugin_data ) {
-		$options = get_site_option( 'github_updater' );
-		if ( empty( $options['branch_switch'] ) ) {
+		if ( empty( self::$options['branch_switch'] ) ) {
 			return false;
 		}
 
@@ -256,9 +231,8 @@ class Plugin extends Base {
 		}
 
 		// Get current branch.
-		$branch = new Branch();
 		$repo   = $this->config[ $plugin['repo'] ];
-		$branch = $branch->get_current_branch( $repo );
+		$branch = Singleton::get_instance( 'Branch' )->get_current_branch( $repo );
 
 		$branch_switch_data                      = array();
 		$branch_switch_data['slug']              = $plugin['repo'];
@@ -288,8 +262,6 @@ class Plugin extends Base {
 	public function plugin_row_meta( $links, $file ) {
 		$regex_pattern = '/<a href="(.*)">(.*)<\/a>/';
 		$repo          = dirname( $file );
-		$slugs         = $this->get_repo_slugs( $repo );
-		$repo          = ! empty( $slugs ) ? $slugs['repo'] : null;
 
 		/*
 		 * Sanity check for some commercial plugins.
@@ -349,12 +321,7 @@ class Plugin extends Base {
 			return $false;
 		}
 
-		/*
-		 * Fix for extended naming.
-		 */
-		$repos          = $this->get_repo_slugs( $plugin->repo );
-		$response->slug = ( $response->slug === $repos['extended_repo'] ) ? $repos['repo'] : $plugin->repo;
-
+		$response->slug          = $plugin->repo;
 		$response->plugin_name   = $plugin->name;
 		$response->name          = $plugin->name;
 		$response->author        = $plugin->author;
@@ -400,40 +367,43 @@ class Plugin extends Base {
 					'package'     => $plugin->download_link,
 					'branch'      => $plugin->branch,
 					'branches'    => array_keys( $plugin->branches ),
+					'type'        => $plugin->type,
 				);
 
-				/*
-				 * Skip on branch switching or rollback.
-				 */
-				if ( $this->tag &&
-				     ( isset( $_GET['plugin'], $_GET['rollback'] ) && $plugin->slug === $_GET['plugin'] )
-				) {
-					continue;
-				}
-
-				/*
-				 * Skip on RESTful updating.
-				 */
+				// Skip on RESTful updating.
 				if ( isset( $_GET['action'] ) && 'github-updater-update' === $_GET['action'] &&
 				     $response['slug'] === $_GET['plugin']
 				) {
 					continue;
 				}
 
-				/*
-				 * If branch is 'master' and plugin is in wp.org repo then pull update from wp.org
-				 */
+				// If branch is 'master' and plugin is in wp.org repo then pull update from wp.org.
 				if ( $plugin->dot_org && 'master' === $plugin->branch ) {
 					$transient = empty( $transient ) ? get_site_transient( 'update_plugins' ) : $transient;
-					if ( isset( $transient->response[ $plugin->slug ] ) &&
-					     ! isset( $transient->response[ $plugin->slug ]->id )
-					) {
+					if ( isset( $transient->response[ $plugin->slug ], $transient->response[ $plugin->slug ]->type ) ) {
 						unset( $transient->response[ $plugin->slug ] );
 					}
-					continue;
+					if ( ! $this->tag ) {
+						continue;
+					}
 				}
 
 				$transient->response[ $plugin->slug ] = (object) $response;
+			}
+
+			// Unset if override dot org AND same slug on dot org.
+			if ( isset( $transient->response[ $plugin->slug ] ) &&
+			     ! isset( $transient->response[ $plugin->slug ]->type ) &&
+			     $this->is_override_dot_org()
+			) {
+				unset( $transient->response[ $plugin->slug ] );
+			}
+
+			// Set transient on rollback.
+			if ( $this->tag &&
+			     ( isset( $_GET['plugin'], $_GET['rollback'] ) && $plugin->slug === $_GET['plugin'] )
+			) {
+				$transient->response[ $plugin->slug ] = $this->set_rollback_transient( 'plugin', $plugin );
 			}
 		}
 

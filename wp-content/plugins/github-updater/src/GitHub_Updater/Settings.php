@@ -28,25 +28,11 @@ if ( ! defined( 'WPINC' ) ) {
 class Settings extends Base {
 
 	/**
-	 * Settings object.
-	 *
-	 * @var Settings $instance
-	 */
-	private static $instance;
-
-	/**
 	 * Holds the plugin basename.
 	 *
 	 * @var string
 	 */
 	private $ghu_plugin_name = 'github-updater/github-updater.php';
-
-	/**
-	 * Holds loaded API classes.
-	 *
-	 * @var
-	 */
-	private static $loaded_apis;
 
 	/**
 	 * Supported remote management services.
@@ -61,27 +47,29 @@ class Settings extends Base {
 	);
 
 	/**
-	 * Start up.
+	 * Constructor.
 	 */
 	public function __construct() {
+		parent::__construct();
+		$this->refresh_caches();
 		$this->ensure_api_key_is_set();
 		$this->load_options();
-		self::$loaded_apis = $this->load_apis();
-		$this->load_hooks();
 	}
 
 	/**
-	 * The Settings object can be created/obtained via this
-	 * method - this prevents potential duplicate loading.
-	 *
-	 * @return Settings $instance
+	 * Check for cache refresh.
 	 */
-	public static function instance() {
-		if ( null === self::$instance ) {
-			self::$instance = new self();
+	protected function refresh_caches() {
+		if ( isset( $_POST['ghu_refresh_cache'] ) && ! ( $this instanceof Messages ) ) {
+			$this->delete_all_cached_data();
 		}
+	}
 
-		return self::$instance;
+	/**
+	 * Let's get going.
+	 */
+	public function run() {
+		$this->load_hooks();
 	}
 
 	/**
@@ -156,8 +144,8 @@ class Settings extends Base {
 	 * @return array $gits
 	 */
 	private function installed_git_repos() {
-		$plugins = Plugin::instance()->get_plugin_configs();
-		$themes  = Theme::instance()->get_theme_configs();
+		$plugins = Singleton::get_instance( 'Plugin' )->get_plugin_configs();
+		$themes  = Singleton::get_instance( 'Theme' )->get_theme_configs();
 
 		$repos = array_merge( $plugins, $themes );
 		$gits  = array_map( function( $e ) {
@@ -292,10 +280,10 @@ class Settings extends Base {
 
 			<?php
 			if ( 'github_updater_install_plugin' === $tab ) {
-				new Install( 'plugin' );
+				Singleton::get_instance( 'Install' )->install( 'plugin' );
 			}
 			if ( 'github_updater_install_theme' === $tab ) {
-				new Install( 'theme' );
+				Singleton::get_instance( 'Install' )->install( 'theme' );
 			}
 			?>
 			<?php if ( 'github_updater_remote_management' === $tab ) : ?>
@@ -396,16 +384,16 @@ class Settings extends Base {
 			);
 		}
 
-		if ( self::$loaded_apis['gitlab_api'] instanceof GitLab_API ) {
-			self::$loaded_apis['gitlab_api']->add_settings();
+		if ( parent::$installed_apis['gitlab_api'] ) {
+			Singleton::get_instance( 'GitLab_API', new \stdClass() )->add_settings();
 		}
 
-		if ( self::$loaded_apis['bitbucket_api'] instanceof Bitbucket_API ) {
-			self::$loaded_apis['bitbucket_api']->add_settings();
+		if ( parent::$installed_apis['bitbucket_api'] ) {
+			Singleton::get_instance( 'Bitbucket_API', new \stdClass() )->add_settings();
 		}
 
-		if ( self::$loaded_apis['bitbucket_server_api'] instanceof Bitbucket_Server_API ) {
-			self::$loaded_apis['bitbucket_server_api']->add_settings();
+		if ( parent::$installed_apis['bitbucket_server_api'] ) {
+			Singleton::get_instance( 'Bitbucket_Server_API', new \stdClass() )->add_settings();
 		}
 
 		$this->update_settings();
@@ -416,8 +404,8 @@ class Settings extends Base {
 	 */
 	public function ghu_tokens() {
 		$ghu_options_keys = array();
-		$ghu_plugins      = Plugin::instance()->get_plugin_configs();
-		$ghu_themes       = Theme::instance()->get_theme_configs();
+		$ghu_plugins      = Singleton::get_instance( 'Plugin' )->get_plugin_configs();
+		$ghu_themes       = Singleton::get_instance( 'Theme' )->get_theme_configs();
 		$ghu_tokens       = array_merge( $ghu_plugins, $ghu_themes );
 
 		foreach ( $ghu_tokens as $token ) {
@@ -454,18 +442,18 @@ class Settings extends Base {
 					break;
 				case 'bitbucket':
 					if ( empty( $token->enterprise ) ) {
-						if ( self::$loaded_apis['bitbucket_api'] instanceof Bitbucket_API ) {
-							$repo_setting_field = self::$loaded_apis['bitbucket_api']->add_repo_setting_field();
+						if ( parent::$installed_apis['bitbucket_api'] ) {
+							$repo_setting_field = Singleton::get_instance( 'Bitbucket_API', new \stdClass() )->add_repo_setting_field();
 						}
 					} else {
-						if ( self::$loaded_apis['bitbucket_server_api'] instanceof Bitbucket_Server_API ) {
-							$repo_setting_field = self::$loaded_apis['bitbucket_server_api']->add_repo_setting_field();
+						if ( parent::$installed_apis['bitbucket_server_api'] ) {
+							$repo_setting_field = Singleton::get_instance( 'Bitbucket_Server_API', new \stdClass() )->add_repo_setting_field();
 						}
 					}
 					break;
 				case 'gitlab':
-					if ( self::$loaded_apis['gitlab_api'] instanceof GitLab_API ) {
-						$repo_setting_field = self::$loaded_apis['gitlab_api']->add_repo_setting_field();
+					if ( parent::$installed_apis['gitlab_api'] ) {
+						$repo_setting_field = Singleton::get_instance( 'GitLab_API', new \stdClass() )->add_repo_setting_field();
 					}
 					break;
 			}
@@ -652,16 +640,14 @@ class Settings extends Base {
 	 * Print the GitHub Updater text.
 	 */
 	public function print_section_ghu_settings() {
-		if ( defined( 'GITHUB_UPDATER_EXTENDED_NAMING' ) && GITHUB_UPDATER_EXTENDED_NAMING ) {
-			printf( esc_html__( 'Extended Naming is %sactive%s.', 'github-updater' ), '<strong>', '</strong>' );
+		if ( $this->is_override_dot_org() ) {
+			printf( esc_html__( 'Override Dot Org is %sactive%s.', 'github-updater' ), '<strong>', '</strong>' );
+		} else {
+			printf( esc_html__( 'Override Dot Org is %snot active%s.', 'github-updater' ), '<strong>', '</strong>' );
 		}
-		if ( ! defined( 'GITHUB_UPDATER_EXTENDED_NAMING' ) ||
-		     ( defined( 'GITHUB_UPDATER_EXTENDED_NAMING' ) && ! GITHUB_UPDATER_EXTENDED_NAMING )
-		) {
-			printf( esc_html__( 'Extended Naming is %snot active%s.', 'github-updater' ), '<strong>', '</strong>' );
-		}
-		printf( '<br>' . esc_html__( 'Extended Naming renames plugin directories %s to prevent possible conflicts with WP.org plugins.', 'github-updater' ), '<code>&lt;git&gt;-&lt;owner&gt;-&lt;repo&gt;</code>' );
-		printf( '<br>' . esc_html__( 'Activate Extended Naming by setting %s', 'github-updater' ), '<code>define( \'GITHUB_UPDATER_EXTENDED_NAMING\', true );</code>' );
+		print( '<br>' . esc_html__( 'Override Dot Org will skip any updates from wordpress.org for plugins with identical slugs.', 'github-updater' ) );
+		printf( '<br>' . esc_html__( 'Activate Override Dot Org by setting %s', 'github-updater' ), '<code>define( \'GITHUB_UPDATER_OVERRIDE_DOT_ORG\', true );</code>' );
+
 		print( '<p>' . esc_html__( 'Check to enable branch switching from the Plugins or Themes page.', 'github-updater' ) . '</p>' );
 	}
 
@@ -683,10 +669,9 @@ class Settings extends Base {
 	 * Print the Remote Management text.
 	 */
 	public function print_section_remote_management() {
-		$api_key = get_site_option( 'github_updater_api_key' );
 		$api_url = add_query_arg( array(
 			'action' => 'github-updater-update',
-			'key'    => $api_key,
+			'key'    => self::$api_key,
 		), admin_url( 'admin-ajax.php' ) );
 
 		?>
@@ -768,41 +753,20 @@ class Settings extends Base {
 	}
 
 	/**
-	 * Filter options so that sub-tab options are grouped in single $options variable.
+	 * Filter options to remove unchecked checkbox options.
 	 *
 	 * @access private
 	 * @return array|mixed
 	 */
 	private function filter_options() {
-		$plugins          = Plugin::instance()->get_plugin_configs();
-		$themes           = Theme::instance()->get_theme_configs();
-		$repos            = array_merge( $plugins, $themes );
-		$options          = parent::$options;
-		$non_repo_options = array(
-			'github_access_token',
-			'bitbucket_username',
-			'bitbucket_password',
-			'bitbucket_server_username',
-			'bitbucket_server_password',
-			'gitlab_access_token',
-			'gitlab_enterprise_token',
-			'branch_switch',
-			'db_version',
-		);
+		$options = parent::$options;
 
-		$repos = array_map( function( $e ) {
-			return $e->repo = null;
-		}, $repos );
+		// Remove checkbox options.
+		$options = array_filter( $options, function( $e ) {
+			return $e !== '1';
+		} );
 
-		array_filter( $non_repo_options,
-			function( $e ) use ( &$options ) {
-				unset( $options[ $e ] );
-			}
-		);
-
-		$intersect  = array_intersect( $options, $repos );
-		$db_version = array( 'db_version' => parent::$options['db_version'] );
-		$options    = array_merge( $intersect, $_POST['github_updater'], $db_version );
+		$options = array_merge( $options, $_POST['github_updater'] );
 
 		return $options;
 	}
@@ -928,8 +892,8 @@ class Settings extends Base {
 	 * @param $type
 	 */
 	private function display_ghu_repos( $type ) {
-		$plugins  = Plugin::instance()->get_plugin_configs();
-		$themes   = Theme::instance()->get_theme_configs();
+		$plugins  = Singleton::get_instance( 'Plugin' )->get_plugin_configs();
+		$themes   = Singleton::get_instance( 'Theme' )->get_theme_configs();
 		$repos    = array_merge( $plugins, $themes );
 		$bbserver = array( 'bitbucket', 'bbserver' );
 
@@ -948,7 +912,7 @@ class Settings extends Base {
 				'name'    => $e->name,
 				'private' => isset( $e->is_private ) ? $e->is_private : false,
 				'broken'  => $e->broken,
-				'dot_org' => $e->dot_org,
+				'dot_org' => isset( $e->dot_org ) ? $e->dot_org : false,
 			);
 		}, $type_repos );
 

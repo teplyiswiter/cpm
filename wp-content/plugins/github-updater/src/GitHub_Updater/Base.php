@@ -44,13 +44,6 @@ class Base {
 	protected $repo_api;
 
 	/**
-	 * Class Object for Language Packs.
-	 *
-	 * @var \stdClass
-	 */
-	protected $languages;
-
-	/**
 	 * Variable for setting update transient hours.
 	 *
 	 * @var integer
@@ -77,6 +70,13 @@ class Base {
 	 * @var mixed
 	 */
 	protected static $options_remote;
+
+	/**
+	 * Holds the value for the Remote Management API key.
+	 *
+	 * @var
+	 */
+	protected static $api_key;
 
 	/**
 	 * Holds HTTP error code from API call.
@@ -144,14 +144,15 @@ class Base {
 
 	/**
 	 * Constructor.
-	 * Loads options to private static variable.
 	 */
 	public function __construct() {
-		if ( isset( $_POST['ghu_refresh_cache'] ) && ! ( $this instanceof Messages ) ) {
-			$this->delete_all_cached_data();
-		}
-
 		$this->set_installed_apis();
+	}
+
+	/**
+	 * Let's get going.
+	 */
+	public function run() {
 		$this->load_hooks();
 
 		if ( self::is_wp_cli() ) {
@@ -163,7 +164,7 @@ class Base {
 	/**
 	 * Set boolean for installed API classes.
 	 */
-	private function set_installed_apis() {
+	protected function set_installed_apis() {
 		if ( class_exists( 'Fragen\GitHub_Updater\Bitbucket_Server_API' ) ) {
 			self::$installed_apis['bitbucket_server_api'] = true;
 		}
@@ -176,33 +177,12 @@ class Base {
 	}
 
 	/**
-	 * Load APIs in use into array for later use.
-	 *
-	 * @return array $loaded_apis
-	 */
-	protected function load_apis() {
-		$loaded_apis                  = array();
-		$loaded_apis['bitbucket_api'] = self::$installed_apis['bitbucket_api']
-			? new Bitbucket_API( new \stdClass() )
-			: false;
-
-		$loaded_apis['bitbucket_server_api'] = self::$installed_apis['bitbucket_server_api']
-			? new Bitbucket_Server_API( new \stdClass() )
-			: false;
-
-		$loaded_apis['gitlab_api'] = self::$installed_apis['gitlab_api']
-			? new GitLab_API( new \stdClass() )
-			: false;
-
-		return $loaded_apis;
-	}
-
-	/**
 	 * Load site options.
 	 */
 	protected function load_options() {
 		self::$options        = get_site_option( 'github_updater', array() );
 		self::$options_remote = get_site_option( 'github_updater_remote_management', array() );
+		self::$api_key        = get_site_option( 'github_updater_api_key' );
 	}
 
 	/**
@@ -216,21 +196,25 @@ class Base {
 		add_action( 'wp_ajax_github-updater-update', array( &$this, 'ajax_update' ) );
 		add_action( 'wp_ajax_nopriv_github-updater-update', array( &$this, 'ajax_update' ) );
 
-		/*
-		 * Load hook for shiny updates Basic Authentication headers.
-		 */
+		// Load hook for shiny updates Basic Authentication headers.
 		if ( self::is_doing_ajax() ) {
-			Basic_Auth_Loader::instance( self::$options )->load_authentication_hooks();
+			Singleton::get_instance( 'Basic_Auth_Loader', self::$options )->load_authentication_hooks();
 		}
 
 		add_filter( 'extra_theme_headers', array( &$this, 'add_headers' ) );
 		add_filter( 'extra_plugin_headers', array( &$this, 'add_headers' ) );
 		add_filter( 'upgrader_source_selection', array( &$this, 'upgrader_source_selection' ), 10, 4 );
 
-		/*
-		 * The following hook needed to ensure transient is reset correctly after
-		 * shiny updates.
-		 */
+		// Needed for updating from update-core.php.
+		if ( ! self::is_doing_ajax() ) {
+			add_filter( 'upgrader_pre_download',
+				array(
+					Singleton::get_instance( 'Basic_Auth_Loader', self::$options ),
+					'upgrader_pre_download',
+				), 10, 3 );
+		}
+
+		// The following hook needed to ensure transient is reset correctly after shiny updates.
 		add_filter( 'http_response', array( 'Fragen\\GitHub_Updater\\API', 'wp_update_response' ), 10, 3 );
 	}
 
@@ -244,7 +228,7 @@ class Base {
 		remove_filter( 'http_response', array( 'Fragen\\GitHub_Updater\\API', 'wp_update_response' ) );
 
 		if ( $this->repo_api instanceof Bitbucket_API ) {
-			Basic_Auth_Loader::instance( self::$options )->remove_authentication_hooks();
+			Singleton::get_instance( 'Basic_Auth_Loader', self::$options )->remove_authentication_hooks();
 		}
 	}
 
@@ -252,8 +236,7 @@ class Base {
 	 * Ensure api key is set.
 	 */
 	public function ensure_api_key_is_set() {
-		$api_key = get_site_option( 'github_updater_api_key' );
-		if ( ! $api_key ) {
+		if ( ! self::$api_key ) {
 			update_site_option( 'github_updater_api_key', md5( uniqid( mt_rand(), true ) ) );
 		}
 	}
@@ -326,7 +309,7 @@ class Base {
 		if ( self::$load_repo_meta && is_admin() &&
 		     ! apply_filters( 'github_updater_hide_settings', false )
 		) {
-			Settings::instance();
+			Singleton::get_instance( 'Settings' )->run();
 		}
 
 		return true;
@@ -337,8 +320,7 @@ class Base {
 	 */
 	public function ajax_update() {
 		$this->load_options();
-		$rest_update = new Rest_Update();
-		$rest_update->process_request();
+		Singleton::get_instance( 'Rest_Update' )->process_request();
 	}
 
 	/**
@@ -359,7 +341,7 @@ class Base {
 	public function forced_meta_update_plugins( $true = false ) {
 		if ( self::$load_repo_meta || $true ) {
 			$this->load_options();
-			Plugin::instance()->get_remote_plugin_meta();
+			Singleton::get_instance( 'Plugin' )->get_remote_plugin_meta();
 		}
 	}
 
@@ -371,7 +353,7 @@ class Base {
 	public function forced_meta_update_themes( $true = false ) {
 		if ( self::$load_repo_meta || $true ) {
 			$this->load_options();
-			Theme::instance()->get_remote_theme_meta();
+			Singleton::get_instance( 'Theme' )->get_remote_theme_meta();
 		}
 	}
 
@@ -482,7 +464,7 @@ class Base {
 		$this->$type->watchers             = 0;
 		$this->$type->forks                = 0;
 		$this->$type->open_issues          = 0;
-		$this->$type->requires_wp_version  = '4.4';
+		$this->$type->requires_wp_version  = '4.6';
 		$this->$type->requires_php_version = '5.3';
 		$this->$type->release_asset        = false;
 	}
@@ -549,7 +531,8 @@ class Base {
 			}
 			$this->repo_api->get_remote_tag();
 			$repo->download_link = $this->repo_api->construct_download_link();
-			$this->languages     = new Language_Pack( $repo, new Language_Pack_API( $repo ) );
+			$language_pack       = new Language_Pack( $repo, new Language_Pack_API( $repo ) );
+			$language_pack->run();
 		}
 
 		$this->remove_hooks();
@@ -580,7 +563,7 @@ class Base {
 		 * Rename plugins.
 		 */
 		if ( $upgrader instanceof \Plugin_Upgrader ) {
-			$upgrader_object = Plugin::instance();
+			$upgrader_object = Singleton::get_instance( 'Plugin' );
 			if ( isset( $hook_extra['plugin'] ) ) {
 				$slug       = dirname( $hook_extra['plugin'] );
 				$new_source = trailingslashit( $remote_source ) . $slug;
@@ -591,7 +574,7 @@ class Base {
 		 * Rename themes.
 		 */
 		if ( $upgrader instanceof \Theme_Upgrader ) {
-			$upgrader_object = Theme::instance();
+			$upgrader_object = Singleton::get_instance( 'Theme' );
 			if ( isset( $hook_extra['theme'] ) ) {
 				$slug       = $hook_extra['theme'];
 				$new_source = trailingslashit( $remote_source ) . $slug;
@@ -611,12 +594,13 @@ class Base {
 		 * Remote install source.
 		 */
 		if ( empty( $repo ) && isset( self::$options['github_updater_install_repo'] ) ) {
-			$repo['repo'] = $repo['extended_repo'] = self::$options['github_updater_install_repo'];
+			$repo['repo'] = self::$options['github_updater_install_repo'];
 			$new_source   = trailingslashit( $remote_source ) . self::$options['github_updater_install_repo'];
 		}
 
+		Singleton::get_instance( 'Branch' )->set_branch_on_switch( $slug );
+
 		$new_source = $this->fix_misnamed_directory( $new_source, $remote_source, $upgrader_object, $slug );
-		$new_source = $this->extended_naming( $new_source, $remote_source, $upgrader_object, $repo );
 		$new_source = $this->fix_gitlab_release_asset_directory( $new_source, $remote_source, $upgrader_object, $slug );
 
 		$wp_filesystem->move( $source, $new_source );
@@ -657,34 +641,6 @@ class Base {
 					}
 				}
 			}
-		}
-
-		return $new_source;
-	}
-
-	/**
-	 * Extended naming.
-	 * Only for plugins and not for 'master' === branch && .org hosted.
-	 *
-	 * @param string       $new_source
-	 * @param string       $remote_source
-	 * @param Plugin|Theme $upgrader_object
-	 * @param array        $repo
-	 *
-	 * @return string $new_source
-	 */
-	private function extended_naming( $new_source, $remote_source, $upgrader_object, $repo ) {
-		if ( $upgrader_object instanceof Plugin &&
-		     ( defined( 'GITHUB_UPDATER_EXTENDED_NAMING' ) && GITHUB_UPDATER_EXTENDED_NAMING ) &&
-		     ( ( isset( $upgrader_object->config[ $repo['repo'] ] ) &&
-		         ! $upgrader_object->config[ $repo['repo'] ]->dot_org ) ||
-		       ( $upgrader_object->tag && 'master' !== $upgrader_object->tag ) ||
-		       isset( self::$options['github_updater_install_repo'] ) )
-		) {
-			$new_source = trailingslashit( $remote_source ) . $repo['extended_repo'];
-			printf( esc_html__( 'Rename successful using extended name to %1$s', 'github-updater' ) . '&#8230;<br>',
-				'<strong>' . $repo['extended_repo'] . '</strong>'
-			);
 		}
 
 		return $new_source;
@@ -733,7 +689,9 @@ class Base {
 
 	/**
 	 * Set array with normal and extended repo names.
-	 * Fix name even if installed without renaming originally.
+	 * Fix name even if installed without renaming originally, eg <repo>-master
+	 *
+	 * @TODO remove extended naming stuff
 	 *
 	 * @param string            $slug
 	 * @param Base|Plugin|Theme $upgrader_object
@@ -752,11 +710,12 @@ class Base {
 
 		$rename = isset( $upgrader_object->config[ $slug ] ) ? $slug : $rename;
 		foreach ( (array) $upgrader_object->config as $repo ) {
-			if ( ( $slug === $repo->repo || $slug === $repo->extended_repo ) ||
+			if ( ( $slug === $repo->repo ||
+			       ( isset( $repo->extended_repo ) && $slug === $repo->extended_repo ) ) ||
 			     ( $rename === $repo->owner . '-' . $repo->repo || $rename === $repo->repo )
 			) {
 				$arr['repo']          = $repo->repo;
-				$arr['extended_repo'] = $repo->extended_repo;
+				$arr['extended_repo'] = isset( $repo->extended_repo ) ? $repo->extended_repo : null;
 				break;
 			}
 		}
@@ -850,8 +809,6 @@ class Base {
 
 		if ( is_dir( $this->$type->local_path ) ) {
 			$local_files = scandir( $this->$type->local_path, 0 );
-		} elseif ( is_dir( $this->$type->local_path_extended ) ) {
-			$local_files = scandir( $this->$type->local_path_extended, 0 );
 		}
 
 		$changes = array_intersect( (array) $local_files, $changelogs );
@@ -878,12 +835,6 @@ class Base {
 		$remote_is_newer = version_compare( $type->remote_version, $type->local_version, '>' );
 		$wp_version_ok   = version_compare( $wp_version, $type->requires_wp_version, '>=' );
 		$php_version_ok  = version_compare( PHP_VERSION, $type->requires_php_version, '>=' );
-
-		if ( ( isset( $this->tag ) && $this->tag ) &&
-		     ( isset( $_GET['plugin'] ) && $type->slug === $_GET['plugin'] )
-		) {
-			$remote_is_newer = true;
-		}
 
 		return $remote_is_newer && $wp_version_ok && $php_version_ok;
 	}
@@ -1143,9 +1094,7 @@ class Base {
 		}
 
 		if ( $branch ) {
-			$options = get_site_option( 'github_updater' );
-
-			return empty( $options['branch_switch'] );
+			return empty( self::$options['branch_switch'] );
 		}
 
 		return ( ! isset( $_POST['ghu_refresh_cache'] ) && ! $response && ! $this->can_update( $this->type ) );
@@ -1166,14 +1115,10 @@ class Base {
 			return $response;
 		}
 
-		if ( is_dir( $repo->local_path ) ) {
-			if ( file_exists( $repo->local_path . $file ) ) {
-				$response = file_get_contents( $repo->local_path . $file );
-			}
-		} elseif ( is_dir( $repo->local_path_extended ) ) {
-			if ( file_exists( $repo->local_path_extended . $file ) ) {
-				$response = file_get_contents( $repo->local_path_extended . $file );
-			}
+		if ( is_dir( $repo->local_path ) &&
+		     file_exists( $repo->local_path . $file )
+		) {
+			$response = file_get_contents( $repo->local_path . $file );
 		}
 
 		switch ( $repo->type ) {
@@ -1323,13 +1268,9 @@ class Base {
 			$slug = dirname( $_GET['plugin'] );
 			$type = 'plugin';
 
-			// For extended naming
-			foreach ( (array) $this->config as $repo ) {
-				if ( $slug === $repo->repo || $slug === $repo->extended_repo ) {
-					$slug = $repo->repo;
-					break;
-				}
-			}
+			// For extended naming @TODO remove extended naming stuff
+			$repo = $this->get_repo_slugs( $slug );
+			$slug = ! empty( $repo ) ? $repo['repo'] : $slug;
 		}
 
 		if ( isset( $_GET['theme'] ) && 'upgrade-theme' === $_GET['action'] ) {
@@ -1339,7 +1280,7 @@ class Base {
 
 		if ( ! empty( $slug ) && array_key_exists( $slug, (array) $this->config ) ) {
 			$repo = $this->config[ $slug ];
-			$this->set_rollback_transient( $type, $repo );
+			$this->set_rollback_transient( $type, $repo, true );
 		}
 
 		return $update_data;
@@ -1348,10 +1289,13 @@ class Base {
 	/**
 	 * Update transient for rollback or branch switch.
 	 *
-	 * @param string    $type plugin|theme
+	 * @param string    $type          plugin|theme
 	 * @param \stdClass $repo
+	 * @param bool      $set_transient Default false, if true then set update transient.
+	 *
+	 * @return array $rollback Rollback transient.
 	 */
-	private function set_rollback_transient( $type, $repo ) {
+	protected function set_rollback_transient( $type, $repo, $set_transient = false ) {
 		switch ( $repo->type ) {
 			case 'github_plugin':
 			case 'github_theme':
@@ -1371,27 +1315,31 @@ class Base {
 				break;
 		}
 
-		$transient         = 'update_' . $type . 's';
-		$this->tag         = isset( $_GET['rollback'] ) ? $_GET['rollback'] : null;
-		$slug              = 'plugin' === $type ? $repo->slug : $repo->repo;
-		$updates_transient = get_site_transient( $transient );
-		$rollback          = array(
+		$this->tag = isset( $_GET['rollback'] ) ? $_GET['rollback'] : null;
+		$slug      = 'plugin' === $type ? $repo->slug : $repo->repo;
+		$rollback  = array(
 			$type         => $slug,
 			'new_version' => $this->tag,
 			'url'         => $repo->uri,
 			'package'     => $this->repo_api->construct_download_link( false, $this->tag ),
 			'branch'      => $repo->branch,
 			'branches'    => $repo->branches,
+			'type'        => $repo->type,
 		);
 
 		if ( 'plugin' === $type ) {
-			$rollback['slug']                     = $repo->repo;
-			$updates_transient->response[ $slug ] = (object) $rollback;
+			$rollback['slug'] = $repo->repo;
+			$rollback         = (object) $rollback;
 		}
-		if ( 'theme' === $type ) {
-			$updates_transient->response[ $slug ] = (array) $rollback;
+
+		if ( $set_transient ) {
+			$transient                  = 'update_' . $type . 's';
+			$current                    = get_site_transient( $transient );
+			$current->response[ $slug ] = $rollback;
+			set_site_transient( $transient, $current );
 		}
-		set_site_transient( $transient, $updates_transient );
+
+		return $rollback;
 	}
 
 	/**
@@ -1428,17 +1376,17 @@ class Base {
 			switch ( $transient ) {
 				case 'update_plugins':
 					$this->forced_meta_update_plugins( true );
-					$current = Plugin::instance()->pre_set_site_transient_update_plugins( $current );
+					$current = Singleton::get_instance( 'Plugin' )->pre_set_site_transient_update_plugins( $current );
 					break;
 				case 'update_themes':
 					$this->forced_meta_update_themes( true );
-					$current = Theme::instance()->pre_set_site_transient_update_themes( $current );
+					$current = Singleton::get_instance( 'Theme' )->pre_set_site_transient_update_themes( $current );
 					break;
 				case 'update_core':
 					$this->forced_meta_update_plugins( true );
-					$current = Plugin::instance()->pre_set_site_transient_update_plugins( $current );
+					$current = Singleton::get_instance( 'Plugin' )->pre_set_site_transient_update_plugins( $current );
 					$this->forced_meta_update_themes( true );
-					$current = Theme::instance()->pre_set_site_transient_update_themes( $current );
+					$current = Singleton::get_instance( 'Theme' )->pre_set_site_transient_update_themes( $current );
 					break;
 			}
 			set_site_transient( $transient, $current );
@@ -1547,6 +1495,16 @@ class Base {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Is override dot org option active?
+	 *
+	 * @return bool
+	 */
+	protected function is_override_dot_org() {
+		return ( defined( 'GITHUB_UPDATER_OVERRIDE_DOT_ORG' ) && GITHUB_UPDATER_OVERRIDE_DOT_ORG )
+		       || ( defined( 'GITHUB_UPDATER_EXTENDED_NAMING' ) && GITHUB_UPDATER_EXTENDED_NAMING );
 	}
 
 }
