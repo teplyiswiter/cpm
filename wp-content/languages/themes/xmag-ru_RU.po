@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-13 17:07+0300\n"
 "POT-Revision-Date: Fri Jul 08 2016 17:24:50 GMT+0200 (CEST)\n"
-"PO-Revision-Date: 2017-07-13 17:45+0300\n"
+"PO-Revision-Date: 2018-01-15 15:05+0200\n"
 "Language-Team: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
@@ -62,7 +62,7 @@ msgstr ""
 #: searchform.php:13
 msgctxt "placeholder"
 msgid "Search &hellip;"
-msgstr ""
+msgstr "Поиск &hellip;"
 
 #: searchform.php:15
 msgctxt "submit button"
