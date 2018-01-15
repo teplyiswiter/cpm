@@ -22,6 +22,14 @@ Tags: custom-background, custom-colors, custom-header, custom-menu, featured-ima
 	background-color: #5c6089 !important;	
 }
 
+.mobile-title {
+    font-size: 12px !important;
+}
+
+h1.entry-title {
+    font-size: 23px !important;
+}
+
 @media screen and (min-width: 320px) {
 	.list-post .entry-summary {
 		display: block;
